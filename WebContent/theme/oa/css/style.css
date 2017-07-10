@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+ul,li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.table .tablestyle:hover{
+    background-color:#d7efea; 
+}
+
+.newbtn{
+    padding:3px 6px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+#profile1 .liushui{
+    text-align: right;
+}
+
+#profile1 .liushui span{
+    margin-left: 20px;
+}
+
+#profile1  h4{
+    text-align: center;
+    color: #111;
+    line-height: 28px;
+}
+#profile1  span{
+    color: #333;
+    font-size: 14px;
+}
+/*
+#profile1 p{
+    padding:1px 10px;
+}*/
+
+.font16{
+    font-size:16px;
+    color: #111;
+}
+
+.chuli{
+    border: 1px solid #c5d7fb;
+    background-color: #eff7ff;
+}
+
+.form-control1{
+    position: relative;
+}
+
+.form-control1 .input-img{
+    position: absolute;
+    right: 24px;
+    top:6px;
+    border-radius:4px;
+    /*padding:7px 12px;*/
+    line-height: 20px;
+}
+
+.mouchu{
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin:0 10px; 
+}
+
+.form-control2{
+    min-height: 28px;
+}
+
+.form-horizontal .control-label1{
+    padding-top: 0;
+}
+
+.form-group1{
+    margin-bottom: 5px;
+}
+
+.fujian{
+    color: #ff7c55;
+    line-height: 24px;
+    margin:0;
+}
+
+td a{
+    color:#ff7c55;
+}
+
+.dashboard-tile .content p a,.dashboard-tile .content p a:hover{
+    color:#fff;
+}

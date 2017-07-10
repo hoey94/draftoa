@@ -1,0 +1,48 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="留言信息"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑留言信息</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname" value="${obj.tname?default('')}" /></td>
+<td class="titleTd">信息内容</td>
+<td class="contentTd"><input type="text" class="txtinput" name="content" value="${obj.content?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">信息内容</td>
+<td class="contentTd"><select  name="parentId"/><@common.options list=parentlist defaultValue="${obj.parentId}"/></select></td>
+<td class="titleTd">回复内容</td>
+<td class="contentTd"><input type="text" class="txtinput" name="backMessage" value="${obj.backMessage}" /></td>
+</tr>
+<tr>
+<td class="titleTd">是否为留言</td>
+<td class="contentTd"><select  name="ismain"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+<td class="titleTd">排序号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="sortCode" value="${obj.sortCode?c}" /></td>
+</tr>
+<tr>
+<td class="titleTd">备注描述</td>
+<td class="contentTd"><textarea name="description" />${obj.description?default('')} </textarea></td>
+<td width=120 bgColor=#f8f8f8></td>
+<td class="contentTd"></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

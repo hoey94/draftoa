@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="columnsController" class="com.starsoft.cms.controller.ColumnsController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="columnsDomain" />
+		<property name="actionKey" value="columns" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="articleController" class="com.starsoft.cms.controller.ArticleController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="articleDomain" />
+		<property name="actionKey" value="article" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="advertisementController" class="com.starsoft.cms.controller.AdvertisementController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="advertisementDomain" />
+		<property name="actionKey" value="advertisement" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="staticizeController" class="com.starsoft.cms.controller.StaticizeController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="articleDomain" />
+		<property name="actionKey" value="staticize" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean name="webMenuController" class="com.starsoft.cms.controller.WebMenuController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="webMenuDomain" />
+		<property name="actionKey" value="webMenu" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean name="acquisitionRuleController" class="com.starsoft.cms.controller.AcquisitionRuleController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="acquisitionRuleDomain" />
+		<property name="actionKey" value="acquisitionRule" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="visterNumberController" class="com.starsoft.cms.controller.VisterNumberController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="visterNumberDomain" />
+		<property name="actionKey" value="visterNumber" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="linksController" class="com.starsoft.cms.controller.LinksController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="linksDomain" />
+		<property name="actionKey" value="links" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="imagePlayController" class="com.starsoft.cms.controller.ImagePlayController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="imagePlayDomain" />
+		<property name="actionKey" value="imagePlay" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="imagePlayRelationImagesController"
+		class="com.starsoft.cms.controller.ImagePlayRelationImagesController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="imagePlayRelationImagesDomain" />
+		<property name="actionKey" value="imagePlayRelationImages" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="commentController" class="com.starsoft.cms.controller.CommentController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="commentDomain" />
+		<property name="actionKey" value="comment" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="surveyOptionController" class="com.starsoft.cms.controller.SurveyOptionController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="surveyOptionDomain" />
+		<property name="actionKey" value="surveyOption" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="specialController" class="com.starsoft.cms.controller.SpecialController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="specialDomain" />
+		<property name="actionKey" value="special" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="onlineSurveyController" class="com.starsoft.cms.controller.OnlineSurveyController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="onlineSurveyDomain" />
+		<property name="actionKey" value="onlineSurvey" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="acquisitionHistoryController"
+		class="com.starsoft.cms.controller.AcquisitionHistoryController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="acquisitionHistoryDomain" />
+		<property name="actionKey" value="acquisitionHistory" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="cmsLoginController" class="com.starsoft.cms.controller.CmsLoginController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="usersDomain" />
+		<property name="actionKey" value="login" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="visterHistoryController" class="com.starsoft.cms.controller.VisterHistoryController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="visterHistoryDomain" />
+		<property name="actionKey" value="visterHistory" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="articleTemplateController" class="com.starsoft.cms.controller.ArticleTemplateController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="articleTemplateDomain" />
+		<property name="actionKey" value="articleTemplate" />
+		<property name="initkey" value="cms" />
+	</bean>
+	
+
+	
+	<!-- 外部网站开始 -->
+	<bean name="webIndexController" class="com.starsoft.cms.controller.WebIndexController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="columnsDomain" />
+		<property name="actionKey" value="webIndex" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean name="webArticleController" class="com.starsoft.cms.controller.WebArticleController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="columnsDomain" />
+		<property name="actionKey" value="webArticle" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean name="systemFileController" class="com.starsoft.cms.controller.SystemFileController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="columnsDomain" />
+		<property name="actionKey" value="systemFile" />
+		<property name="initkey" value="cms" />
+	</bean>
+	<bean id="cmsUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="loginInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/columns.do" value-ref="columnsController" />
+				<entry key="/article.do" value-ref="articleController" />
+				<entry key="/advertisement.do" value-ref="advertisementController" />
+				<entry key="/staticize.do" value-ref="staticizeController" />
+				<entry key="/webMenu.do" value-ref="webMenuController" />
+				<entry key="/acquisitionRule.do" value-ref="acquisitionRuleController" />
+				<entry key="/visterNumber.do" value-ref="visterNumberController" />
+				<entry key="/links.do" value-ref="linksController" />
+				<entry key="/imagePlay.do" value-ref="imagePlayController" />
+				<entry key="/imagePlayRelationImages.do" value-ref="imagePlayRelationImagesController" />
+				<entry key="/comment.do" value-ref="commentController" />
+				<entry key="/surveyOption.do" value-ref="surveyOptionController" />
+				<entry key="/special.do" value-ref="specialController" />
+				<entry key="/onlineSurvey.do" value-ref="onlineSurveyController" />
+				<entry key="/acquisitionHistory.do" value-ref="acquisitionHistoryController" />
+				<entry key="/articleTemplate.do" value-ref="articleTemplateController" />
+				<entry key="/systemFile.do" value-ref="systemFileController" />
+			</map>
+		</property>
+	</bean>
+	<bean id="cmsUrlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="browserAdapterInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/cmslogin.do" value-ref="cmsLoginController" />
+				<entry key="/webIndex.do" value-ref="webIndexController" />
+				<entry key="/webArticle.do" value-ref="webArticleController" />
+				<entry key="/visterHistory.do" value-ref="visterHistoryController" />
+				
+			</map>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,124 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >角色(${role.tname?default('')})权限列表 </span>
+	<ul>
+		<li><input type="button" class="buttons" value="批量启用" onclick="updatePrivileges(true)" /></li>	
+		<li><input type="button" class="buttons" value="批量关闭" onclick="updatePrivileges(false)" /></li>	
+	</ul>
+</div>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td>菜单名称</td>
+<td>人员查看</td>
+<td>权限状态</td>
+</tr>
+</thead>
+<tbody>
+<#list menulist as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td align="left">${obj.tname?default('')}</td>
+<td align="center"><a href="roleUsers.do?roleId=${role.id}">人员查看</a></td>
+<td align="center"><img src="theme/defaultstyle/images/false.gif" border="0" id="${obj.id}" onclick="updatePrivilege(this);"  style="cursor:pointer" /></td>
+</tr>
+<#list obj.subset as subobj>
+	<tr>
+	<td width=20 ><input type="checkbox" name="box" value="${subobj.id?default('')}"/></td>
+	<td align="left" style="padding-left: 20px">>>${subobj.tname?default('')}</td>
+	<td align="center"><a href="roleUsers.do?roleId=${role.id}">人员查看</a></td>
+	<td align="center"><img src="theme/defaultstyle/images/false.gif" border="0" id="${subobj.id}" onclick="updatePrivilege(this);"  style="cursor:pointer" /></td>
+	</tr>
+	<#list subobj.subset as subobj1>
+	<tr>
+	<td width=20 ><input type="checkbox" name="box" value="${subobj1.id?default('')}"/></td>
+	<td align="left" style="padding-left: 40px">>>${subobj1.tname?default('')}</td>
+	<td align="center"><a href="roleUsers.do?roleId=${role.id}">人员查看</a></td>
+	<td align="center"><img src="theme/defaultstyle/images/false.gif" border="0" id="${subobj1.id}" onclick="updatePrivilege(this);"  style="cursor:pointer" /></td>
+	</tr>
+	<#list subobj1.subset as subobj2>
+	<tr>
+	<td width=20 ><input type="checkbox" name="box" value="${subobj2.id?default('')}"/></td>
+	<td align="left" style="padding-left: 60px">>>${subobj2.tname?default('')}</td>
+	<td align="center"><a href="roleUsers.do?roleId=${role.id}">人员查看</a></td>
+	<td align="center"><img src="theme/defaultstyle/images/false.gif" border="0" id="${subobj2.id}" onclick="updatePrivilege(this);"  style="cursor:pointer" /></td>
+	</tr>
+	</#list>
+	</#list>
+</#list>
+</#list>
+</tbody>
+</table>
+<form id="commonform" action="?action=listbyrole" method="post">
+<input type='hidden' id='page' name="page" value='${page.pageIndex?c}' />
+<input type='hidden' id='roleId' name="roleId" value="${role.id?default('')}" />
+</form>
+<script type="text/javascript">
+<!--
+function updatePrivileges(flag){
+	var menuIds = getSelectIds();
+	if (menuIds.length > 0) {
+		var roleId=document.getElementById("roleId").value;
+		$.ajax( {
+			type : "post",
+			url : "?action=jsupdatesbyrole",
+			data:{roleId:roleId,menuIds:menuIds,result:flag},
+			timeout : 10000,
+			success : function(msg) {
+				if(msg.resultCode==0){
+					alert(msg.resultDesc);
+				}else{
+					var queryString=$("#commonform").serialize();
+					location.href=$("#commonform").attr("action")+"&"+queryString
+				}
+			}
+		});
+	} else {
+		alert("请选择要操作的数据！");
+	}
+}
+function updatePrivilege(obj){
+	var menuId=obj.id;
+	var roleId=document.getElementById("roleId").value;
+	var src=obj.src;
+	var result="true";
+	if(src.indexOf("true")>-1){
+		result="false";
+		obj.src="theme/defaultstyle/images/false.gif";
+	}else{
+		result="true";
+		}
+	$.ajax( {
+		type : "post",
+		url : "?action=jsupdate",
+		data:{roleId:roleId,menuId:menuId,result:result},
+		timeout : 10000,
+		success : function(msg) {
+			if(msg.resultCode==0){
+				alert(msg.resultDesc);
+			}else{
+				obj.src="theme/defaultstyle/images/"+result+".gif"
+			}
+		}
+	});
+}
+var roleId="";
+var obj=null;
+function initpage(){
+	<#list selectlist as obj>
+	roleId="${obj.menuId}";
+	obj=document.getElementById(roleId);
+	if(obj){
+		obj.src="theme/defaultstyle/images/true.gif";
+		}
+	</#list>
+}
+initSort();
+initpage();
+//-->
+</script>
+<@common.bottom/>
+

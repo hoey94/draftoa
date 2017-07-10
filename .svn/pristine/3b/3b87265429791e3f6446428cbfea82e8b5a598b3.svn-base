@@ -1,0 +1,35 @@
+<div id="content_sub" >
+	    <div id="focus"><div class="img02"></div></div>
+	    <div id="content-box" >
+               <div class="sub_left">
+			   <div id="submenu">
+			       <h3>相关栏目列表</h3>
+				   <ul>
+				    <#list sublist as obj>
+					   <li class="nTabSub" id="nodeSub1"><a href="articlelist.jsp?node=${node?default('node2')}&columnId=${obj.id?default('')}" title="">${obj.tname?default('')}</a></li>
+					 </#list>
+				   </ul>
+				   <script type="text/javascript">doclickSub(findObj("nodeSub2"),2);</script>
+			   </div><!--end .sub_left-->
+
+			   <a href="articledetail.jsp?node=node10&columnId=2014051816092320320622&id=20140527233000886183752890636091" title=""><img src="html/jiuye/images/banner_A1.jpg" width="284" height="71" alt="视频招聘" /></a>
+			    <a href="articledetail.jsp?node=node10&columnId=2014051816101252920805&id=20140522104136287416702136879215" title=""><img src="html/jiuye/images/banner_A3.jpg" width="284" height="117" alt=" 毕业生就业手续办理流程" style="margin:10px 0 0 0; "/></a>
+			   </div>
+			   <div class="sub_right">
+			       <div class="weizhi"><a href="index.jsp" title="">首页</a> > ${defaultOrganName?default('无标题')}</div>
+				   <div class="text">
+				   <h2 title="${article.tname?default('')}"><#if article.tname?default('')?length lt 25 >${article.tname}<#else>${article.tname[0..23]}... </#if></h2>
+				   <i>发布人：${article.createId?default('')} 浏览次数：${article.hits?c}</i>
+				   <p><div>${articleContent?default('')}</div></p>
+				   <div>
+	                  <ul class="list4">
+						<li>上一篇：&nbsp;<#if lastArticle??><a href="articledetail.jsp?node=${node?default('node2')}&columnId=${article.columnId?default('')}&id=${lastArticle.id?default('')}">${lastArticle.tname?default('')}</a><#else>不存在上一条</#if></li>
+						<li>下一篇：&nbsp;<#if nextArticle??><a href="articledetail.jsp?node=${node?default('node2')}&columnId=${article.columnId?default('')}&id=${nextArticle.id?default('')}">${nextArticle.tname?default('')}</a><#else>不存在下一条</#if></li>		
+				      </ul>
+			      </div>
+				   </div>
+ 
+			   </div>
+            <div class="clearfix"></div>
+		</div><!-- end #content-box-->
+	</div><!-- end #content_sub-->

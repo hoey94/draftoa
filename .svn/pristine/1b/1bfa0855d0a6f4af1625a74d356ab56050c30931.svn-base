@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="indexController" class="com.starsoft.oa.controller.IndexController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="motionDomain" />
+		<property name="actionKey" value="info" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="motionController" class="com.starsoft.oa.controller.MotionController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="motionDomain" />
+		<property name="actionKey" value="motion" />
+		<property name="initkey" value="oa" />
+	</bean>
+	
+	<bean id="fuyiRecordController" class="com.starsoft.oa.controller.FuyiRecordController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="fuyiRecordDomain" />
+		<property name="actionKey" value="fuyi" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="fuyiController" class="com.starsoft.oa.controller.FuyiController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="fuyiDomain" />
+		<property name="actionKey" value="fuyi" />
+		<property name="initkey" value="oa" />
+	</bean>
+	
+	<bean id="qianpiController" class="com.starsoft.oa.controller.QianpiController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="qianpiDomain" />
+		<property name="actionKey" value="qianpi" />
+		<property name="initkey" value="oa" />
+	</bean>
+	
+	<bean id="qianpiRecordController" class="com.starsoft.oa.controller.QianpiRecordController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="qianpiRecordDomain" />
+		<property name="actionKey" value="qianpiRecord" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="chengbanController" class="com.starsoft.oa.controller.ChengbanController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="chengbanDomain" />
+		<property name="actionKey" value="chengban" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="chengbanRecordController" class="com.starsoft.oa.controller.ChengbanRecordController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="chengbanRecordDomain" />
+		<property name="actionKey" value="chengbanRecord" />
+		<property name="initkey" value="oa" />
+	</bean>
+	
+	<bean id="lianshenpiController" class="com.starsoft.oa.controller.LianshenpiController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="lianshenpiDomain" />
+		<property name="actionKey" value="lianshenpi" />
+		<property name="initkey" value="oa" />
+	</bean>
+	
+	<bean id="lianshenpiRecordController" class="com.starsoft.oa.controller.LianshenpiRecordController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="lianshenpiRecordDomain" />
+		<property name="actionKey" value="lianshenpiRecord" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="userController" class="com.starsoft.oa.controller.UserController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="usersDomain" />
+		<property name="actionKey" value="user" />
+		<property name="initkey" value="oa" />
+	</bean>
+	<bean id="tianQueryController" class="com.starsoft.oa.controller.TianQueryController">
+		<property name="methodNameResolver" ref="methodResolver"/>
+		<property name="baseDomain" ref="motionDomain"/>
+		<property name="actionKey" value="allTian"/>
+		<property name="initkey" value="oa"/>
+	</bean>
+	<bean id="lianReturnController" class="com.starsoft.oa.controller.LianReturnController">
+		<property name="methodNameResolver" ref="methodResolver"/>
+		<property name="baseDomain" ref="lianReturnDomain"/>
+		<property name="actionKey" value="lianReturn"/>
+		<property name="initkey" value="oa"/>
+	</bean>
+	<bean id="lianReturnRecordController" class="com.starsoft.oa.controller.LianReturnRecordController">
+		<property name="methodNameResolver" ref="methodResolver"/>
+		<property name="baseDomain" ref="lianReturnRecordDomain"/>
+		<property name="actionKey" value="lianReturnRecord"/>
+		<property name="initkey" value="oa"/>
+	</bean>
+	<bean id="oaUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		
+		<property name="interceptors">
+			<list><ref bean="myLoginInterceptor"/></list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/motion.do" value-ref="motionController" />
+				<entry key="/fuyiRecord.do" value-ref="fuyiRecordController" />
+				<entry key="/fuyi.do" value-ref="fuyiController" />
+				<entry key="/qianpi.do" value-ref="qianpiController" />
+				<entry key="/qianpiRecord.do" value-ref="qianpiRecordController" />
+				<entry key="/chengban.do" value-ref="chengbanController" />
+				<entry key="/chengbanRecord.do" value-ref="chengbanRecordController" />
+				<entry key="/lianshenpi.do" value-ref="lianshenpiController" />
+				<entry key="/lianshenpiRecord.do" value-ref="lianshenpiRecordController" />
+				<entry key="/user.do" value-ref="userController" />
+				<entry key="/tianQuery.do" value-ref="tianQueryController"/>
+				<entry key="/lianReturn.do" value-ref="lianReturnController"/>
+				<entry key="/lianReturnRecord.do" value-ref="lianReturnRecordController"/>
+			</map>
+		</property>
+	</bean>
+	<bean id="oaLoginMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/index.do" value-ref="indexController" />
+			</map>
+		</property>
+	</bean>
+</beans>

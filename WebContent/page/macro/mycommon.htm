@@ -1,0 +1,367 @@
+<!---页面头部--->
+<#macro header>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+<title>教代会网上提案系统</title>
+<link rel="stylesheet" href="theme/oa/css/bootstrap.min.css">
+<link rel="stylesheet" href="theme/oa/css/font-awesome.min.css">
+<link rel="stylesheet" href="theme/oa/css/animate.css">
+<!-- 用户自定义的css文件 -->
+<link rel="stylesheet" href="theme/oa/css/main.css">
+<!--  -->
+<link rel="stylesheet" href="theme/oa/css/style.css">
+<link rel="stylesheet" href="theme/oa/css/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="theme/oa/css/todos.css">
+<link rel="stylesheet" href="theme/oa/css/morris.css">
+<script type="text/javascript" src="javascript/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="javascript/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+
+function logout(){
+	window.location.href="index.do?action=logout";
+}
+function goFyEdit(id,status,a_id){
+	// 判断议案的状态，如果该议案为2则跳转到审批编辑页面
+	//alert(status);
+	
+	// 动态移除a_id
+	/*
+	var li_id = a_id+"-li";
+	$("#"+li_id).remove();
+	
+	var $num = $("#new-messages").text();
+	$num = $num - 1;
+	$("#new-messages").text($num);
+	 */
+	if(status=='0' || status=='1'){
+		window.location.href="fuyi.do?action=edit&id=" + id;
+	}else if(status == '2'){
+		window.location.href="qianpi.do?action=edit&id=" + id;
+	}else if(status == '3'){
+		window.location.href = "chengban.do?action=edit&id=" + id;
+	}else if(status == '4'){
+		window.location.href = "chengbanRecord.do?action=edit&id=" + id;
+	}else if(status == '5'){
+		window.location.href = "lianshenpi.do?action=edit&id=" + id;
+	}else if(status == '6'){
+		window.location.href = "lianReturn.do?action=edit&id=" + id;
+	}
+}
+
+function goLists(organId){
+	if(organId == '005'){
+		window.location.href="fuyi.do";
+	}else if(organId == '004'){
+		window.location.href="qianpi.do";
+	}else if(organId == '002'){
+		window.location.href = "chengban.do";
+	}else if(organId == '003'){
+		window.location.href = "chengbanRecord.do";
+	}else if(organId == '001'){
+		window.location.href = "lianshenpi.do";
+	}else if(organId == '000'){
+		window.location.href = "lianReturn.do";
+	}
+	
+}
+
+function findRecord(){
+	// 查找记录信息
+	var url = "operationRecord.do?action=findRecord";
+	$.post(url);
+}
+
+/* function qicaotian(){
+	alert("1");
+	var url = "motion.do?action=edit";
+	$.post(url, function(data) {
+		alert("3");
+	});
+	alert("2");
+} */
+	
+</script>
+
+<!-- Fonts -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'> 
+-->
+</head>
+<body >
+<section id="container">
+<header id="header">
+    <!--logo start-->
+    <div class="brand">
+        <a href="index.do" class="logo">
+            <span> 网上提案系统</span></a>
+    </div>
+    <!--logo end-->
+    <div class="toggle-navigation toggle-left">
+        <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="切换导航">
+            <i class="fa fa-bars"></i>
+        </button>
+    </div>
+    <#if SESSONUSER ??>
+    <div class="user-nav">
+        <ul>
+            <li class="dropdown messages">
+                <span class="badge badge-danager animated bounceIn" id="new-messages">
+                <#if XYTA??> 
+				  ${XYTA?size}
+				<#else> 
+				 0
+				</#if> 
+                </span>
+                <button type="button" class="btn btn-default dropdown-toggle options" id="toggle-mail" data-toggle="dropdown">
+                    <i class="fa fa-envelope"></i>
+                </button>
+                <ul id="ulID" class="dropdown-menu alert animated fadeInDown">
+                    <li>
+                        <h1>你有
+                            <strong>
+                            <#if XYTA??>
+			                ${XYTA?size}
+			                <#else>
+			                0
+			                </#if>
+			            </strong>条信息</h1>
+                    </li>
+                    <li>
+                    <#if XYTA??>
+                    <#list XYTA as obj>
+                    <#if obj_index lt 6>
+                    	<li id="tz-${obj_index}-li">
+                        <a id="tz-${obj_index}" href="javascript:void(0);" onclick="goFyEdit('${obj.id}','${obj.status}',this.id)">
+                            <div class="profile-photo">
+                                <img src="theme/oa/images/avatar.png" style="width: 25px;height: 25px;" alt="" class="img-circle">
+                            </div>
+                            <div class="message-info">
+                                <span class="sender">${obj.createId!''}</span>
+                                <span class="time">${obj.time!''}</span>
+                                <div class="message-title">${obj.tname!''}</div>
+                                <#if obj.content?? && obj.content?length gt 10>
+                                	<div class="message-content">${obj.content?substring(0,10)}...</div>
+                                <#else>
+                                	<div class="message-content">${obj.content!''}</div>
+                                </#if>
+                            </div>
+                        </a>
+                    </li>
+                    </#if>
+                    </#list>
+                    <#else>
+                    
+                    </#if>
+
+					
+                    <li><a href="javascript:void(0);" onclick="goLists('${SESSONUSER.organId}');">查看所有消息 <i class="fa fa-angle-right"></i></a>
+                    </li>
+                </ul>
+
+            </li>
+            <li class="profile-photo">
+                <img style="width: 35px;height: 35px;" src="theme/oa/images/avatar.png" alt="" class="img-circle">
+            </li>
+            <li class="dropdown settings">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              	${SESSONUSER.tname}<i class="fa fa-angle-down"></i>
+            	</a>
+                <ul class="dropdown-menu animated fadeInDown">
+                    <li>
+                        <!-- <a href="#"><i class="fa fa-user"></i> 设置</a> -->
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="logout();"><i class="fa fa-power-off"></i> 退出</a>
+                    </li>
+                </ul>
+            </li>
+           <!--  <li>
+                <div class="toggle-navigation toggle-right">
+                    <button type="button" class="btn btn-default" id="toggle-right">
+                        <i class="fa fa-comment"></i>
+                    </button>
+                </div>
+            </li> -->
+
+        </ul>
+    </div>
+	<#else>
+	<div class="user-nav">
+		<a href="javascript:void(0);" onclick="lgn();">登录</a>
+	</div>
+	</#if>
+</header>
+</#macro>
+
+		<#macro left>
+		<aside class="sidebar">
+            <div id="leftside-navigation" class="nano">
+                <ul class="nano-content">
+                    <li class="active">
+                        <a href="index.do"><i class="fa fa-dashboard"></i><span>主页</span></a>
+                    </li>
+                    <li class="sub-menu" id="mytian">
+                        <a href="javascript:void(0);"><i class="fa fa-align-left"></i><span>我的提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                        <ul>
+                        	<!-- <li><a id="qicaotian" href="javascript:void(0);" onclick="qicaotian()">起草提案</a>
+                            </li> -->
+                            <li><a href="motion.do?action=edit">起草提案</a>
+                            </li>
+                            <li><a href="motion.do?action=pass&status=4">立案提案</a>
+                            </li>
+                            <li><a href="motion.do">提案反馈</a>
+                            </li>
+                            <li><a href="motion.do?action=pass&status=6">通过提案</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li class="sub-menu">
+                        <a href="motion.do?action=findList"><i class="fa fa-clock-o"></i><span>提案查询</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="fa fa-tasks"></i><span>全部提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                        <ul>
+                            <li><a href="tianQuery.do?action=latestSubmit">最新上报</a>
+                            </li>
+                            <li><a href="tianQuery.do?action=latestFeedback">最新反馈</a>
+                            </li>
+                            <li><a href="tianQuery.do?action=latestExam">最新审批</a>
+                            </li>
+                            </li>
+                        </ul>
+                    </li>
+                    <#if SESSONUSER.organId == '005'>
+                      <li class="sub-menu">
+                          <a href="fuyi.do"><i class="fa fa-magic"></i><span>待附议提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                      </li>
+					<#elseif SESSONUSER.organId == '004'> 
+					  <li class="sub-menu">
+                          <a href="qianpi.do"><i class="fa fa-magic"></i><span>待签批提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                      </li>
+					<#elseif SESSONUSER.organId == '003'> 
+					  <li class="sub-menu">
+                          <a href="chengbanRecord.do"><i class="fa fa-magic"></i><span>承办待回复提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                      </li>
+                    <#elseif SESSONUSER.organId == '002'>
+	                    <li class="sub-menu">
+	                        <a href="chengban.do"><i class="fa fa-magic"></i><span>待承办提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+	                    </li>
+                   	<#elseif SESSONUSER.organId == '001'>
+                   	  <li class="sub-menu">
+                          <a href="lianshenpi.do"><i class="fa fa-magic"></i><span>待立案提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                      </li> 
+					<#elseif SESSONUSER.organId == '000'> 
+					  <li class="sub-menu">
+                         <a href="lianReturn.do"><i class="fa fa-magic"></i><span>立案待回复提案</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                      </li>
+					</#if> 
+                    
+                    <!-- 
+                    
+                   
+                    
+
+                    <li class="sub-menu">
+                        <a href="javascript:void(0);"><i class="fa fa-file"></i><span>页面</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                        <ul>
+                            <li><a href="pages-login.html">登录</a>
+                            </li>
+                            <li><a href="pages-sign-up.html">注册</a>
+                            </li>
+                            <li><a href="pages-timeline.html">时间轴</a>
+                            </li>
+                            <li><a href="pages-404.html">404</a>
+                            </li>
+                            <li><a href="pages-500.html">500</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+
+        </aside>
+        </#macro>
+
+<!---页面底部--->
+<#macro bottom>
+<!--[if lt IE 9]>
+    <script src="theme/oa/js/html5shiv.js"></script>
+    <script src="theme/oa/js/respond.min.js"></script>
+<![endif]-->
+
+<!--全局 JS-->
+<!-- <script src="js/jquery-1.10.2.min.js"></script>  使用公共javascript/jquery-1.11.2.min.js-->
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+<script src="javascript/jquery-1.11.2.min.js"></script>
+<script src="theme/oa/js/bootstrap.min.js"></script>
+<script src="theme/oa/js/application.js"></script>
+<!--页面等级的js-->
+<script src="theme/oa/js/jquery.countTo.js"></script>
+<!-- 前台的chartjs -->
+<script src="theme/oa/js/jquery.flot.min.js"></script>
+<script src="theme/oa/js/jquery.flot.example.js"></script>
+<!-- todo List  -->
+<script src="theme/oa/js/todos.js"></script>
+<!-- Feature detection -->
+<script src="theme/oa/js/modernizr-2.6.2.min.js"></script>
+<script src="theme/oa/js/waypoints.min.js"></script>
+<script src="theme/oa/js/jquery.nanoscroller.min.js"></script>
+<script src="theme/oa/js/jquery.dataTables.js"></script>
+<script src="theme/oa/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="javascript/validate.js"></script>
+</body>
+</html>
+</#macro>
+
+<#macro mySwitch str="">
+ <#if str??>
+	<#switch str>
+	<#case "0">
+	附议中
+	<#break>
+	<#case "1">
+	允许上报
+	<#break>
+	<#case "2">
+	签批中
+	<#break>
+	<#case "3">
+	承办中
+	<#break>
+	<#case "4">
+	承办回复中
+	<#break>
+	<#case "5">
+	立案中
+	<#break>
+	<#case "6">
+	立案回复中
+	<#break>
+	<#case "7">
+	通过
+	<#break>
+	<#case "8">
+	未通过
+	<#break>
+	<#default>
+	审议中
+	</#switch>
+	<#else>
+</#if>
+</#macro>
+
+
+
+
+

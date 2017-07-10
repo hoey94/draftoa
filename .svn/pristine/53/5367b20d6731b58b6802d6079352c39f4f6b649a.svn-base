@@ -1,0 +1,49 @@
+<div class="left">
+     <ul>
+     	<#list imageList as obj>
+		<li><a href="${obj.url?default('#')}" title="${obj.tname?default('')}" target="_blank"><img src="${obj.imageurl?default('')}" width="163" height="48" alt="${obj.tname?default('')}" /></a></li>
+     	</#list>
+     </ul>
+</div>
+ <div class="right">
+     <div class="binguo_search">
+      <input type="text" id="searchKey" name="searchKey" class="input">
+   <span>	
+	   <input name="" type="radio" value="" /> 职位　
+	   <input name="" type="radio" value="" /> 公司名　
+	   <input name="" type="radio" value="" /> 资讯
+   </span>
+   <input type="button" class="submit" onclick="searchother()">
+   <script type="text/javascript">
+   function searchother(){
+	   var searchKey=document.getElementById("searchKey").value;
+	   var url="http://www.bingojob.cn/zhiwei/postlist.aspx?q="+encodeURI(searchKey);
+	   window.open(url);
+   }
+   </script>
+  </div><!--end .binguo_search-->
+  <select class="select" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+	<option value="" selected>——用人单位网站——</option>
+	<#list hrcompanyList as obj>
+	<option value="${obj.url?default('')}">${obj.tname?default('')}</option>
+	</#list>
+  </select> 
+  <select  class="select" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+	<option value="" selected>——各高校就业网站——</option>
+	<#list gaoxiaoList as obj>
+	<option value="${obj.url?default('')}">${obj.tname?default('')}</option>
+	</#list>
+  </select> 
+  <select  class="select" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+	<option value="" selected>——人才招聘网站——</option>
+	<#list hrzhaopinList as obj>
+	<option value="${obj.url?default('')}">${obj.tname?default('')}</option>
+	</#list>
+  </select> 
+  <select  class="select" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+	<option value="" selected>——教育部就业网站——</option>
+	<#list jiaoyujiuyeList as obj>
+	<option value="${obj.url?default('')}">${obj.tname?default('')}</option>
+	</#list>
+  </select> 
+ </div><!--end .right-->

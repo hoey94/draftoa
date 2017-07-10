@@ -1,0 +1,32 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="应用"/>
+<form id="formId" method="post" action="?action=save" >
+<input type="hidden" name="subSystemName" value="custom">
+<input type="hidden" name="id" value="${id?default('')}">
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+新建自定义应用</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">应用名称</td>
+<td class="contentTd"><input type="text" class="btinput" required=true style="width: 60%" name="tname"/><span class="spantip" id="tname_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">表名</td>
+<td class="contentTd" colspan="3"><input type="text" class="btinput" required=true style="width: 60%" name="tableName" check="strStartsWith('T_CUSTOM_')" value="T_CUSTOM_"/><span class="spantip" id="tableName_span"/></td>
+</tr>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

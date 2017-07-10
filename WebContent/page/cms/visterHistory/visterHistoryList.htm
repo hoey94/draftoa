@@ -1,0 +1,55 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<@common.listheader name="访问历史"/>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<tr>
+<td bgColor=#f8f8f8 height=22 width=100>请选择筛选条件</td>
+<td bgColor=#f8f8f8>帐号名称：<input class="txtinput"  id="tname" name="name" value="${name?default('')}"></td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20><input type="checkbox" name="allbox" value="checkbox" onClick="selectAll(this.checked)" /></td>
+<td width=70 onclick="resetSort('tname')" style="cursor:pointer;" >姓名<span id="sorttname"></span></td>
+<td width=60 onclick="resetSort('createId')" style="cursor:pointer;" >帐号<span id="sortcreateId"></span></td>
+<td width=60 onclick="resetSort('ip')" style="cursor:pointer;" >请求IP<span id="sortip"></span></td>
+<td onclick="resetSort('browserType')" style="cursor:pointer;" >浏览器类型<span id="sortbrowserType"></span></td>
+<td onclick="resetSort('visterpath')" style="cursor:pointer;" >访问路径<span id="sortvisterpath"></span></td>
+</tr>
+</thead>
+<tbody>
+<#list list as obj>
+<tr ondblclick="editInfor('${obj.id}')">
+<td width=20 align="center"><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td width=70 bgColor=#ffffff><a title="${obj.sessionId?default('')}" href='javascript:void(0)' onClick="editInfor('${obj.id}')">${obj.tname?default('')}</a></td>
+<td width=60 bgColor=#ffffff>${obj.createId?default('')}</td>
+<td width=60 bgColor=#ffffff>${obj.ip?default('')}</td>
+<td bgColor=#ffffff>${obj.browserType?default('')}</td>
+<td bgColor=#ffffff>${obj.visterpath?default('')}</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+<tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+<script type="text/javascript">
+<!--
+var curaction="?action=list"; 
+initSort();
+//-->
+</script>
+<@common.bottom/>
+

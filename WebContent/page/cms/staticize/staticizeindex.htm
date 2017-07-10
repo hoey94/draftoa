@@ -1,0 +1,38 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >首页静态化 </span>
+</div>
+<hr>
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<tr>
+<td bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="静态化首页" onclick="staticizeindex()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="删除首页" onclick="deletestaticizeindex();" />
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+function staticizeindex(){
+	$.ajax({
+		type : "post",
+		url : "?action=staticizeindex",
+		timeout : 10000,
+		success : function(msg) {
+			alert(msg.resultDesc);
+		}
+	});
+}
+function deletestaticizeindex(){
+	$.ajax( {
+		type : "post",
+		url : "?action=deletestaticizeindex",
+		timeout : 10000,
+		success : function(msg) {
+			alert(msg.resultDesc);
+		}
+	});
+}
+</script>
+<@common.bottom/>
+
+

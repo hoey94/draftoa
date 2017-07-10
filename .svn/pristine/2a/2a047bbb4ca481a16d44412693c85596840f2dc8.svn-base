@@ -1,0 +1,366 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <section class="main-content-wrapper">
+            <section id="main-content">
+             <div class="row">
+                    <div class="col-md-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                            <li><a href="#">主页1</a>
+                            </li>
+                            <li>我的提案</li>
+                            <li class="active">提案签发</li>
+                        </ul>
+                        <!--breadcrumbs end -->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">提案签发</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-wrapper tab-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#profile1" data-toggle="tab">提案信息</a>
+                                        </li>
+                                        <li><a href="#profile2" data-toggle="tab">处理过程</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="profile1">
+                                            <p class="liushui"><#if obj.zlh != ''><span>整理号：${obj.zlh!''}</span></#if>  
+                                            <#if obj.lah != ''><span>立案号：${obj.lah!''}</span></#if></span></p>
+                                            <h4>${obj.tname!''}<br/>
+                                            <span>提交时间：${obj.time!''}</span></h4>
+                                            <p>提案题目：${obj.tname!''}</p>
+                                            <form action="qianpiRecord?action=save" method="post" id="formId">
+                                             <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>姓名</th>
+                                                            <th>职称（务）</th>
+                                                            <th>单位</th>
+                                                            <th>联系电话</th>
+                                                        </tr>
+                                                    </thead>
+                                                    
+                                                    <tbody id="tbodyID">
+                                                    	<!-- 附议人 -->
+                                                        <tr>
+                                                            <td>提案人</td>
+                                                           <td>${users.tname!''}</td>
+                                                            <td>${users.duty!''}</td>
+                                                            <td>${organ.tname!''}</td>
+                                                            <td>${users.mobilNumber!''}</td>
+                                                        </tr>
+                                                        <!-- 附议人 -->
+                                                        <#if fyrs ??>
+                                                        <#list fyrs as fyr>
+                                                        <tr>
+                                                            <td>附议人</td>
+                                                            <td>${fyr.tname!''}</td>
+                                                            <td>${fyr.duty!''}</td>
+                                                            <td>${fyr.organId!''}</td>
+                                                            <td>${fyr.mobilNumber!''}</td>
+                                                        </tr>
+                                                        </#list>
+                                                    	</#if>
+                                                    	
+                                                
+			                                            <tr>
+				                                            <td  colspan="5">
+					                                            <p class="font16">提案内容：</p>
+					                                            <p>${obj.content!''}</p>
+				                                            </td>
+			                                            </tr>
+			                                            <!-- 附议人的意见 -->
+			                                            <tr>
+				                                            <td  colspan="5">
+					                                            <p class="font16">附议人建议：</p>
+					                                            <#if fyrs??>
+					                                            <#list fyrs as fyr>
+					                                            <p>${fyr.tname!''}:${fyr.remarker!''}</p>
+					                                            </#list>
+					                                            </#if>
+				                                             </td>
+			                                            </tr>
+			                                           
+			                                            	<input type="hidden" value="${obj.id!''}" name="motionId">
+				                                            <tr>
+					                                            <td  colspan="5">
+						                                            <p class="font16">校教代会提案工作委员会审查意见：</p>
+						                                            <label class="radio" style="font-weight:400;">
+						                                            <input class="icheck" type="radio" checked="" name="mark" value="1">同意签批</label>
+						                                            <label class="radio" style="font-weight:400;">
+						                                            <input class="icheck" type="radio" name="mark" value="0">作为一般性意见，转<input type="text" class="mouchu" name="zjc">处（室、处）参考处理</label> 
+						                                            <p align="right">提案工作委员会主任（签名）：<input id="qprID" type="text" class="mouchu" name="qpr" value="${SESSONUSER.id!''}"></p>
+						                                            <div align="right" id="dateID" >1111</div>
+					                                             </td>
+				                                            </tr>
+	
+				                                            <tr>
+					                                            <td  colspan="5">
+					                                            	<p class="font16">校领导审批意见：</p>
+					                                            	<textarea id="contentId" cols="30" rows="5" placeholder="请写出您的意见" class="col-md-12" name="content"></textarea>
+					                                             </td>
+				                                            </tr>
+                                           		 </tbody>
+                                            </table>
+                                             </form> 
+                                            <p>说明：1.一表一事一议 2.按时限时交表</p> <button type="button" class="btn btn-primary " style="padding:1px 10px;margin-left:20px;" onclick="mySave();">提交</button>
+                                            
+                                           <!--  <div class="form-group">
+                                                <label class="control-label" style="font-weight:bold;">您的意见：</label>
+                                                <label class="radio-inline">
+                                                <input class="icheck" type="radio" checked="" name="rad1">通过，交部门办理</label>
+                                                <label class="radio-inline">
+                                                <input class="icheck" type="radio" name="rad1">不通过</label> 
+                                                <button type="button" class="btn btn-primary " style="padding:1px 10px;margin-left:20px;" >提交</button>                  
+                                            </div>               -->                                        
+                                        </div>
+ 
+                                        <div class="tab-pane" id="profile2">
+                                        <#if fuyiRecords?size gt 0 && fuyiRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 创议阶段</div>
+                                            <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>附议人</th>
+                                                            <th>意见</th>
+                                                            <th>是否附议</th>
+                                                            <th>提交时间</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                   
+                                                    <#list fuyiRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.fyr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                        
+                                        </#if>
+                                         <#if qianpiRecords?size gt 0 && qianpiRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 签批阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>签批人</th>
+                                                         <th>意见</th>
+                                                         <th>是否签批</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    <#list qianpiRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.qpr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                             </table>
+                                         </#if>
+                                        <#if chengbans?size gt 0 && chengbans??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 承办阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>承办人</th>
+                                                         <th>意见</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list chengbans as obj>
+                                                        <tr>
+                                                            <td>${obj.clr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        <#if chengbanRecords?size gt 0 && chengbanRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 承办回复阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>承办回复人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list chengbanRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.cbr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                   
+                                                    </tbody>
+                                             </table>
+                                         </#if>
+                                        <#if lianshenpis?size gt 0 && lianshenpis??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 立案阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>立案人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list lianshenpis as obj>
+                                                        <tr>
+                                                            <td>${obj.lar!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                   
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        
+                                        <#if lianReturnRecords?size gt 0 && lianReturnRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 立案回复阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>立案回复人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list lianReturnRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.createId!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </section>
+        <script type="text/javascript">
+        	var date = new Date();
+        	var div = document.getElementById("dateID");
+        	div.innerHTML = date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+        </script>
+        <script type="text/javascript">
+        	function mySave(){
+        		var txt = $("#qprID").val();
+        		if($.trim(txt).length == 0){
+        			alert("请填写签批人");
+        			$(".mouchu").focus();
+        			return;
+        		}
+        		$.ajax({
+        			type:"post",
+        			dataType:"json",
+        			url:"qianpiRecord.do?action=save",
+        			data:$('#formId').serialize(),
+        			success:function(msg){
+        				if(msg.resultCode==0){
+        					alert(msg.resultDesc);
+        				}else{
+        					//判断是不是子框架
+        					alert("提交成功");
+        					var nextUrl=msg.data;
+        					if(nextUrl&&nextUrl!=""){
+        						location.href=nextUrl;
+        					}else{
+        						location.href=document.referrer;
+        					}
+        				}
+        			},
+        			error:function(data){
+        				alert(data);
+        			}
+        		});
+        	}
+        </script>
+<@common.bottom/>

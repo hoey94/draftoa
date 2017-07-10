@@ -1,0 +1,108 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >操作权限(应用：${appes?default('')}操作：${actionName?default('')})列表 </span>
+	<ul>
+		<li><input type="button" id="buttonadd" class="buttons" value="批量禁用" onclick="updatePrivileges(false)" /></li>
+		<li><input type="button" id="buttonadd" class="buttons" value="批量启用" onclick="updatePrivileges(true)" /></li>
+	</ul>
+</div>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type="hidden" id="appes" name="appes" value="${appes?default('')}" />
+<input type="hidden" id="actionName" name="actionName" value="${actionName?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>名称：<input class="txtinput" name="name" value="${name?default('')}"></td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td>角色名称</td>
+<td>人员查看</td>
+<td>权限状态</td>
+</tr>
+</thead>
+<tbody>
+<#list list as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td align="left">${obj.tname?default('')}</td>
+<td align="center"><a href="roleUsers.do?roleId=${obj.id}">人员查看</a></td>
+<td align="center"><img src="theme/defaultstyle/images/false.gif" border="0" id="${obj.id}" onclick="updatePrivilege(this);"  style="cursor:pointer" /></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<script type="text/javascript">
+<!--
+function updatePrivilege(obj){
+	var roleId=obj.id;
+	var actionName=document.getElementById("actionName").value;
+	var appes=document.getElementById("appes").value;
+	var src=obj.src;
+	var result="true";
+	if(src.indexOf("true")>-1){
+		result="false";
+		obj.src="theme/defaultstyle/images/false.gif";
+	}else{
+		result="true";
+		}
+	$.ajax( {
+		type : "post",
+		url : "appesActionPrivilege.do?action=changePrivilege",
+		data:{roleIds:roleId,appes:appes,actionName:actionName,result:result},
+		timeout : 10000,
+		success : function(msg) {
+			if(msg.resultCode==0){
+				alert(msg.resultDesc);
+			}else{
+				obj.src="theme/defaultstyle/images/"+result+".gif"
+			}
+		}
+	});
+}
+function updatePrivileges(obj){
+	var result=obj;
+	var ids = getSelectIds();
+	var actionName=document.getElementById("actionName").value;
+	var appes=document.getElementById("appes").value;
+	if (ids.length > 0) {
+		$.ajax( {
+			type : "post",
+			url : "appesActionPrivilege.do?action=changePrivilege",
+			data:{roleIds:ids,appes:appes,actionName:actionName,result:result},
+			timeout : 10000,
+			success : function(msg) {
+				var url=location.href;
+				location.href=url;
+			}
+		});
+	}else{
+		alert("请选择要操作的数据！");
+		}
+}
+var roleId="";
+var obj=null;
+function initpage(){
+	<#list selectlist as obj>
+	roleId="${obj.roleId}";
+	obj=document.getElementById(roleId);
+	if(obj){
+		obj.src="theme/defaultstyle/images/true.gif";
+		}
+	</#list>
+}
+initpage();
+//-->
+</script>
+<@common.bottom/>
+

@@ -1,0 +1,34 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="提醒"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建提醒</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">标题</td>
+<td class="contentTd"><input type="text" class="txtinput" style="width: 96%" name="tname"/></td>
+<td class="titleTd">提醒时间</td>
+<td class="contentTd"><input type="text" class="calendars" name="remindTime"/></td>
+</tr>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><@common.commonselect app="menu" objectId="menuId" selectType=1/></td>
+<td class="titleTd">提醒内容</td>
+<td bgColor=#ffffff ><textarea style="width: 96%" name="description"/></textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

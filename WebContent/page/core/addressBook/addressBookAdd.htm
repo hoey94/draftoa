@@ -1,0 +1,48 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="我的通讯录"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建我的通讯录</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="btinput" check="isString('#',12)" required=true name="tname"/><span class="spantip" id="tname_span"/></td>
+<td class="titleTd">手机号码</td>
+<td class="contentTd"><input type="text" class="txtinput" check="isMobile" name="mobilNumber"/><span class="spantip" id="mobilNumber_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">电子邮箱</td>
+<td class="contentTd"><input type="text" class="txtinput" check="isEmail" name="email"/><span class="spantip" id="email_span"/></td>
+<td class="titleTd">QQ号码</td>
+<td class="contentTd"><input type="text" class="txtinput" check="isInt;isString(5,12)" name="qqNumber"/><span class="spantip" id="qqNumber_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">家庭地址</td>
+<td class="contentTd"><input type="text" class="txtinput" name="homeAddress"/><span class="spantip" id="homeAddress_span"/></td>
+<td class="titleTd">工作地址</td>
+<td class="contentTd"><input type="text" class="txtinput" name="workAddress"/><span class="spantip" id="workAddress_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">通讯录组</td>
+<td class="contentTd">
+<select  name="addressBookTypeId" /><@common.options list=addressBookTypelist defaultValue="${addressBookTypeId?default('')}" display="false"/></select>
+</td>
+<td width=120 bgColor=#f8f8f8></td>
+<td class="contentTd"></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

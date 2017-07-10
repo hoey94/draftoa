@@ -1,0 +1,176 @@
+<!doctype html public "-//w3c//dtd xhtml 1.0 transitional//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>郑州互联——郑州网站建设|郑州网站制作|郑州网站设计|网络推广|站群系统|快速开发平台|个性化需求|定制开发|企业应用咨询</title>
+<meta name="Keywords" content="郑州网站建设|郑州网站制作|郑州网站设计|网络推广|站群系统|快速开发平台|个性化需求|定制开发|企业应用咨询|企业解决方案|签单回扣" />
+<meta name="Description" content="郑州互联是一家专注于企业级应用，为企业提供高质量的信息化服务。针对企事业单位信息化管理和宣传的需求，利用先进的技术理念，研制开发模块化、可配置的业务管理系统。我们的团队都是拥有多年经验的一流技术专家，组成高效率，高水平，专业的软件开发团队。他们将以最好的产品和最优的服务，开拓和推广企业的信息化建设，不断提升客户企业的管理水平和竞争力，共创明日之辉煌！" />
+<link rel="stylesheet" href="html/style.css" type="text/css" media="screen, projection" />
+<LINK href="html/templates/default/css/flash.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="html/templates/default/js/jquery-1.11.2.min.js"></script>
+<SCRIPT src="html/templates/default/js/flash.js" type=text/javascript></SCRIPT>
+</head>
+<body>
+<div id="wrapper">
+<!--  header -->
+<div id="header">
+	<a href="index.html" id="top_logo"></a>	
+	<div id="mainmenu">
+        <div class="menu1 first"><a href="index.html">首页</a> </div>
+        <div class="menu1"><a href="articleinfo/product.html" title="产品介绍" >产品中心</a>
+			<ul>
+			<li><a href="articleinfo/cms.html" title="信息发布系统">信息发布系统</a></li>
+            <li><a href="articleinfo/website.html" title="网站群管理系统">网站群管理系统</a></li>
+			<li><a href="articleinfo/oa.html" title="办公自动化系统">办公自动化系统</a></li>
+			<li><a href="articleinfo/customer.html" title="客户关系系统">客户关系系统</a></li>
+			<li><a href="articleinfo/platform.html" title="快速开发平台">快速开发平台</a></li>
+			</ul>
+		</div>
+		<div class="menu1"><a href="articleinfo/webportals.html" title="企业应用" >企业应用</a>
+			<ul>
+			<li><a href="articleinfo/webportals.html" title="企业门户系统">企业门户系统</a></li>
+			<li><a href="articleinfo/oa.html" title="企业办公系统">企业办公系统</a></li>
+			<li><a href="articleinfo/email.html" title="企业邮件系统">企业邮件系统</a></li>
+			<li><a href="articleinfo/manager.html" title="经营管理系统">经营管理系统</a></li>
+            <li><a href="articleinfo/ebusiness.html" title="电子商务系统">电子商务系统</a></li>
+			<li><a href="articleinfo/individuality.html" title="企业个性需求">企业个性需求</a></li>
+			</ul>
+		</div>
+        <div class="menu1"><a href="articleinfo/solution.htm" title="解决方案" >教育行业</a>
+			<ul>
+				<li><a href="articleinfo/zhaosheng.html" title="招生管理系统">招生管理系统</a></li>
+				<li><a href="articleinfo/jiuye.html" title="就业管理系统">就业管理系统</a></li>
+				<li><a href="articleinfo/xuesheng.html" title="学生管理系统">学生管理系统</a></li>
+                <li><a href="articleinfo/xueji.html" title="学籍管理系统">学籍管理系统</a></li>
+                <li><a href="articleinfo/kaoshi.html" title="在线考试系统">在线考试系统</a></li>
+                <li><a href="articleinfo/xuanke.html" title="网上选课系统">网上选课系统</a></li>
+			</ul>
+		</div>
+        <div class="menu1"><a href="articleinfo/consulting.html" title="解决方案咨询" >解决方案咨询</a>
+			<ul>
+				<li><a href="articleinfo/consulting.html#customer" title="企业应用咨询" >企业应用咨询</a></li>
+				<li><a href="articleinfo/consulting.html" title="教育行业咨询" >教育行业咨询</a></li>
+                <li><a href="articleinfo/consulting.html" title="机房建设咨询" >机房建设咨询</a></li>
+                <li><a href="articleinfo/consulting.html" title="系统集成咨询" >系统集成咨询</a></li>
+			</ul>
+		</div>
+		<div class="menu1"><a href="articleinfo/cases.html" title="软件成功案例" >成功案例</a>
+			<ul>
+				<li><a href="articleinfo/cases.html#customer" title="初创企业" >初创企业</a></li>
+				<li><a href="articleinfo/cases.html#comany" title="中小型企业" >中小型企业</a></li>
+				<li><a href="articleinfo/cases.html#education" title="教育行业" >教育行业</a></li>
+			</ul>
+		</div>
+		<div class="menu1"><a href="articleinfo/techarticleinfo.html" title="技术支持" >服务与支持</a>
+			<ul>
+                <li><a href="articleinfo/techarticleinfo.html" title="技术支持">技术支持</a></li>
+                <li><a href="articleinfo/serverway.html" title="服务方式">服务方式</a></li>
+			</ul>
+		</div>
+        <div class="menu1"><a href="articleinfo/productprice.html" title="产品报价" >产品报价</a>
+			<ul>
+                <li><a href="articleinfo/alliance.html" title="渠道合作联盟">渠道合作联盟</a></li>
+				<li><a href="articleinfo/client.html" title="终端用户">终端用户</a></li>
+			</ul>
+		</div>
+		<div class="menu1"><a href="articleinfo/articleinfointro.html" title="关于我们">关于我们</a> 
+			<ul>
+				<li><a href="articleinfo/articleinfointro.html" title="公司简介">公司简介</a></li>
+				<li><a href="articleinfo/principle.html" title="企业理念" >企业理念</a></li>
+				<li><a href="articleinfo/contact.html"  title="联系方法">联系方式</a></li>
+			</ul>
+		</div>
+		<div class="menu1"><a href="articleinfo/zhaopin.html" title="诚聘英才">诚聘英才</a> 
+			<ul>
+				<li><a href="articleinfo/yingxiao.html" title="互联网营销大师">互联网营销大师</a></li>
+				<li><a href="articleinfo/yanfa.html" title="产品研发工程师">产品研发工程师</a></li>
+				<li><a href="articleinfo/zhichi.html" title="开发支持工程师" >技术支持工程师</a></li>
+                <li><a href="articleinfo/shouli.html" title="业务受理工程师" >业务受理工程师</a></li>
+				<li><a href="articleinfo/xiaoshou.html" title="销售代表" >销售代表</a></li>
+			</ul>
+		</div>
+    </div>	
+</div>
+
+<div id="home" style="padding:0px;">
+<div id=imgPlay>
+<ul class=imgs id=actor>  
+        <li><a target="_self" title="郑州互联一新版上线" href="#">
+        <img src="html/images/1.jpg" width="960" /></a></li>
+	    <li><a target="_self" title="企业业务一随你而变" href="#">
+        <img src="html/images/2.jpg" width="960"/></a></li>
+	    <li><a target="_self" title="合作伙伴一共赢发展" href="#">
+        <img src="html/images/3.jpg" width="960"/></a></li>
+	  <li><a target="_self" title="郑州互联一追求的目标" href="#">
+      <img src="html/images/4.jpg" width="960"/></a></li>
+	  <li><a target="_self" title="郑州互联一存在的意义" href="#">
+      <img src="html/images/5.jpg" width="960"/></a></li>
+ 	  <li><a target="_self" title="郑州互联一长期与您共存" href="#">
+      <img src="html/images/7.jpg" width="960"/></a></li>
+	  <li><a target="_self" title="郑州互联一服务的专业" href="#">
+      <img src="html/images/8.jpg" width="960"/></a></li>
+ </ul>
+<div class=num>
+<P class=lc></P>
+<P class=mc></P>
+<P class=rc></P>
+</div>
+<div class=num id=numInner></div>
+<div class=prev>上一张</div>
+<div class=next>下一张</div>
+</div>
+</div>
+<div id="info">
+	<div class="infocate">
+		<div class="infortitle">			
+		</div>
+		<div class="inforlist">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;郑州互联是一家专注于企业级应用，为企业提供高质量的信息化服务。针对企事业单位信息化管理和宣传的需求，利用先进的技术理念，研制开发模块化、可配置的业务管理系统。我们的团队都是拥有多年经验的一流技术专家，组成高效率，高水平，专业的软件开发团队。他们将以最好的产品和最优的服务，开拓和推广企业的信息化建设，不断提升客户企业的管理水平和竞争力，共创明日之辉煌！
+		</div>
+	</div>
+	<div class="infoline"></div>
+	<div class="infocate">
+		<div class="infortitle1">
+			
+			
+		</div>
+		<div class="inforlist" style="padding-top:10px;">
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;专业的UI设计人员，多年从事企业级设计</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;专业的研发团队，都是工作三年以上的高级技术人员</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;专业的网络营销人员负责帮您推广</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;与各大搜索引擎公司都有长期的合作，合作费用最低</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;提供现场技术支持，并提供合理的信息化建议</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;允许先试用后付款的合作方式</br>
+			&nbsp;&nbsp;<IMG src="images/019.jpg" width=8 height=8>&nbsp;&nbsp;提供针对系统定期升级完善</br>
+		</div>
+	</div>
+	<div class="infoline"></div>
+	<div class="infocate">
+		<div class="infortitle2">
+			
+		</div>
+		<div class="inforln">
+				
+		</div>
+	</div>
+</div>
+
+
+<!--  footer -->
+<div class=footer>
+<div class=footer-line></div>
+<div class=footer-content>
+<div>
+  <A href="articleinfo/contact.html" rel=nofollow>联系我们</A>|<A href="articleinfo/articleinfointro.html" rel=nofollow>公司简介</A>|<A href="articleinfo/zhaopin.html" rel=nofollow>诚征英才</A>|<A href="#">手机支持：<strong>15637176511  13663002110 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=393568883&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:393568883:50" alt="点击这里给我发消息" title="点击这里给我发消息"></a></strong></a>
+</div>
+<div><SPAN class=beian>豫ICP备10007912号</SPAN>版权信息 @ CopyRight 郑州互联&nbsp;<script src="http://s15.cnzz.com/stat.php?id=2995597&web_id=2995597&online=1&show=line" language="JavaScript"></script>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

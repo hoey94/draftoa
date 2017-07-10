@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<title>华北水利水电大学就业信息网-登录</title>
+<meta charset="UTF-8" />
+<link type="text/css" rel="stylesheet" href="theme/indexAndLogin/regist.css" />
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+<script type="text/javascript">
+function loginconfirm(){
+    if(document.getElementById("id").value==""){
+       alert("用户名不能为空！");
+       document.getElementById("id").focus();
+       return false;
+    }else if(document.getElementById("password").value==""){
+ 	   document.getElementById("password").focus();
+       alert("密码不能为空！");
+       return false;
+    }else if(document.getElementById("txtyzm")&&document.getElementById("txtyzm").value==""){
+       alert("验证码不能为空！");
+       document.getElementById("txtyzm").focus();
+       return false;
+    }
+    document.getElementById("form1").submit();
+ }
+function refloginreshImg(){
+	var codeimg=document.getElementById("regCodeImg_Login");
+	codeimg.src="validateCode.do?base=0123456789&rand="+Math.random();
+}
+function initpage(){
+	if(top.location!=self.location){ 
+		top.location.href=self.location.href; 
+	} 
+	var ide=document.getElementById("id");
+	var password=document.getElementById("password");
+	var txtyzm=document.getElementById("txtyzm");
+	if(ide.value!=""&&password.value!=""&&txtyzm.value!=""){
+		document.getElementById("form1").submit();
+	}else{
+		if(ide.value==""){
+			ide.focus();
+		}else{
+			password.focus();
+		}
+	}
+}
+</script>
+</head>
+<body onload="initpage()">
+<div id="page">
+    <!--头部+导航开始-->
+    <div id="header">
+	    <div class="header">
+		    <h1 id="logo"><img src="theme/indexAndLogin/images/logo.png" width="424" height="56" alt="就业信息网" /></h1>
+			<div id="menu">
+				<ul>
+					<li "><a href="index.jsp" title="">返回首页</a></li>
+				</ul>
+			</div>
+		</div><!-- end .header-->
+	</div><!-- end #header-->
+	<form name="form1" method="post" action="login.do" id="form1">
+	<!--头部+导航结束-->
+	<div id="content" class="sub">
+	    <div id="content-box" class="sub">
+		      <h3 class="sub_title">用户登录：</h3>
+				<div class="login"  >
+				    <h4 class="">用户登录</h4>
+					<table class="login_table">
+					    <tr>
+						    <th>用户名：</th>
+							<td>
+							  <input name="id" id="id" type="text" class="input" style="width:260px"/>
+							 </td>
+						</tr>
+						<tr>
+						    <th>密　码：</th>
+							<td><input name="password" id="password" type="password" class="input" style="width:260px"/>
+							 </td>
+						</tr>
+							<tr>
+						    <th> 验证码：</th>
+							<td>
+							    <input type="text" id="txtyzm" name="txtyzm" maxlength="4" style="width: 60px;" class="input" />
+							    <img src="validateCode.do?base=0123456789&rand="+Math.random() id="regCodeImg_Login" height="24" align="absmiddle" />
+							    <a id="regChangeImg_login" href="javascript:refloginreshImg()">换一张</a> 
+							 </td>
+						</tr>
+						 <tr>
+								  <td height="20" colspan="2" align="center"><font color="red">${msg?default('')}</font></td>
+						</tr>
+						<tr>
+						    <th></th>
+							<td height="80px"><input type="button" value="" onclick="loginconfirm()" class="btn-login"/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="mobileIndex.do">手机访问</a> </td>
+						</tr>
+					</table>
+				</div>
+		 </div><!-- end #content-box-->
+	</div><!-- end #content-->
+	</form>
+	<div id="footer">
+	    <div id="footer-box">    
+		   <p>郑州轻工业学院 版权所有 </p>
+        </div>
+	</div><!-- fine #footer-->
+</div><!-- end #page-->
+</body>
+</html>

@@ -1,0 +1,37 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.readheader name="系统日志"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="90%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>
+查看系统日志</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">日志标题</td>
+<td class="contentTd">${obj.tname?default('')}</td>
+<td class="titleTd">请求时间</td>
+<td class="contentTd"><@common.stringShowDate str="${obj.id}"/></td>
+</tr>
+<tr>
+<td class="titleTd">请求类</td>
+<td class="contentTd">${obj.infoClass?default('')}</td>
+<td class="titleTd">请求路径</td>
+<td class="contentTd">${obj.qpath?default('')}</td>
+</tr>
+<tr>
+<td class="titleTd">日志内容</td>
+<td class="contentTd" colspan="3" >${obj.infoContent?default('')}</td>
+</tr>
+<tr>
+<td colspan=4 height=30 align="center"><input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

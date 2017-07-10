@@ -1,0 +1,413 @@
+/*
+   Copyright (c) 2007-11, iUI Project Members
+   See LICENSE.txt for licensing terms
+   Version 0.40-dev3
+ */
+body {
+    margin: 0;
+    font-family:Helvetica,"΢���ź�","����";
+    color: #000000;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+}
+
+body > *:not(.toolbar) {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 45px;
+    width: 100%;
+    height: auto;
+    min-height: 416px;
+    -webkit-transition-duration: 300ms;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transform: translateX(0%);
+}
+
+body[orient="landscape"] > *:not(.toolbar) {
+    height: auto;
+    min-height: 268px;
+}
+
+body > *[selected="true"] {
+    display: block;
+}
+
+li > a[selected], li > a:active {
+    background-color: #f39800 !important;
+    background-repeat: no-repeat, repeat-x !important;	/* TG: !important */
+    background-position: right center, left top !important;	/* TG: !important */
+    color: #FFFFFF !important;
+}
+
+li > a[selected="progress"] {
+}
+
+/************************************************************************************************/
+
+body > .toolbar {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0 10px 10px 10px;
+    height: 45px;
+
+}
+
+.toolbar > h1 {
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+    margin: 1px 0 0 -75px;
+    padding-top: 10px;
+    height: 45px;
+    font-size: 20px;
+    width: 150px;
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0;
+    text-align: center;
+	font-weight:normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #FFFFFF;
+}
+
+body[orient="landscape"] > .toolbar > h1 {
+    margin-left: -125px;
+    width: 250px;
+}
+
+.button {
+    position: absolute;
+    overflow: hidden;
+    top: 10px;
+    right: 6px;
+    margin: 0;
+    border-width: 0 5px;
+    padding: 0 3px;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    font-family: inherit;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+}
+
+.blueButton {
+    border-width: 0 5px;
+}
+
+.leftButton {
+    left: 6px;
+    right: auto;
+}
+
+/*#backButton {
+    left: 6px;
+    right: auto;
+    padding: 0;
+    max-width: 55px;
+    border-width: 0 8px 0 14px;
+	color: #333333;
+}*/
+#backButton {
+    left:0;
+    top:0;
+    right: auto;
+    width:52px;
+	height:43px;
+    text-indent:-9999px;
+}
+#homeButton {
+     position: absolute;
+    overflow: hidden;
+	top:8px;
+    right: 10px;
+    left: auto;
+    width:35px;
+	height:30px;
+    display:block;	
+	text-indent:-9999px;
+}
+
+.whiteButton,
+.redButton,
+.grayButton {
+
+    border-width: 0 12px;
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: inherit;
+}
+
+/* TG */ .grayButton[selected], .grayButton:active,
+.whiteButton {
+    text-shadow: rgba(255, 255, 255, 0.7) 0 1px 0;
+/* TG */ background:transparent !important;
+}
+
+.redButton {
+/* TG */ background:transparent !important;
+    color:#fff;
+    text-shadow: #7a0001 0 -1px 0;
+}
+
+/* TG */ .whiteButton[selected], .whiteButton:active,
+.grayButton {
+    color: #FFFFFF;
+/* TG */ background:transparent !important;
+}
+
+/************************************************************************************************/
+
+body > ul > li {
+    position: relative;
+    margin: 0;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 8px 0 8px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+}
+
+body > ul > li.group {
+    position: relative;
+    top: -1px;
+    margin-bottom: -2px;
+    border-top: 1px solid #7d7d7d;
+    border-bottom: 1px solid #999999;
+    padding: 1px 10px;
+    font-size: 17px;
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
+    color: #FFFFFF;
+}
+
+body > ul > li.group:first-child {
+    top: 0;
+    border-top: none;
+}
+
+body > ul > li > a {
+    display: block;
+    margin: -8px 0 -8px -10px;
+    padding: 8px 32px 8px 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+a[target="_replace"] {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 18px;
+    color: cornflowerblue;
+    background-color: #FFFFFF;
+    background-image: none;
+}
+
+/************************************************************************************************/
+    
+
+
+.dialog > fieldset {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-top: 1px solid #6d84a2;
+    padding: 10px 6px;
+}
+
+.dialog > fieldset > h1 {
+    margin: 0 10px 0 10px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0;
+    text-align: center;
+}
+
+.dialog > fieldset > label {
+    position: absolute;
+    margin: 16px 0 0 6px;
+    font-size: 14px;
+    color: #999999;
+}
+
+input[type|=text]{
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    width: 70%;
+    border: 1px solid #b2afa8;
+    height: 24px;
+	line-height:24px;
+    font-weight: normal;
+}
+textarea{
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    width: 100%;
+    border: 1px solid #b2afa8;
+	line-height:24px;
+    font-weight: normal;
+}
+.select{
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    width: 100%;
+    border: 1px solid #b2afa8;
+	height: 24px;
+	line-height:24px;
+    font-weight: normal;
+}
+/************************************************************************************************/
+
+body > .panel {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0;
+}
+body > .panel1 {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0;
+}
+.panel > ul, 
+.panel > fieldset {
+    position: relative;
+    margin: 0 0 20px 0;
+    padding: 0;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid #999999;
+    text-align: right;
+    font-size: 16px;
+}
+
+.panel > ul li,
+.row  {
+    position: relative;
+    min-height: 42px;
+    border-bottom: 1px solid #999999;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    text-align: right;
+}
+ table > fieldset {
+ position: relative;
+    margin: 0 0 20px 0;
+    padding: 0;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid #999999;
+    text-align: right;
+    font-size: 16px;
+ }
+ .file1{
+    border: 1px solid #b2afa8;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	margin:0; padding:0;
+	background:#e4e4e2;
+ }
+  .file1 li{line-height:30px;margin:0;padding:0 3px;list-style:none;text-align:left;}
+
+  .file1 li input[type=|rideo]{}
+
+
+.panel > ul li:last-child,
+fieldset > .row:last-child {
+    border-bottom: none !important;
+}
+
+.inbox{padding:0px;}
+.inbox2{padding:0 0 10px 0;}
+.form > label{
+    float:left;
+    width:30%;
+    margin: 0 ;
+    line-height: 42px;
+    color:#3d4245;	
+	text-align:left;
+	
+}
+.form table tr td,th{border-bottom:1px dashed #c4c4c4;line-height:24px;padding:0px 0;vertical-align :top;}
+.form table tr td span{color:#0080bb;}
+.list table{margin:0px;}
+.list table tr td,th{border-bottom:1px dashed #c4c4c4;line-height:24px;padding:0px 0;vertical-align :top;}
+.list table tr td span{color:#0080bb;}
+.list table tr td a{color:#7f2d00;text-decoration:none;}
+
+.submitB{text-align:center;margin:10px 0;}
+
+.loginSubmit > label{
+    float:left;
+    width:30%;
+    margin: 0;
+    line-height: 42px;
+    color:#3d4245;	
+	text-align:left;
+	font-size:14px;
+	
+}
+.loginSubmit >label > input[type|=checkbox] {
+  margin: 10px 3px 0 0;
+
+  -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+	border: 1px solid #b2afa8;
+}
+
+.form > input[type|=text]{ 
+    width:65%;
+    margin: 6px 0 ;
+    border: 1px solid #b2afa8;
+    height: 24px;
+	line-height:24px;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+
+
+
+.panel > h2 {
+    margin: 0 0 8px 14px;
+    font-size: inherit;
+    font-weight: bold;
+    color: #4d4d70;
+    text-shadow: rgba(255, 255, 255, 0.75) 2px 2px 0;
+}
+
+
+
+/**login**********************************************************************************************/
+#login > .inbox > .form{background:none;}
+
+/**menu**********************************************************************************************/
+.SpeedDial ul{margin:0;padding:0;}
+.SpeedDial ul li a{display: block; text-decoration: none;  color: inherit;}
+.SpeedDial ul li{width:33%;height:130px;float:left;text-align:center;list-style:none;font-size:15px;}
+.SpeedDial ul li a{display:block;padding:10px;}
+.SpeedDial ul li a img{width:70px;height:70px; display:block;margin:5px auto 10px auto;}

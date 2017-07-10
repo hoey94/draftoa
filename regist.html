@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+<title>华北水利水电大学就业信息网-注册</title>
+<meta charset="UTF-8" />
+<link type="text/css" rel="stylesheet" href="theme/indexAndLogin/regist.css" />
+<script type="text/jscript" src="javascript/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+<script type="text/javascript" src="javascript/validate.js"></script>
+</head>
+<body>
+<div id="page">
+    <!--头部+导航开始-->
+    <div id="header">
+	    <div class="header">
+		    <h1 id="logo"><img src="theme/indexAndLogin/images/logo.png" width="424" height="56" alt="就业信息网" /></h1>
+			<div id="menu">
+				<ul>
+					<li><a href="index.jsp" title="">返回首页</a></li>
+				</ul>
+			</div>
+		</div><!-- end .header-->
+	</div><!-- end #header-->
+	<!--头部+导航结束-->
+	<div id="content" class="sub">
+	    <div id="content-box" class="sub">
+		      <h3 class="sub_title">用户注册：<span>已注册企业请 <a href="index.jsp" title=""> 登录</a></span></h3>
+				<div class="regist"  ><form id="formId"  method="post" action="?action=save" >
+				    <h4 class="classify">企事业单位基本信息</h4>
+					<table class="regist_table">
+					    <tr>
+						    <th><i>*</i> 单位名称：</th>
+							<td>
+							  <input type="text"  required=true  id="tname" name="tname" onblur="getAccount(this)" class="input" style="width:360px;"/><span class="spantip" id="tname_span"/></span>
+							 </td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 单位性质：</th>
+							<td><select id="natureOfEnterprise" name="natureOfEnterprise" param="id=natureOfEnterprise&displayTitle=false" ></select>
+							 </td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 所在行业：</th>
+							<td><select id="trade" name="trade" param="id=trade&displayTitle=false" ></select></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 电话：</th>
+							<td><input type="text" class="input" style="width:260px;" name="telephone"/></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 传真：</th>
+							<td><input type="text" class="input" style="width:260px;" name="fax"/></td>
+						</tr>				
+					</table>
+					<h4 class="classify">企事业单位系统帐号信息</h4>
+					<table class="regist_table">
+					    <tr>
+						    <th><i>*</i> 系统帐号：</th>
+							<td>
+							  <input type="text"  id="loginCode" onblur="checkAccount();" required=true check="enOrNum" class="input" style="width: 260px" name="loginCode"/><span class="spantip" id="loginCode_span"/>
+							 </td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 登录密码：</th>
+							<td><input type="text"  required=true  class="input" style="width: 260px" id="password" name="password" value="123456"/><span class="spantip" id="password_span"/>
+							 </td>
+						</tr>						
+					</table>
+					<h4 class="classify">企事业单位联系人信息</h4>
+					<table class="regist_table">
+					<tr>
+						    <th><i>*</i> 联系人：</th>
+							<td><input type="text" class="input" style="width: 260px" name="linkMan"/></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 称谓：</th>
+							<td><select id="sex" name="sex" param="id=sex&displayTitle=false" ></select></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 职务：</th>
+							<td><select id="duty" name="duty" param="id=workduty&displayTitle=false" ></select></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> 手机号码：</th>
+							<td><input type="text" class="input" style="width:260px" name="mobilNumber" check="isMobile"/><span class="spantip" id="mobilNumber_span"/></td>
+						</tr>
+						<tr>
+						    <th><i>*</i>QQ号码：</th>
+							<td><input type="text" class="input" style="width: 260px"  onblur="setEmail(this)" name="qqNumber"/></td>
+						</tr>
+						<tr>
+						    <th><i>*</i> E-mail：</th>
+							<td><input type="text" class="input" style="width: 260px" id="email" name="email"/><span class="spantip" id="email_span">可做登录帐号</span></td>
+						</tr>
+						<tr>
+						    <th></th>
+							<td height="80px"><input type="button"  value="" onclick="saveinfo()" class="btn-regist" /> </td>
+						</tr>
+					</table>
+			</form>
+				</div>
+			</div>
+		
+		 </div><!-- end #content-box-->
+	</div><!-- end #content-->
+	<div id="footer">
+	    <div id="footer-box">    
+		   <p>华北水利水电大学招生就业处 版权所有 </p>
+        </div>
+	</div><!-- fine #footer-->
+	
+<script type="text/javascript">
+ 	initSelect();
+ 	/****
+ 	 * 获取帐号信息通过名称
+ 	 */
+ 	function getAccount(obj){
+ 		var account=obj.value;
+ 		var loginCode=document.getElementById("loginCode").value;
+ 		if(account.length>1){
+ 			$.ajax( {
+ 				type : "post",
+ 				url : "jiuye.do?action=getAccount",
+ 				data:{tname:account,loginCode:loginCode},
+ 				timeout : 10000,
+ 				success : function(msg) {
+ 					if(msg.resultCode==0){
+ 						alert(msg.resultDesc);
+ 						obj.select();
+ 					}else{
+ 						var idinput=document.getElementById("loginCode");
+ 						idinput.value=msg.resultDesc;
+ 					}
+ 				}
+ 			});
+ 		}
+ 	}
+ 	//检测帐号是否可用
+ 	function checkAccount(){
+ 		var loginCodeEle=document.getElementById("loginCode");
+ 		var loginCode=loginCodeEle.value;
+ 		if(loginCode.length>1){
+ 			$.ajax( {
+ 				type : "post",
+ 				url : "jiuye.do?action=checkAccount",
+ 				data:{loginCode:loginCode},
+ 				timeout : 10000,
+ 				success : function(msg) {
+ 					if(msg.resultCode==0){
+ 						alert(msg.resultDesc);
+ 						loginCodeEle.select();
+ 					}
+ 				}
+ 			});
+ 		}
+ 	}
+ 	function setEmail(obj){
+ 		var qq=obj.value;
+ 		var checkqq=qq.match(/^\d.*$/);
+ 		if(checkqq==qq){
+ 			var emailinput=document.getElementById("email");
+ 			if(emailinput.value==""){
+ 				emailinput.value=qq+"@qq.com";
+ 			}
+ 		}
+ 	}
+ 	function saveinfo(){
+ 		var form=document.getElementById("formId");
+ 		if(Validate.CheckForm(form)){
+ 		$.ajax({
+ 			type:"post",
+ 			dataType:"json",
+ 			url:"jiuye.do?action=regedit",
+ 			data:$('#formId').serialize(),
+ 			success:function(msg){
+ 				if(msg.resultCode==0){
+ 					alert(msg.resultDesc);
+ 				}else{
+ 					//判断是不是子框架
+ 					var nextUrl=msg.nextUrl;
+ 					if(nextUrl&&nextUrl!=""){
+ 						location.href=nextUrl;
+ 					}else{
+ 						location.href=document.referrer;
+ 					}
+ 				}
+ 			},
+ 			error:function(data){
+ 			}
+ 		});
+ 		}
+  	}				   	
+ 	</script>
+</html>
+
+</div><!-- end #page-->
+</body>

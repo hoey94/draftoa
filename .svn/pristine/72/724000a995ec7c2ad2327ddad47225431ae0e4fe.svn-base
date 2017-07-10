@@ -1,0 +1,64 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >应用列表 </span>
+</div>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=importlist" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>应用名称：<input id="tname" class="txtinput" name="tname" value="${tname?default('')}">
+</td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;" >应用名称<span id="sorttname"></span></td>
+<td onclick="resetSort('subSystemName')" style="cursor:pointer;" >子系统名称<span id="sortsubSystemName"></span></td>
+<td onclick="resetSort('tableName')" style="cursor:pointer;" >表名<span id="sorttableName"></span></td>
+<td onclick="resetSort('valid')" style="cursor:pointer;" >操作<span id="sortvalid"></span></td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td>${obj.tname?default('')}</td>
+<td>${obj.subSystemName?default('')}</td>
+<td>${obj.tableName?default('')}</td>
+<td align="center"><a href="?action=importpage&app=${obj.id?default('')}">导入</a></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr></tfoot>
+</table>
+<script type="text/javascript">
+<!--
+initSort();
+function exportall(){
+	var ids=getSelectIds();
+	if(ids.length>0){
+		var iframecontent=document.getElementById("iframecontent");
+		if(iframecontent){
+			iframecontent.src="?action=exportall&app="+ids;
+		}else{
+			location.href="?action=exportall&app="+ids;
+			}
+	}else{
+		alert("请选择要操作的数据！");
+	}
+}
+//-->
+</script>
+<@common.bottom/>
+

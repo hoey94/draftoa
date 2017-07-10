@@ -1,0 +1,85 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.readheader name="组织部门"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" id="page" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>组织部门信息</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">部门名称</td>
+<td bgColor=#ffffff valign="bottom" class="contentTd">${obj.tname?default('')}</td>
+<td class="titleTd">部门编码</td>
+<td bgColor=#ffffff class="contentTd">${obj.organCode?default('')}</td>
+</tr>
+<tr>
+<td class="titleTd">上级部门</td>
+<td class="contentTd">${parentName?default('')}</td>
+<td class="titleTd">部门领导</td>
+<td class="contentTd">${obj.leaderName?default('')}</td>
+</tr>
+<tr>
+<td class="titleTd">部门类型</td>
+<td class="contentTd">${obj.organType?default('')}</td>
+<td class="titleTd">部门状态</td>
+<td class="contentTd">${obj.valid?string('启用','禁用')}</td>
+</tr>
+<tr>
+<td class="titleTd">部门排序</td>
+<td class="contentTd">${obj.sortCode?c}</td>
+<td class="titleTd">部门管理员</td>
+<td bgColor=#ffffff><#list organAdmins as users>${users.tname?default('')};&nbsp;</#list></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="编辑" onclick="editInfor('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="删除" onclick="formdelete('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="用户管理" onclick="javascript:permanager('${obj.id}');" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="关闭" onclick="gotourl('organ.do');" />
+</td>
+</tr></tbody>
+</table>
+</form>
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td onclick="resetSort('id')" style="cursor:pointer;">登录帐号<span id="sortid"></span></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;">姓名<span id="sorttname"></span></td>
+<td>性别</td>
+<td>出生日期</td>
+<td>工作岗位</td>
+<td>手机号码</td>
+<td>电子邮箱</td>
+</tr>
+</thead>
+<thead>
+</thead><tbody><#list list as obj>
+<tr ondblclick="viewUser('${obj.id}')">
+<td align="left">${obj.id?default('')}</td>
+<td align="left"><a href="#" onclick="viewUser('${obj.id}')">${obj.tname?default('')}</a></td>
+<td align="center">${obj.sex?default('')}</td>
+<td><#if obj??>${obj.birthday?default('')}</#if></td>
+<td><#if obj??>${obj.duty?default('')}</#if></td>
+<td><#if obj??>${obj.mobilNumber?default('')}</#if></td>
+<td><#if obj??>${obj.email?default('')}</#if></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<script type="text/javascript">
+<!--
+function permanager(obj){
+	location.href='users.do?organId='+obj;
+}
+function viewUser(obj){
+	location.href="users.do?action=read&id="+obj;
+}
+//-->
+</script>
+<@common.bottom/>
+

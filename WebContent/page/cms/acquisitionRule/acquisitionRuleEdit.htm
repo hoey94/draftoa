@@ -1,0 +1,74 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="采集规则"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑采集规则</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">规则名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname" value="${obj.tname?default('')}" /></td>
+<td class="titleTd">对应栏目</td>
+<td class="contentTd">
+<select  name="columns" /><@common.options list=columnslist display="false" defaultValue="${obj.columns.id}"/></select>
+</td>
+</tr>
+<tr>
+<td class="titleTd">网页地址</td>
+<td bgColor=#ffffff colspan="3"><input type="text" class="txtinput" name="pageUrl" size="104" value="${obj.pageUrl?default('')}"/></td>
+</tr>
+<tr>
+<td class="titleTd">网页编码</td>
+<td class="contentTd"><input type="text" class="txtinput" name="pageCharset" value="${obj.pageCharset?default('')}" /></td>
+<td class="titleTd">采集内容数</td>
+<td class="contentTd"><input type="text" class="txtinput" name="contentLength" value="${obj.contentLength?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">地址开始</td>
+<td bgColor=#ffffff colspan="3">
+<textarea  name="pageHrefStart" cols="76"/>${obj.pageHrefStart?default('')}</textarea>
+</td>
+</tr>
+<tr>
+<td class="titleTd">标题开始</td>
+<td bgColor=#ffffff colspan="3">
+<textarea  name="titleStart" cols="76"/>${obj.titleStart?default('')}</textarea>
+</td>
+</tr>
+<tr>
+<td class="titleTd">内容开始</td>
+<td bgColor=#ffffff colspan="3">
+<textarea  name="contentStart" cols="76"/>${obj.contentStart?default('')}</textarea>
+</td>
+</tr>
+<tr>
+<td class="titleTd">是否把首幅图片设置为标题图片</td>
+<td class="contentTd"><select  name="titleImage"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+<td class="titleTd">内容HTML清除</td>
+<td class="contentTd"><select  name="clearHtml"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+</tr>
+<tr>
+<td class="titleTd">开始时间</td>
+<td class="contentTd"><input type="text" name="startTime" class="calendars" <#if obj.startTime??> value="${obj.startTime?string("yyyy-MM-dd")}"</#if> /></td>
+<td class="titleTd">结束时间</td>
+<td class="contentTd"><input type="text" name="endTime" class="calendars" <#if obj.endTime??>value="${obj.endTime?string("yyyy-MM-dd")}"</#if> /></td>
+</tr>
+<tr>
+<td class="titleTd">备注描述</td>
+<td class="contentTd" colspan="3"><textarea name="description" />${obj.description?default('')} </textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr></tbody>
+</table>
+</form>
+<@common.bottom/>
+

@@ -1,0 +1,364 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <section class="main-content-wrapper">
+            <section id="main-content">
+             <div class="row">
+                    <div class="col-md-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                            <li><a href="index.do">主页</a>
+                            </li>
+                            <li>我的提案</li>
+                            <li class="active">管理提案申请</li>
+                        </ul>
+                        <!--breadcrumbs end -->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">管理提案申请</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-wrapper tab-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                        <a href="#profile1" data-toggle="tab">提案信息</a>
+                                        </li>
+                                        <li><a href="#profile2" data-toggle="tab">处理过程</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="profile1">
+                                          <div class="panel-body chuli">
+                                         	 <#if obj.status == '0'>
+                                          
+                                                <label  class=" control-label" style="margin-left:20px;">增加附议人：</label>
+                                                <span class="form-control1" style="width:200px;display:inline-block">
+                                                <select name="fyr" class="form-control form-control2">
+                                                	<#if fyrs??>
+                                                	<#list fyrs as obj>
+                                                	<option value="${obj.id}">${obj.id!''}</option>
+                                                	</#list>
+                                                	</#if>
+                                                </select>
+                                                </span>
+                                                <button type="button" class="btn btn-info btn-sm" onclick="addFyr('${obj.id}');">增加附议人</button>
+                                                <#else>
+                                                <label  class=" control-label" style="margin-left:20px;">签批人：</label>
+                                                <span class="form-control1" style="width:200px;display:inline-block">
+                                                <!-- <input class="form-control"   style="min-height:30px;" name="qprId" id="qprId">
+                                                <img src="theme/oa/images/iconfont-fangdajing.png" alt=""style="width:20px;height:20px;right:10px;" class="input-img">   -->
+                                                <select name="qpr" class="form-control form-control2">
+                                                	<#if qprs??>
+                                                	<#list qprs as obj>
+                                                	<option value="${obj.id}">${obj.id!''}</option>
+                                                	</#list>
+                                                	</#if>
+                                                </select>
+                                                </span>
+                                                <span>|</span> 
+                                                <button type="button" class="btn btn-info btn-sm" onclick="goQianpiSave('${obj.id}');">上报提案</button>
+                                                </#if>
+                                             </div>          
+                                            <p class="liushui"><#if obj.zlh != ''><span>整理号：${obj.zlh!''}</span></#if>  
+                                            <#if obj.lah != ''><span>立案号：${obj.lah!''}</span></#if></p>
+                                            <h4>${obj.tname!''}<br/>
+                                            <span>提交时间：${obj.time!''}</span></h4>
+                                            <p>提案题目：${obj.tname!''}</p>
+                                            <p class="font16">提案内容：</p>
+                                            <textarea id="ueID" name="content">${obj.content!''}</textarea>
+                                                        
+                                        </div>
+                                        
+                                        
+                                        <div class="tab-pane" id="profile2">
+                                        <#if fuyiRecords?size gt 0 && fuyiRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 创议阶段</div>
+                                            <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>附议人</th>
+                                                            <th>意见</th>
+                                                            <th>是否附议</th>
+                                                            <th>提交时间</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                   
+                                                    <#list fuyiRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.fyr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                        
+                                        </#if>
+                                         <#if qianpiRecords?size gt 0 && qianpiRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 签批阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>签批人</th>
+                                                         <th>意见</th>
+                                                         <th>是否签批</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    <#list qianpiRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.qpr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                             </table>
+                                         </#if>
+                                        <#if chengbans?size gt 0 && chengbans??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 承办阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>承办人</th>
+                                                         <th>意见</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list chengbans as obj>
+                                                    	 <#if obj.clr??>
+	                                                        <tr>
+	                                                            <td>${obj.clr!''}</td>
+	                                                            <td>${obj.content!''}</td>
+	                                                            <td>${obj.time!''}</td>
+	                                                        </tr>
+                                                        <#else>
+															<tr>
+	                                                            <td colspan="3" align="center" style="color: red">承办中...</td>
+	                                                        </tr>
+														</#if>
+                                                    </#list>
+                                                    
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        <#if chengbanRecords?size gt 0 && chengbanRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 承办回复阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>承办回复人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list chengbanRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.cbr!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                   
+                                                    </tbody>
+                                             </table>
+                                         </#if>
+                                        <#if lianshenpis?size gt 0 && lianshenpis??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 立案阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>立案人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list lianshenpis as obj>
+                                                    <#if obj.mark??>
+                                                        <tr>
+                                                            <td>${obj.lar!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+																
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                        <#else>
+															<tr>
+	                                                            <td colspan="4" style="color: red">立案中...</td>
+	                                                        </tr>	
+														</#if>
+                                                    </#list>
+                                                   
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        
+                                        <#if lianReturnRecords?size gt 0 && lianReturnRecords??>
+                                        <div class="alert alert-success"><i class="fa fa-hand-o-right"></i> 立案回复阶段</div>
+                                        <table class="table table-bordered">
+                                                 <thead>
+                                                     <tr>
+                                                         <th>立案回复人</th>
+                                                         <th>意见</th>
+                                                         <th>是否通过</th>
+                                                         <th>提交时间</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    
+                                                    <#list lianReturnRecords as obj>
+                                                        <tr>
+                                                            <td>${obj.createId!''}</td>
+                                                            <td>${obj.content!''}</td>
+                                                            <td>
+                                                            	<#switch obj.mark>
+																  <#case '1'>
+																   	 通过
+																    <#break>
+																  <#case '0'>
+																  	 未通过
+																    <#break>
+																</#switch>
+                                                            </td>
+                                                            <td>${obj.time!''}</td>
+                                                        </tr>
+                                                    </#list>
+                                                    </tbody>
+                                             </table>
+                                        </#if>
+                                        </div>
+                                        
+                                        
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <script type="text/javascript">
+        	function addFyr(id){
+        		var createId = $("select[name=fyr]").val();
+        		$.ajax({
+        			type:"post",
+        			dataType:"json",
+        			url:"fuyi.do?action=addFyr",
+        			data:{
+        				"motionid":id,
+        				"createId":createId
+        			},
+        			success:function(msg){
+        				if(msg.resultCode==0){
+        					alert(msg.resultDesc);
+        				}else{
+        					//判断是不是子框架
+        					var nextUrl=msg.data;
+        					if(nextUrl&&nextUrl!=""){
+        						alert(msg.resultDesc);  						
+        						location.href=nextUrl;
+        					}else{
+        						location.href=document.referrer;
+        					}
+        				}
+        			},
+        			error:function(data){
+        				alert(data);
+        			}
+        		});
+        	}
+        	
+        	// 上报的方法
+        	function goQianpiSave(id){
+        		var qprId = $("select[name=qpr]").val();
+        		if($.trim(qprId).length == 0){
+        			$("#qprId").focus();
+        			return;
+        		}
+        		$.ajax({
+        			type:"post",
+        			dataType:"json",
+        			url:"qianpi.do?action=save",
+        			data:{
+        				"qprId" : qprId,
+        				"motionId" : id
+        			},
+        			success:function(msg){
+        				if(msg.resultCode==0){
+        					alert(msg.resultDesc);
+        				}else{
+        					//判断是不是子框架
+        					var nextUrl=msg.data;
+        					if(nextUrl&&nextUrl!=""){
+        						alert("上报成功");
+        						location.href=nextUrl;
+        					}else{
+        						location.href=document.referrer;
+        					}
+        				}
+        			},
+        			error:function(data){
+        				alert(data);
+        			}
+        		});
+        	}
+        </script>
+        <script type="text/javascript">
+        	var ue = UE.getEditor('ueID');
+        	ue.addListener('ready',function(){  
+                ue.setDisabled();  
+            });
+        </script>
+<@common.bottom/>

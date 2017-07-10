@@ -1,0 +1,45 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >留言列表 </span>
+	<ul>
+		<li><input type="button" class="buttons" value="新留言" onclick="addInfor()" /></li>
+	</ul>
+</div>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=50 >留言人</td>
+<td  bgColor=#f8f8f8 width=70% align="center">信息内容</td>
+<td  >操作</td>
+<td  >状态</td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=50 >${obj.creater?default('')}</td>
+<td align="left">
+	留言时间：${obj.id[0..9]}<br>
+	留言内容：${obj.content?default('')}
+	<#list obj.backMessage as objs>
+	<br><hr>
+	${objs.creater?default('')}回复：${objs.content?default('')}<br>
+	回复时间:${obj.id[0..9]}
+	</#list>
+</td>
+<td align="center"><a href="?action=list&parentId=${obj.id?default('')}">回复</a></td>
+<td align="center"><a href='javascript:void(0)' id="${obj.id?default('')}" onClick="updateBaseObject(this,${obj.valid?string('false','true')})" name=valid> ${obj.valid?string('启用','禁用')}</a></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<form id="commonform" action="?action=list" method="post">
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+</form>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr></tfoot>
+</table>
+<@common.bottom/>
+

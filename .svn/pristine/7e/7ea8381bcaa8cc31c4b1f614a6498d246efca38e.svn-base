@@ -1,0 +1,39 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="组织部门"/>
+<form id="formId" method="post" action="?action=save">
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>新建组织部门</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">部门名称</td>
+<td class="contentTd"><input type="text" class="btinput" required=true name="tname" /><span class="spantip" id="tname_span"/></td>
+<td class="titleTd">部门编码</td>
+<td class="contentTd"><input type="text" class="btinput" required="true" check="enOrNum;isString(2,32)" name="organCode"/><span class="spantip" id="organCode_span"></span></td>
+</tr>
+<tr>
+<td class="titleTd">上级部门</td>
+<td bgColor=#ffffff><select id="parentId" name="parentId" /><@common.treeoptions list=parentlist defaultValue="${parentId}"/></select><span class="spantip" id="parentId_span"></span></td>
+<td class="titleTd">部门类型</td>
+<td bgColor=#ffffff><select id="organType" style="width: 200px" name="organType" param="id=organType&amp;displayTitle=false"></select>
+</td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="formsave()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<script type="text/javascript">
+<!--
+//-->
+</script>
+<@common.bottom/>
+
+

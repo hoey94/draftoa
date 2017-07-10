@@ -1,0 +1,46 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="字典(${itemName?default('')})"/>
+<form id="formId" method="post" action="?action=save" >
+<input type='hidden' id='itemId' name="itemId" value="${itemId?default('')}" />
+<input type='hidden' id='itemName' name="itemName" value="${itemId?default('')}" />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+新建字典</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">字典项标识</td>
+<td class="contentTd"><input type="text" class="btinput" required=true check="enOrNum" name="id"/><span class="spantip" id="id_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">字典描述</td>
+<td class="contentTd"><input type="text" class="btinput" size="100" style="width: 600px;" required=true name="tname" /><span class="spantip" id="tname_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">字典类型</td>
+<td class="contentTd">
+<select id="valid" name="valid" param="id=dictionaryvalid&displayTitle=false" />&nbsp;&nbsp;&nbsp;&nbsp;静态字典直接维护值，动态字典系统通过sql获取值</td>
+</tr>
+<tr>
+<td class="titleTd">字典值</td>
+<td class="contentTd">
+<textarea rows="3" cols="80" class="bttextarea" required=true name="description"></textarea><span class="spantip" id="description_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">默认值</td>
+<td class="contentTd"><input type="text" class="btinput" name="defaultValue"/><span class="spantip" id="id_span"/></td>
+</tr>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

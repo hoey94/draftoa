@@ -1,0 +1,140 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <section class="main-content-wrapper">
+            <section id="main-content">
+             <div class="row">
+                    <div class="col-md-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                            <li><a href="#">主页</a>
+                            </li>
+                            <li>我的提案</li>
+                            <li class="active">提案反馈查询</li>
+                        </ul>
+                        <!--breadcrumbs end -->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">提案反馈查询</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-wrapper tab-primary">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#profile1" data-toggle="tab">提案信息</a>
+                                        </li>
+                                        <li><a href="#profile5" data-toggle="tab">反馈意见</a>
+                                        </li>
+                                    </ul>
+                                    <form action="chengbanRecord.do?action=save" method="post" id="formId">
+                                    <!-- 谁将该议案提交给了我，就查找该人的信息 -->
+                                    <!-- <input type="hidden" name="cbr" value="${chengban.createId!''}"> -->
+                                    <!-- 议案的id -->
+                                    <input type="hidden" name="motionId" value="${obj.id!''}">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="profile1">
+                                            <p class="liushui"><#if obj.zlh != ''><span>整理号：${obj.zlh!''}</span></#if>  
+                                            <#if obj.lah != ''><span>立案号：${obj.lah!''}</span></#if></span></p>
+                                            <h4>${obj.tname!''}<br/>
+                                            <span>提交时间：${obj.time!''}</span></h4>
+                                            <p>提案题目：${obj.tname!''}</p>
+                                             <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>姓名</th>
+                                                            <th>职称（务）</th>
+                                                            <th>单位</th>
+                                                            <th>联系电话</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                           <td>提案人</td>
+                                                           <td>${user.tname!''}</td>
+                                                           <td>${user.duty!''}</td>
+                                                           <td>${user.organId!''}</td>
+                                                           <td>${user.mobilNumber!''}</td>
+                                                        </tr>
+                                                        <#if fyrs ??>
+                                                        <#list fyrs as obj>
+                                                        <tr>
+                                                            <td>附议人</td>
+                                                            <td>${obj.tname!''}</td>
+                                                            <td>${obj.duty!''}</td>
+                                                            <td>${obj.organId!''}</td>
+                                                            <td>${obj.mobilNumber!''}</td>
+                                                        </tr>
+                                                        </#list>
+                                                        </#if>
+                                                    </tbody>
+                                                </table>
+                                            <p class="font16">提案内容：</p>
+                                            <p>${obj.content!''}</p>    
+                                        </div>
+ 
+                                        <div class="tab-pane" id="profile5">
+                                           <div class="panel-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>内容摘要</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                         <#if obj.content?? && obj.content?length gt 10>
+						                                	<div class="message-content">${obj.content?substring(0,10)}...</div>
+						                                <#else>
+						                                	<div class="message-content">${obj.content!''}</div>
+						                                </#if>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                        <!-- <div style="margin: 5px 0px;">
+                                                        <label  class=" control-label">承办人：</label>
+                                                        <span class="form-control1" style="width:200px;display:inline-block">
+                                                        <input class="form-control"  style="min-height:30px;" name="cbr" required="true">
+                                                        <img src="theme/oa/images/iconfont-fangdajing.png" alt=""style="width:20px;height:20px;right:10px;" class="input-img">  
+                                                         </span>
+	                                                        </div> -->
+                                                        <div class="form-group">
+                                                        <label class="control-label" style="font-weight:bold;">您的意见：</label>
+                                                            <label class="radio-inline">
+                                                                <input class="icheck" type="radio" checked="" name="mark" value="1">满意</label>
+                                                            <label class="radio-inline">
+                                                                <input class="icheck" type="radio" name="mark" value="0">不满意</label>                   
+                                                        </div>
+                                                        
+                                                       	
+                                                        <textarea name="content" style="padding:0px;" id="contentID" cols="30" rows="5" placeholder="请写出您的意见" class="col-md-12"></textarea>
+                                                        <p style="text-align:center;"><button type="button" class="btn btn-primary " style="margin:15px auto;" onclick="save();" >提交您的意见</button></p>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                            				</div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </section>
+        <script type="text/javascript">
+        	var date = new Date();
+        	var div = document.getElementById("dateID");
+        	div.innerHTML = date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+        </script>
+        <script type="text/javascript">
+        	var ue = UE.getEditor('contentID');
+        </script>
+<@common.bottom/>

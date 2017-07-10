@@ -1,0 +1,68 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="用户"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<input type="hidden" id="defaultOrganId" value="${organId?default('')}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑用户</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">登录帐号</td>
+<td bgColor=#ffffff colspan="3">${obj.id?default('')}</td>
+</tr>
+<tr>
+<td class="titleTd">密码</td>
+<td class="contentTd"><input type="password" class="btinput" style="width: 60%" readOnly="true" value="${obj.password?default('')}" name="password"/></td>
+<td class="titleTd">再一次输入密码</td>
+<td class="contentTd"><input type="password" class="btinput" style="width: 60%" readOnly="true" value="${obj.password?default('')}" name="password2"/></td>
+</tr>
+<tr>
+<td colspan=4 style="background-color:#f8f8f8" height=30 align="center">人员信息</td>
+</tr>
+<tr>
+<td class="titleTd">姓名</td>
+<td class="contentTd"><input type="text" class="btinput" required=true id="tname" check="isString(1,10)" style="width: 60%" name="tname" value="${obj.tname?default('')}" /><span class="spantip" id="tname_span"/></td>
+<td class="titleTd"> 性别</td>
+<td class="contentTd"><select id="sex" name="sex"/><@common.sex defaultValue="${obj.sex?default('男')}" /></select></td>
+</tr>
+<tr>
+<td class="titleTd">QQ号码</td>
+<td class="contentTd"><input type="text" class="txtinput" style="width: 60%" check="isInt" id="qqNumber" name="qqNumber" value="${obj.qqNumber?default('')}"/><span class="spantip" id="qqNumber_span"/></td>
+<td class="titleTd">手机号码</td>
+<td class="contentTd"><input type="text" class="txtinput" check="isMobile" style="width: 60%" id="mobilNumber" name="mobilNumber"  value="${obj.mobilNumber?default('')}"/><span class="spantip" id="mobilNumber_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">工作岗位</td>
+<td class="contentTd"><select id="duty" name="duty" /><@common.nameOptions list=jobpostList defaultValue="${obj.duty?default('')}" display="true"/></select></td>
+<td class="titleTd">出生日期</td>
+<td class="contentTd"><input type="text"  id="birthday" name="birthday"  class="calendars" value="${obj.birthday?default('')}"/></td>
+</tr>
+<tr>
+<td class="titleTd">电子邮箱</td>
+<td class="contentTd"><input type="text" class="txtinput" check="isEmail" id="email" name="email"  value="${obj.email?default('')}"/><span class="spantip" id="email_span"/></td>
+<td class="titleTd">所属部门</td>
+<td class="contentTd"><select id="organId" name="organId" /><@common.treeoptions list=organlist defaultValue="${organId?default('')}"/></select></td>
+</tr>
+<tr>
+<td class="titleTd">所属角色</td>
+<td bgColor=#ffffff colspan="3">
+<#list rolelist as robj>${robj.tname?default('')};&nbsp;&nbsp;</#list>
+</td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="所属角色" onclick="openDialog('roleUsers.do?action=add&userId=${obj.id?default('')}')" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="删除" onclick="formdelete('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="关闭" onclick="gotourl('users.do?organId='+document.getElementById('defaultOrganId').value);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>

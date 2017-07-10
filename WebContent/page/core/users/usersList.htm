@@ -1,0 +1,88 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >${organName?default('')}用户列表 </span>
+	<ul>
+		<!-- <li><input type="button" class="buttons" value="坦诚" onclick="opendialog('http://www.163.com','标题的数量达到飒沓方法是',false,400,300)" /></li> -->	
+		<li><input type="button" class="buttons" value="批量导入" onclick="importuser()" /></li>	
+		<li><input type="button" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" class="buttons" value="禁用" onclick="jsdeletes()" /></li>	
+		<li><input type="button" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=list" method="post">
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<input type='hidden' id='sortfield' name="sortfield" value="${sortfield?default('')}" />
+<input type='hidden' id='organId' name="organId" value="${organId?default('')}" />
+<input type='hidden' id='sortvalue' name="sortvalue" value="${sortvalue?default('')}" />
+  <tr>
+    <td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+    <td bgColor=#f8f8f8>姓名：<input id="tname"  class="txtinput" name="tname" value="${tname?default('')}"></td>
+    <td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+  </tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td onclick="resetSort('id')" style="cursor:pointer;">登录帐号<span id="sortid"></span></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;">姓名<span id="sorttname"></span></td>
+<td>性别</td>
+<td  onclick="resetSort('birthday')" style="cursor:pointer;">出生日期<span id="sortbirthday"></span></td>
+<td>工作岗位</td>
+<td  onclick="resetSort('mobilNumber')" style="cursor:pointer;">手机号码<span id="sortmobilNumber"></span></td>
+<td  onclick="resetSort('qqNumber')" style="cursor:pointer;">QQ号码<span id="sortqqNumber"></span></td>
+<td  onclick="resetSort('email')" style="cursor:pointer;">电子邮箱<span id="sortemail"></span></td>
+<td  onclick="resetSort('createTime')" style="cursor:pointer;">注册时间<span id="sortcreateTime"></span></td>
+<td onclick="resetSort('sortCode')" style="cursor:pointer;" >排序<span id="sortsortCode"></span></td>
+<td onclick="resetSort('valid')" style="cursor:pointer;" >状态<span id="sortvalid"></span></td>
+<td>操作</td>
+</tr>
+</thead>
+<thead>
+</thead><tbody><#list list as obj>
+<tr ondblclick="readInfor('${obj.id}')">
+<td width=20 bgColor=#ffffff  align="center"><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td align="left">${obj.id?default('')}</td>
+<td align="left"><a href="#" onclick="readInfor('${obj.id}')">${obj.tname?default('')}</a></td>
+<td align="center">${obj.sex?default('')}</td>
+<td><#if obj??>${obj.birthday?default('')}</#if></td>
+<td><#if obj??>${obj.duty?default('')}</#if></td>
+<td><#if obj??>${obj.mobilNumber?default('')}</#if></td>
+<td><#if obj??>${obj.qqNumber?default('')}</#if></td>
+<td><#if obj??>${obj.email?default('')}</#if></td>
+<td><#if obj??>${obj.createTime?string("yyyy-MM-dd")}</#if></td>
+<td><#if obj??>${obj.sortCode?c}</#if></td>
+<td align="center"><a href='javascript:void(0)' id="${obj.id?default('')}" onClick="updateBaseObject(this,${obj.valid?string('false','true')})" name=valid  value= ${obj.valid?string('false','true')}> ${obj.valid?string('启用','禁用')}</a></td>
+<td align="center"><a href="#" onclick="resetpassword('${obj.id}')">密码重置</a></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page params=""/>&nbsp;</td>
+</tr></tfoot>
+</table>
+<script type="text/javascript">
+initSort();
+function importuser(){
+	window.showModalDialog("?action=importdatas&parameters=''",window,"status:false;dialogWidth:500px;dialogHeight:160px;edge:Raised; enter: Yes; help: No; resizable: No; status: No"); 
+	window.location.reload();
+}
+function resetpassword(obj){
+	$.ajax({
+		   type: "get",
+		   url: "users.do?action=resetpassword&id="+obj,
+		   timeout: 5000,
+		   success: function(msg){
+				alert(msg.resultDesc);
+		   }			
+		 });
+}
+</script>
+<@common.dialogBottom/>
+

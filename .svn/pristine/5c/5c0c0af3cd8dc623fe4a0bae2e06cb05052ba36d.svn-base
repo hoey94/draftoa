@@ -1,0 +1,90 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="用户"/>
+<form id="formId" method="post" action="?action=save" >
+<input type="hidden" id="defaultOrganId" value="${organId?default('')}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>
+新建用户</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">姓名</td>
+<td class="contentTd"><input type="text" class="btinput" required=true style="width: 60%" check="isString(1,10)" id="tname" onblur="getAccount(this)" name="tname"/><span class="spantip" id="tname_span"/></td>
+<td class="titleTd">性别</td>
+<td class="contentTd"><select id="sex" name="sex" /><@common.sex/></select></td>
+</tr>
+<tr>
+<td class="titleTd">QQ号码</td>
+<td class="contentTd"><input type="text" class="txtinput" style="width: 60%" check="isInt" id="qqNumber" name="qqNumber" onblur="setEmail(this)"/><span class="spantip" id="qqNumber_span"/></td>
+<td class="titleTd">手机号码</td>
+<td class="contentTd"><input type="text" class="txtinput" style="200" id="mobilNumber" check="isMobile" name="mobilNumber"/><span class="spantip" id="mobilNumber_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">工作岗位</td>
+<td class="contentTd"><select id="duty" name="duty" /><@common.nameOptions list=jobpostList display="true"/></select></td>
+<td class="titleTd">出生日期</td>
+<td class="contentTd"><input type="text" id="birthday" name="birthday" id="calendar" class="calendars"/><span class="spantip" id="birthday_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">电子邮箱</td>
+<td class="contentTd"><input type="text" class="txtinput" style="width: 60%" check="isEmail" id="email" name="email"/><span class="spantip" id="email_span"/></td>
+<td class="titleTd">所属部门</td>
+<td class="contentTd"><select id="organId" name="organId" /><@common.treeoptions list=organlist defaultValue="${organId?default('')}"/></select></td>
+</tr>
+<tr>
+<td colspan=4 style="background-color:#f8f8f8" height=30 align="center">帐号信息</td>
+</tr>
+<tr>
+<td class="titleTd">登录帐号</td>
+<td bgColor=#ffffff ><input type="text" class="btinput" check="enOrNum;isString('#','32')" required=true style="width: 60%" id="id" name="id"/><span class="spantip" id="id_span"/></td>
+<td class="titleTd">密码</td>
+<td class="contentTd"><input type="text" class="btinput" required=true style="width: 60%" value="123456" name="password"/><span class="spantip" id="password_span"/></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="gotourl('users.do');" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+<script type="text/javascript">
+<!--
+function getAccount(obj){
+	var account=obj.value;
+	if(account.length>1){
+		$.ajax( {
+			type : "post",
+			url : "users.do?action=getAccount",
+			data:{tname:account},
+			timeout : 10000,
+			success : function(msg) {
+				if(msg.resultCode==0){
+					alert(msg.resultDesc);
+				}else{
+					var idinput=document.getElementById("id");
+					idinput.value=msg.resultDesc;
+				}
+			}
+		});
+	}
+}
+function setEmail(obj){
+	var qq=obj.value;
+	var checkqq=qq.match(/^\d.*$/);
+	if(checkqq==qq){
+		var emailinput=document.getElementById("email");
+		if(emailinput.value==""){
+			emailinput.value=qq+"@qq.com";
+		}
+	}
+}
+//-->
+</script>
+
+

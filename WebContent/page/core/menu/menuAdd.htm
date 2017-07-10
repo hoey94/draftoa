@@ -1,0 +1,61 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="菜单"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建菜单</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">菜单名称</td>
+<td class="contentTd"><input type="text" class="btinput" required=true name="tname"/><span class="spantip" id="tname_span"/></td>
+<td class="titleTd">链接地址</td>
+<td class="contentTd"><input type="text" class="btinput" required=true name="url"/><span class="spantip" id="url_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">上级菜单</td>
+<td class="contentTd">
+<select  name="parentId"/><@common.treeoptions list=parentlist defaultValue="${parentId?default('')}" /></select></td>
+<td class="titleTd">显示目标</td>
+<td class="contentTd">
+<select name="targets"/>
+<option value="mainarea">中间显示</option>
+<option value="leftarea">左边菜单列表</option>
+<option value="_blank">新窗口</option>
+</select></td>
+</tr>
+<tr>
+<td class="titleTd">菜单类型</td>
+<td class="contentTd">
+<select  name="menuType" />
+<option value=function>正常连接类型</option>
+<option value="structure">功能显示类型</option>
+</select></td>
+<td class="titleTd">菜单图片</td>
+<td class="contentTd"><input type="text" style="font-size:13px;border:#A5A5A5 1px solid;width:100px; height: 22px; line-height: 22px;padding-left: 5px;" id="imgurl" name="imgurl" onclick="selectImage()"/></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="formsave()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+<script type="text/javascript">
+<!--
+function selectImage(){
+	var imgurl=document.getElementById("imgurl").value;
+	var returnValue=window.showModalDialog("menu.do?action=selectImage&imgurl="+imgurl,window,"status:false;dialogWidth:680px;dialogHeight:400px;edge:Raised; enter: Yes; help: No; resizable: No; status: No"); 
+	if(returnValue){
+		document.getElementById("imgurl").value=returnValue;
+	}
+}
+//-->
+</script>
+

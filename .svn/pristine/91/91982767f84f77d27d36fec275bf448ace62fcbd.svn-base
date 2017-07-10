@@ -1,0 +1,34 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="模块操作"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建模块操作</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname"/></td>
+<td class="titleTd">应用名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="appes"/></td>
+</tr>
+<tr>
+<td class="titleTd">操作类别</td>
+<td class="contentTd"><input type="text" class="txtinput" name="actionType"/></td>
+<td class="titleTd"></td>
+<td class="contentTd"></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

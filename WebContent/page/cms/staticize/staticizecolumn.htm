@@ -1,0 +1,33 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >栏目静态化 </span>
+</div>
+<hr>
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<tr>
+<td class="titleTd">栏目</td>
+<td class="contentTd"><select id="columnId" name="columnId"/><@common.options list=columnlist/></select></td>
+</tr>
+<tr>
+<td bgColor=#ffffff height=30 align="center" colspan="2">
+<input type="button" class="buttons" value="静态化栏目" onclick="staticizecolumn()" />
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+function staticizecolumn(){
+	var columnId=document.getElementById("columnId").value;
+	$.ajax({
+		type : "post",
+		url : "?action=staticizecolumns&columnId="+columnId,
+		timeout : 10000,
+		success : function(msg) {
+			alert(msg.resultDesc);
+		}
+	});
+}
+</script>
+<@common.bottom/>
+
+

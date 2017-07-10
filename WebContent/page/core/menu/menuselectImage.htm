@@ -1,0 +1,15 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<#list listImages as image>
+&nbsp;<a href="#" onclick="select('${image?default('')}')"><img id="" <#if imgurl!=image>style="border:0px;"</#if> src="theme/defaultstyle/mobilemenu/${image?default('')}" ismap></a>
+</#list>
+<@common.bottom/>
+<script type="text/javascript">
+<!--
+function select(obj){
+	window.returnValue=obj;
+	window.close();
+}
+//-->
+</script>
+

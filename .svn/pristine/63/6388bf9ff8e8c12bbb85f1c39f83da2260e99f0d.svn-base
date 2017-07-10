@@ -1,0 +1,43 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="使用样例"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑使用样例</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td bgColor=#ffffff  colspan="3"><input type="text" class="txtinput" style="width: 96%" name="tname" value="${obj.tname?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">信息内容</td>
+<td bgColor=#ffffff colspan="3">
+<textarea id="content" name="content"  rows="20" cols="80" style="width:800px;">${obj.content?default('')}</textarea>
+</td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" onclick="savestate()" value="更新" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor_plugins/ubb.js"></script>
+<script type="text/javascript">
+var editor=$('#content').xheditor({upLinkUrl:"fileUplod.do?action=jsfileUplod",upLinkExt:"doc,zip,rar,txt,xls,ppt",upImgUrl:"fileUplod.do?action=jsfileUplod",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"fileUplod.do?action=jsfileUplod",upFlashExt:"swf",upMediaUrl:"fileUplod.do?action=jsfileUplod",upMediaExt:"wmv,avi,wma,mp3,mid"});
+function savestate(){
+	var sHtml=editor.getSource(); 
+	document.getElementById("articleContent").value=sHtml;
+	save();
+  }
+</script>
+

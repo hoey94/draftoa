@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<!-- controller start -->
+	<bean id="loginDefaultController" class="com.starsoft.core.controller.LoginDefaultController">
+    	<property name="methodNameResolver" ref="methodResolver"/>
+		<property name="baseDomain" ref="usersDomain"/>
+		<property name="actionKey" value="admin/index"/>
+		<property name="initkey" value=""/>
+    </bean>
+    <bean id="menuController" class="com.starsoft.core.controller.MenuController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="menuDomain"/>
+      <property name="actionKey" value="menu"/>
+      <property name="initkey" value="core"/>
+    </bean>
+    <bean id="usersController" class="com.starsoft.core.controller.UsersController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="usersDomain"/>
+      <property name="actionKey" value="users"/>
+       <property name="initkey" value="core"/>
+    </bean>
+    <bean id="roleController" class="com.starsoft.core.controller.RoleController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="roleDomain"/>
+      <property name="actionKey" value="role"/>
+      <property name="initkey" value="core"/>
+    </bean>
+     <bean id="menuPrivilegeController" class="com.starsoft.core.controller.MenuPrivilegeController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="menuPrivilegeDomain"/>
+      <property name="actionKey" value="menuPrivilege"/>
+      <property name="initkey" value="core"/>
+    </bean>
+    <bean id="organController" class="com.starsoft.core.controller.OrganController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="organDomain"/>
+      <property name="actionKey" value="organ"/>
+       <property name="initkey" value="core"/>
+    </bean>
+    <bean id="dictionaryController" class="com.starsoft.core.controller.DictionaryController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="dictionaryDomain"/>
+      <property name="actionKey" value="dictionary"/>
+      <property name="initkey" value="core"/>
+    </bean>
+    <bean id="roleUsersController" class="com.starsoft.core.controller.RoleUsersController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="roleUsersDomain"/>
+      <property name="actionKey" value="roleUsers"/>
+      <property name="initkey" value="core"/>
+    </bean>
+    <bean id="appesActionController" class="com.starsoft.core.controller.AppesActionController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="appesActionDomain"/>
+      <property name="actionKey" value="appesAction"/>
+      <property name="initkey" value="core"/>
+    </bean> 
+	<bean id="appesController" class="com.starsoft.core.controller.AppesController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="appesDomain"/>
+      <property name="actionKey" value="appes"/>
+      <property name="initkey" value="core"/>
+      <property name="subSystem" value="${subSystem}"/>
+    </bean>
+    <bean id="appesActionPrivilegeController" class="com.starsoft.core.controller.AppesActionPrivilegeController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="appesActionPrivilegeDomain" />
+		<property name="actionKey" value="appesActionPrivilege" />
+		<property name="initkey" value="core"/>
+	</bean>
+    <bean id="appesAttributeController" class="com.starsoft.core.controller.AppesAttributeController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="appesAttributeDomain"/>
+      <property name="actionKey" value="appesAttribute"/>
+      <property name="initkey" value="core"/>
+    </bean>
+    <bean id="resourceController" class="com.starsoft.core.controller.ResourceController">
+      <property name="methodNameResolver" ref="methodResolver"/>
+      <property name="baseDomain" ref="resourceDomain"/>
+      <property name="actionKey" value="resource"/>
+      <property name="initkey" value="core"/>
+    </bean>
+	<bean id="waitToReadController" class="com.starsoft.core.controller.WaitToReadController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="waitToReadDomain" />
+		<property name="actionKey" value="waitToRead" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<!-- 公用文件上传 -->
+	<bean name="fileUplod" class="com.starsoft.core.controller.FileUploadController">
+	  <property name="methodNameResolver" ref="methodResolver"/>
+   	</bean>	
+	<bean name="systemIntegrationController" class="com.starsoft.core.controller.SystemIntegrationController">
+	  <property name="methodNameResolver" ref="methodResolver"/>
+	  <property name="baseDomain" ref="appesDomain" />
+      <property name="actionKey" value="systemIntegration" />
+	  <property name="initkey" value="core"/>
+	</bean>	
+	<bean id="waitToDoController" class="com.starsoft.core.controller.WaitToDoController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="waitToDoDomain" />
+		<property name="actionKey" value="waitToDo" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="clobInfoController" class="com.starsoft.core.controller.ClobInfoController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="actionKey" value="clobInfo" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="systemPropertyController" class="com.starsoft.core.controller.SystemPropertyController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="systemPropertyDomain" />
+		<property name="actionKey" value="systemProperty" />
+		<property name="initkey" value="core"/>
+		<property name="sysParam" value="jdbc.driver=${jdbc.driver}#jdbc.url=${jdbc.url}#jdbc.username=${jdbc.username}#jdbc.password=${jdbc.password}#database.backup.path=${database.backup.path}"/>
+	</bean>
+	<bean id="systemPropertyPersonController" class="com.starsoft.core.controller.SystemPropertyPersonController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="systemPropertyPersonDomain" />
+		<property name="actionKey" value="systemPropertyPerson" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="favouritesLinkController" class="com.starsoft.core.controller.FavouritesLinkController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="favouritesLinkDomain" />
+		<property name="actionKey" value="favouritesLink" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="helpGuideController" class="com.starsoft.core.controller.HelpGuideController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="helpGuideDomain" />
+		<property name="actionKey" value="helpGuide" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="remindController" class="com.starsoft.core.controller.RemindController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="remindDomain" />
+		<property name="actionKey" value="remind" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="systemLogController" class="com.starsoft.core.controller.SystemLogController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="systemLogDomain" />
+		<property name="actionKey" value="systemLog" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="logInRecordController" class="com.starsoft.core.controller.LogInRecordController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="logInRecordDomain" />
+		<property name="actionKey" value="logInRecord" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="groupUsersController" class="com.starsoft.core.controller.GroupUsersController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="groupUsersDomain" />
+		<property name="actionKey" value="groupUsers" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="groupController" class="com.starsoft.core.controller.GroupController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="groupDomain" />
+		<property name="actionKey" value="group" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="addressBookTypeController" class="com.starsoft.core.controller.AddressBookTypeController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="addressBookTypeDomain" />
+		<property name="actionKey" value="addressBookType" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="addressBookController" class="com.starsoft.core.controller.AddressBookController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="addressBookDomain" />
+		<property name="actionKey" value="addressBook" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="jobPostController" class="com.starsoft.core.controller.JobPostController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="jobPostDomain" />
+		<property name="actionKey" value="jobPost" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="exampleController" class="com.starsoft.core.controller.ExampleController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="exampleDomain" />
+		<property name="actionKey" value="example" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="delegationAuthorizationController" class="com.starsoft.core.controller.DelegationAuthorizationController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="delegationAuthorizationDomain" />
+		<property name="actionKey" value="delegationAuthorization" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="clientVersionController" class="com.starsoft.core.controller.ClientVersionController">
+		<property name="methodNameResolver" ref="methodResolver" />
+		<property name="baseDomain" ref="clientVersionDomain" />
+		<property name="actionKey" value="clientVersion" />
+		<property name="initkey" value="core"/>
+	</bean>
+	<bean id="coreUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">	
+    	<property name="interceptors">
+			<list><ref bean="browserAdapterInterceptor"/><ref bean="loginInterceptor"/></list>
+		</property>	
+	    <property name="urlMap">
+	          <map>
+	            <entry key="/loginDefault.do" value-ref="loginDefaultController"/>
+                <entry key="/menu.do" value-ref="menuController"/>
+                <entry key="/users.do" value-ref="usersController"/>
+                <entry key="/role.do" value-ref="roleController"/>
+                <entry key="/menuPrivilege.do" value-ref="menuPrivilegeController"/>
+                <entry key="/organ.do" value-ref="organController"/>
+                <entry key="/roleUsers.do" value-ref="roleUsersController"/>
+                <entry key="/appesAction.do" value-ref="appesActionController"/>
+                <entry key="/appes.do" value-ref="appesController"/>
+                <entry key="/appesActionPrivilege.do" value-ref="appesActionPrivilegeController"/>
+                <entry key="/appesAttribute.do" value-ref="appesAttributeController"/>
+                <entry key="/resource.do" value-ref="resourceController"/>
+				<entry key="/waitToDo.do" value-ref="waitToDoController"/>
+				<entry key="/systemIntegration.do" value-ref="systemIntegrationController"/>
+				<entry key="/clobInfo.do" value-ref="clobInfoController"/>
+              	<entry key="/systemProperty.do" value-ref="systemPropertyController"/>
+            	<entry key="/favouritesLink.do" value-ref="favouritesLinkController"/>
+              	<entry key="/helpGuide.do" value-ref="helpGuideController"/>
+              	<entry key="/remind.do" value-ref="remindController"/>
+              	<entry key="/waitToRead.do" value-ref="waitToReadController"/>
+              	<entry key="/systemLog.do" value-ref="systemLogController"/>
+				<entry key="/groupUsers.do" value-ref="groupUsersController"/>
+				<entry key="/group.do" value-ref="groupController"/>
+				<entry key="/addressBookType.do" value-ref="addressBookTypeController"/>
+				<entry key="/addressBook.do" value-ref="addressBookController"/>
+				<entry key="/jobPost.do" value-ref="jobPostController"/>
+				<entry key="/example.do" value-ref="exampleController"/>
+				<entry key="/logInRecord.do" value-ref="logInRecordController"/>
+				<entry key="/systemPropertyPerson.do" value-ref="systemPropertyPersonController"/>
+              	<entry key="/delegationAuthorization.do" value-ref="delegationAuthorizationController"/>
+              	<entry key="/clientVersion.do" value-ref="clientVersionController"/>
+              </map>
+         </property>
+    </bean> 
+    <bean id="coreUrlNoLoginMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">	
+    	<property name="interceptors">
+			<list><ref bean="browserAdapterInterceptor"/></list>
+		</property>	
+	    <property name="urlMap">
+	          <map> 
+				 <entry key="/fileUplod.do" value-ref="fileUplod"/>
+	              <entry key="/dictionary.do" value-ref="dictionaryController"/>
+	          </map>
+         </property>
+    </bean> 
+    <!-- 移动端数据交互 -->
+	<bean id="mobileFileUploadController" class="com.starsoft.core.mobilecontroller.MobileFileUploadController"></bean>
+	<bean id="mobileContactsController" class="com.starsoft.core.mobilecontroller.MobileContactsController"></bean>
+	<bean id="mobileLoginController" class="com.starsoft.core.mobilecontroller.MobileLoginController"></bean>
+	<bean id="mobileVersionController" class="com.starsoft.core.mobilecontroller.MobileVersionController"></bean>
+	<bean id="mobileUpdateSelfInfoController" class="com.starsoft.core.mobilecontroller.MobileUpdateSelfInfoController"></bean>
+	<bean id="coreMobileWebUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/mobilefileupload.do" value-ref="mobileFileUploadController"/>
+             	<entry key="/mobilecontacts.do" value-ref="mobileContactsController"/>
+             	<entry key="/mobilelogin.do" value-ref="mobileLoginController"/>
+             	<entry key="/mobileVersion.do" value-ref="mobileVersionController"/>
+             	<entry key="/mobileUpdateSelfInfo.do" value-ref="mobileUpdateSelfInfoController"/>
+			</map>
+		</property>
+	</bean>  
+</beans>

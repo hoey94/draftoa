@@ -1,0 +1,67 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >数据导入(${appes.tname?default('')})</span>
+ <ul>
+		<li><input type="button" class="buttons" value="返回" onclick="javascript:history.go(-1)" /></li>	
+	</ul>
+</div>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+	<tr>
+		<td colspan="100" >数据库表结构</td>
+	</tr>
+</thead>
+<tbody>
+<tr>
+<#list list as obj>
+<td >${obj.description?default('')}</td>
+</#list>
+</tr>
+<tr>
+<#list list as obj>
+<td >${obj.tname?default('')}</td>
+</#list>
+</tr>
+<tr>
+	<td colspan="100" >数据库表导入配置</td>
+</tr>
+<tr>
+	<td colspan="100" height=25 bgColor=#ffffff  align="center">
+	<form id="commonform" action="?action=importdata" method="post" enctype="multipart/form-data">
+	<input type='hidden' id='app' name='app' value='${appes.id}' />
+	ID生成策略：
+	<select name="idcheck">
+		<option value="automatic">系统自动创建
+		<option value="contain">文件自带Id
+	</select>&nbsp;&nbsp;&nbsp;&nbsp;
+	名称限制：
+	<select name="namecheck">
+		<option value="nolimit">无限制
+		<option value="uniqueness">名称唯一
+	</select>
+	&nbsp;&nbsp;<a href="?action=importtemplate&app=${appes.id?default('')}">Excel模版下载</a> &nbsp;&nbsp;&nbsp;&nbsp;上传数据&nbsp;&nbsp;<input type="file" class="txtinput" id="file" name="file"> &nbsp;&nbsp;<input type="button" onClick="importtemplate()"  class="txtinput" value="导入">
+	</form>
+	</td>
+</tr>
+</tbody>
+</table>
+<script type="text/javascript">
+<!--
+function importtemplate(){
+	var file=document.getElementById("file");
+	var commonform=document.getElementById("commonform");
+	if(file&&file.value!=""){
+			if(commonform){
+				commonform.submit();
+				}
+	}else{
+			alert("请选择要上传数据的文件!");
+		}
+}
+
+//-->
+</script>
+<@common.bottom/>
+

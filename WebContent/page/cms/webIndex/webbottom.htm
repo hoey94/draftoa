@@ -1,0 +1,29 @@
+<div id="friendlink" >
+<div class="box_link">
+<#include "/html/webbottom.jsp">
+</div>
+</div>
+<div id="footer">
+  <div id="footer_logo"></div>
+    <div id="footer-box">   
+		<p>华北水利水电大学招生就业处 版权所有  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.do" target="_blank"><font color="#FFFFFF">管理员入口</font></a><br/>联系电话：花园校区：0371-65711379  &nbsp;&nbsp;龙子湖校区：0371-69373771
+		     电子信箱：huashuijiuye@163.com<br/>地址： 花园校区文体中心东202        &nbsp;&nbsp; 龙子湖校区S2(411)<br/>总访问量：<span id="totolNumber"></span>   昨天访问量：<span id="yesterdayNumber"></span>  今天访问量：<span id="todayNumber"></span></p>
+       </div>
+</div><!-- fine #footer-->
+</div><!-- end #page-->
+</body>
+</html>
+<script type="text/javascript">
+var locahref=location.href;
+$.ajax({
+	type:"post",
+	dataType:"json",
+	url:"visterHistory.do?action=save",
+       data:{locahref:locahref},
+       success: function(data){
+           document.getElementById("totolNumber").innerText=data.totolNumber;
+           document.getElementById("yesterdayNumber").innerText=data.yesterdayNumber;
+           document.getElementById("todayNumber").innerText=data.todayNumber;
+           }
+   });
+</script>

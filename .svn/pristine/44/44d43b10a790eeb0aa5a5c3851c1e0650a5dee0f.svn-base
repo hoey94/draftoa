@@ -1,0 +1,48 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<form id="commonform" action="?action=selectsinglelist" method="post">
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<input type='hidden' id='rows' name='rows' value='${page.pageSize?c}' />
+<input type='hidden' id='organId' name="organId" value='${organId?default('')}' />
+<input type='hidden' id='sortfield' name="sortfield" value="${sortfield?default('')}" />
+<input type='hidden' id='sortvalue' name="sortvalue" value="${sortvalue?default('')}" />
+</form>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0>
+<thead>
+<tr>
+<td  bgColor=#f8f8f8 width="50px;" height="22px" align="center">名称 </td>
+<td  bgColor=#f8f8f8 width="30px;" align="center">性别</td>
+<td  bgColor=#f8f8f8 width="60px;" align="center">手机号码</td>
+<td  >工作岗位</td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+</td>
+<td align="left" height="20px" >
+  <a href="#" onclick="selectUser('${obj.id}','${obj.tname}')" ><#if obj.tname?default('')?length lt 5>${obj.tname}<#else>${obj.tname[0..4]}</#if></a>
+</td>
+<td align="center">${obj.sex?default('')}</td>
+<td align="center">${obj.mobilNumber?default('')}</td>
+<td align="left">
+<#if obj.duty?default('')?length lt 8>${obj.duty?default('')}<#else>${obj.duty[0..6]}...</#if>
+</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.simple page=page/></td>
+</tr>
+</table>
+<script type="text/javascript">
+<!--
+function selectUser(id,name){
+	window.parent.returnValue="userIdValue="+id+"&userNamesValue="+name;
+	window.parent.close();
+}
+//-->
+</script>
+<@common.bottom/>
+

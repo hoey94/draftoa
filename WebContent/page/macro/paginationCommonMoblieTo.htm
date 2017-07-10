@@ -1,0 +1,30 @@
+<#macro pagination page=page>
+	<#assign ipage=page.pageIndex?int>
+	<#assign totalpage=page.pageCount?int>
+	<#assign totalCount=page.totalCount?int>
+	<#-- 首页 -->
+	<div class="page clearfix">
+	<#if ipage gt 1>
+		<a onclick="turntopage(${ipage?c}-1);" class="prev no-links">上一页</a>
+	<#else>
+		<a class="prev no-links">上一页</a>
+	</#if>	
+	<div class="select"><label for="page-sel">
+	<select id="selectpage" style="width: 60px;" onchange="turntopage(this.value)">
+			<#list 1..totalpage as num>  
+            <#if ipage != num>  
+               <option value=${num?c}>${num?c}</option>  
+            <#else>
+            	<option value=${num?c} selected>${num?c}</option>  
+           </#if>  
+        </#list>  
+		</option>
+	</select>页</label></div>
+	<#-- 尾页 -->
+	<#if ipage lt totalpage>
+	<a onclick="turntopage(${ipage?c}+1);" class="next">下一页</a>
+	<#else>
+		<a class="next">下一页</a>
+	</#if>
+	</div>		
+</#macro>

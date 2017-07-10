@@ -1,0 +1,334 @@
+<!---页面头部--->
+<#macro header>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+<link href="theme/defaultstyle/images/defaultstyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+<link href="javascript/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="javascript/jquery-ui-1.11.2/jquery-ui.js"></script>
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+<script type="text/javascript" src="javascript/validate.js"></script>
+<script type="text/javascript" language="JavaScript" src="javascript/calendar/calendar.js"></script>
+<script type="text/javascript" src="javascript/ueditor/ueditor.config.js"></script>  
+<script type="text/javascript" src="javascript/ueditor/ueditor.all.js"></script> 
+<!--[if lt IE 9]>
+  <script src="javascript/html5shim.js"></script>
+<![endif]-->
+</head>
+<body onload="initSelect()">
+</#macro>
+<!---add页面头部--->
+<#macro listheader name="数据">
+<div class="current">
+ <span class="place">首页> >${name?default('数据')}列表 </span>
+	<ul>
+		<li><input type="button" id="buttonimport" class="buttons" value="批量导入" onclick="importdatas()" /></li>	
+		<li><input type="button" id="buttondelete" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" id="buttonforbidden" class="buttons" value="禁用" onclick="jsdeletes()" /></li>	
+		<li><input type="button" id="buttonadd" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+</#macro>
+<!---add页面头部--->
+<#macro addheader  name="数据">
+<div class="current">
+ <span class="place">首页> >新建${name?default('数据')} </span>
+</div>
+<hr>
+</#macro>
+<!---edit页面头部--->
+<#macro editheader  name="数据">
+<div class="current">
+ <span class="place">首页> >编辑${name?default('数据')}</span>
+</div>
+<hr>
+</#macro>
+<!---read页面头部--->
+<#macro readheader  name="数据">
+<div class="current">
+ <span class="place">首页> >查看${name?default('数据')}</span>
+</div>
+<hr>
+</#macro>
+<!---页面底部--->
+<#macro bottom>
+</body>
+<script language="javascript" for="document" event="onkeydown">
+<!--
+if(event.keyCode==13 && event.srcElement.type!='button' && event.srcElement.type!='submit' && event.srcElement.type!='reset' && event.srcElement.type!='image' && event.srcElement.type!='')
+event.keyCode=9;
+-->
+</script>
+</html>
+</#macro>
+<#macro dialogBottom>
+<div style="display: none;" id="shadediv"></div>
+<div style="left: 300px; top: 200px; display: none;border:1px solid #0853CC;" id="dialog">
+	<div id="dialogtitlediv">
+		<div id=dialogtitle>Move</div>
+		<div id="colsediv" onclick="closedialog();" style="float:right;padding-right: 10px;padding-top: 3px;cursor: pointer;width: 12px;" ><a href="#" style="color: white;" onclic="closedialog">X</a></div>
+	</div>
+	<div style="padding-top: 25px;BACKGROUND: #fcf3f3;padding-bottom: 5px;" id="iframediv">
+		<iframe frameborder="0" height="200" id="iframecontent" width="300" scrolling="no" src=""></iframe>
+	</div>
+	<div style="width: 100%;height: 30px;BACKGROUND: #fcf3f3;text-align: right;">
+	<input type="button" value="确&nbsp;定" class="btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" value="关&nbsp;闭" onclick="closedialog()" class="btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+</div>
+</body>
+<script language="javascript" for="document" event="onkeydown">
+<!--
+if(event.keyCode==13 && event.srcElement.type!='button' && event.srcElement.type!='submit' && event.srcElement.type!='reset' && event.srcElement.type!='image' && event.srcElement.type!='')
+event.keyCode=9;
+</script>
+<script type="text/javascript">
+//模式对话框开始
+function opendialog(url,title,shade,width,height){
+	var shadediv=document.getElementById("shadediv");
+	var dialog=document.getElementById("dialog");
+	var dialogtitle=document.getElementById("dialogtitle");
+	var dialogtitlediv=document.getElementById("dialogtitlediv");
+	var iframediv=document.getElementById("iframediv");
+	var iframecontent=document.getElementById("iframecontent");
+	var dwidth=width||300;
+	var dheight=height||200;
+	var dtitle=title||"无标题";
+	if(shade&&shadediv){
+		shadediv.style.display = "";
+	}
+	if(dialog){
+		dialog.style.width = dwidth+"px";
+		iframediv.style.width = dwidth+"px";
+		iframecontent.style.width = dwidth+"px";
+		dialog.style.height = dheight+"px";
+		iframediv.style.height = (dheight-60)+"px";
+		iframecontent.style.height = (dheight-60)+"px";
+		dialog.style.display = "";
+		if(dtitle.length>11){
+			dtitle=dtitle.substr(0,10)+'...';
+		}
+		dialogtitle.innerText=dtitle;
+		iframecontent.src=url;
+	}
+	dialogtitlediv.onmousedown = Down;
+    var tHeight,lWidth;
+    function Down(e){
+        var event = window.event || e;
+        tHeight = event.clientY  - parseInt(dialog.style.top.replace(/px/,""));
+        lWidth  = event.clientX - parseInt(dialog.style.left.replace(/px/,""));
+        document.onmousemove = Move;
+        document.onmouseup   = Up;
+    }
+    function Move(e) {
+        var event = window.event || e;
+        var top = event.clientY - tHeight;
+        var left = event.clientX - lWidth;
+        //判断 top 和 left 是否超出边界
+        top = top < 0 ? 0 : top;
+        top = top > document.body.offsetHeight - dheight ? document.body.offsetHeight - dheight : top;
+        left = left < 0 ? 0 : left;
+        left = left > document.body.offsetWidth - dwidth ? document.body.offsetWidth - dwidth : left;
+        dialog.style.top  = top + "px";
+        dialog.style.left = left +"px";
+    }
+    function Up() {
+        document.onmousemove = null;
+    }
+}
+//关闭模式对话框
+function closedialog(){
+	var shadediv=document.getElementById("shadediv");
+	var dialog=document.getElementById("dialog");
+	var dialogtitle=document.getElementById("dialogtitle");
+	var iframecontent=document.getElementById("iframecontent");
+	if(shadediv){
+		shadediv.style.display = "none";
+	}
+	if(dialog){
+		dialog.style.display = "none";
+	}
+	if(iframecontent){
+		iframecontent.src="";
+	}
+}
+</script>
+</html>
+</#macro>
+<!---数据日期列表---->
+<#macro dataDateList contentlist=contentlist strlength=15 turnToPath="webarticledetail.do" >
+	<div class="contents">
+		<ul>
+		 <#list contentlist as obj>
+	     <li><a href="${turnToPath}?id=${(obj.id)?c}" title="${obj.tname}">		     
+	     <#if obj.tname?default('')?length lt strlength >${obj.tname}<#else>${obj.tname[0..(strlength-3)]}... </#if>     
+	   	 </a><span>${obj.id[0..9]}</span></li>
+	    </#list>				
+		</ul>
+	</div>
+</#macro>
+<#macro stringShowDate str="">
+<#if str?default('')?length lt 16>null<#else>${str[0..3]}-${str[4..5]}-${str[6..7]} ${str[8..9]}:${str[10..11]}:${str[12..13]}</#if>
+</#macro>
+<!-- 公共option选项 值为整型 -->
+<#macro options list=list defaultValue="" strlength=15 display="true">
+	<#if display == "true">
+		<option value="">---请选择---</option>
+	</#if>
+ 	<#list list as obj>
+ 		<option value="${obj.id?default('')}"  <#if obj.id==defaultValue>selected</#if>><#if obj.tname?default('')?length lt strlength>${obj.tname?default('')}<#else>${obj.tname[0..(strlength-3)]}... </#if> </option>
+ 	</#list>
+</#macro>
+<!-- 公共option选项 值为整型 -->
+<#macro nameOptions list=list defaultValue="" strlength=15 display="true">
+	<#if display == "true">
+		<option value="">---请选择---</option>
+	</#if>
+ 	<#list list as obj>
+ 		<option value="${obj.tname?default('')}"  <#if obj.tname==defaultValue>selected</#if>><#if obj.tname?default('')?length lt strlength>${obj.tname?default('')}<#else>${obj.tname[0..(strlength-3)]}... </#if> </option>
+ 	</#list>
+</#macro>
+<!-- 公共option选项 值为整型 -->
+<#macro treeoptions list=list defaultValue="" strlength=18 display="false">
+	<#if display == "true">
+		<option value="">---请选择---</option>
+	</#if>
+	<#list list as obj>
+ 		<option value="${obj.id?default('')}"  <#if obj.id==defaultValue>selected</#if>><#if obj.tname?default('')?length lt strlength>${obj.tname?default('')}<#else>${obj.tname[0..(strlength-3)]}... </#if> </option>
+	 	<#list obj.subset as objtwo>
+ 			<option value="${objtwo.id?default('')}"  <#if objtwo.id==defaultValue>selected</#if>>|---<#if objtwo.tname?default('')?length lt strlength>${objtwo.tname?default('')}<#else>${objtwo.tname[0..(strlength-3)]}... </#if> </option>
+	 		<#list objtwo.subset as objthree>
+ 				<option value="${objthree.id?default('')}"  <#if objthree.id==defaultValue>selected</#if>>|---|---<#if objthree.tname?default('')?length lt strlength>${objthree.tname?default('')}<#else>${objthree.tname[0..(strlength-3)]}... </#if> </option>
+	 			<#list objthree.subset as objfour>
+ 					<option value="${objfour.id?default('')}"  <#if objfour.id==defaultValue>selected</#if>>|---|---|---<#if objfour.tname?default('')?length lt strlength>${objfour.tname?default('')}<#else>${objfour.tname[0..(strlength-3)]}... </#if> </option>
+	 				<#list objfour.subset as objfive>
+ 						<option value="${objfive.id?default('')}"  <#if objfive.id==defaultValue>selected</#if>>|---|---|---|---<#if objfive.tname?default('')?length lt strlength>${objfive.tname?default('')}<#else>${objfive.tname[0..(strlength-3)]}... </#if> </option>
+	 				</#list>
+	 			</#list>
+	 		</#list>
+	 	</#list>
+ 	</#list>
+</#macro>
+<!-- 公共字典值选项 值为整型 -->
+<#macro dictionary list=list defaultValue="">
+ 	<#list list as obj>
+ 		<option value="${obj.tname?default('')}"  <#if obj.tname==defaultValue>selected</#if>><#if obj.description?default('')?length lt 20 >${obj.description}<#else>${obj.description[0..18]}... </#if> </option>
+ 	</#list>
+</#macro>
+<!-- 启用和禁用 -->
+<#macro valid  defaultValue="true">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>启用</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>禁用</option>
+</#macro>
+<#macro sex defaultValue="男">
+ 	<option value="男" <#if defaultValue=="男">selected</#if>>男</option>
+ 	<option value="女" <#if defaultValue=="女">selected</#if>>女</option>
+</#macro>
+<#macro yesOrno defaultValue="true">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>是</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>否</option>
+</#macro>
+<#macro commonselect app="app" objectId="objectId" selectType=1 parentId="">
+<input type="hidden" id="${objectId}" name="${objectId}"/><input type="text" class="txtinput" style="width: 96%" id="${objectId}objectName" name="${objectId}objectName"/><a style="padding-left: 6px;" href="#" onclick="commonselect('${app}','${objectId}','${objectId}objectName','${selectType}','${parentId}')">>></a>
+</#macro>
+<#macro doubleTitle defaultValue="false">
+ 	<option value="true" <#if defaultValue=="true">selected</#if>>双层表头</option>
+ 	<option value="false" <#if defaultValue=="false">selected</#if>>单层表头</option>
+</#macro>
+<#macro menuImg defaultValue="false">
+<select name="imgurl" defaultValue=""/>
+<#list 1..48 as num>  
+<option value="${num?c}.png" selected>${num?c}.png</option>  
+</#list>  
+</select>
+</#macro>
+<#macro workFlowInfo>
+<input type="hidden" id="workFlowId" name="workFlowId" value="${workFlowId?default('')}"/>
+<input type="hidden" id="workFlowInstanceId" name="workFlowInstanceId" value="${workFlowInstanceId?default('')}"/>
+<input type="hidden" id="currentNodeId" name="currentNodeId" value="${currentNodeId?default('')}"/>
+<input type="hidden" id="currentState" name="currentState" value="${currentState?default('')}"/>
+<input type="hidden" id="appes" name="appes" value="${appes?default('')}"/>
+<input type="hidden" id="baseObjectId" name="baseObjectId" value="${baseObjectId?default('')}"/>
+<input type='hidden' id='gotourl' name='gotourl' value="${gotourl?default('')}" />
+</#macro>
+<#macro workFlow>
+<input type="hidden" id="workFlowId" name="workFlowId" value="${workFlowId?default('')}"/>
+<input type="hidden" id="workFlowInstanceId" name="workFlowInstanceId" value="${workFlowInstanceId?default('')}"/>
+<input type="hidden" id="currentNodeId" name="currentNodeId" value="${currentNodeId?default('')}"/>
+<input type="hidden" id="currentState" name="currentState" value="${currentState?default('')}"/>
+<input type="hidden" id="appes" name="appes" value="${appes?default('')}"/>
+<input type="hidden" id="baseObjectId" name="baseObjectId" value="${baseObjectId?default('')}"/>
+<input type='hidden' id='gotourl' name='gotourl' value="${gotourl?default('')}" />
+<#if 'edit'==workFlowInstanceAuthorization&&'start'!=currentNodeId>
+<tr>
+	<td colspan="4" align="center">当前办理情况信息</td>
+</tr>
+<tr>
+	<td width="200px" class="titleTd">审核意见</td>
+	<td><select  name="workFlowOperateHistoryAudit" />
+	<option value="同意">同意</option>	
+	<option value="不同意">不同意</option>
+	</select>
+	</td>
+	<td width="200px" class="titleTd">当前节点</td>
+	<td>${currentState?default('')}</td>
+</tr>
+<tr>
+	<td class="titleTd">备注</td>
+	<td colspan="3"><textarea cols="72" name="operateContent"/></textarea></td>
+</tr>
+</#if>
+<#if nextFlowRouters??&&nextFlowRouters?size gt 1>
+<tr>
+	<td class="titleTd">选择下一步</td>
+	<td colspan="3">
+	<select  name="nextFlowRouterId" />
+	<#list nextFlowRouters as router>
+	<option value="${router.nextFlowRouterId?default('')}">${router.workFlowRouterName?default('')}</option>		
+	</#list>
+	</select>&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">只对提交提交下一步启作用</font>
+	</td>
+</tr>
+</#if>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<#if 'edit'==workFlowInstanceAuthorization && 'end'!=currentNodeId>
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="提交下一步" onclick="workFlowFormAction('next')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<#if 'start'!=currentNodeId>
+<input type="button" class="buttons" value="退回上一步" onclick="workFlowFormAction('last')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="返回发起人" onclick="workFlowFormAction('first')" />&nbsp;&nbsp;&nbsp;&nbsp;
+</#if>
+</#if>
+<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+<#if 'start'!=currentNodeId>
+<tr>
+	<td colspan="4" align="center">已办理情况</td>
+</tr>
+<tr>
+<td class="titleTd">节点名称</td>
+<td>审核意见</td>
+<td width="80px" class="titleTd">办理人</td>
+<td width="150px">办理时间</td>
+</tr>
+<#list historyList as obj>
+<tr>
+<td bgColor=#fffff class="titleTd">${obj.currentState?default('')}</td>
+<td bgColor=#fffff>${obj.workFlowOperateHistoryAudit?default('')}-${obj.operateContent?default('')}</td>
+<td bgColor=#fffff>${obj.creater?default('')}</td>
+<td bgColor=#fffff align="center">${obj.id[0..9]}</td>
+</tr>
+</#list>
+</#if>
+</#macro>
+
+
+

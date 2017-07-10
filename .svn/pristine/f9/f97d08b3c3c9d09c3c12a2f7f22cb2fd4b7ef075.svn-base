@@ -1,0 +1,78 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> >${columns.tname?default('信息')}列表 </span>
+	<ul>
+		<li><input type="button" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<input type='hidden' id='columnId' name='columnId' value="${columnId?default('')}" />
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>文章标题：<input id="tname" class="txtinput" name="tname" value="${tname?default('')}">
+</td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</table>
+</form>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td  onclick="resetSort('tname')" style="cursor:pointer;">文章标题<span id="sorttname"></span></td>
+<td  onclick="resetSort('createId')" style="cursor:pointer;" bgColor=#f8f8f8 width="50" align="center">拟稿人<span id="sortcreateId"></span></td>
+<#if auditState>
+<td  bgColor=#f8f8f8 width="50" align="center">审核人</td>
+<td  bgColor=#f8f8f8 width="100" align="center">审核状态</td>
+</#if>
+<td  bgColor=#f8f8f8 width="100" align="center">发布状态</td>
+<td  onclick="resetSort('publishTime')" style="cursor:pointer;" bgColor=#f8f8f8 width="160" align="center">发布时间<span id="sortpublishTime"></span></td>
+<td  bgColor=#f8f8f8 width="50" align="center">操作</td>
+<td onclick="resetSort('hits')" style="cursor:pointer;" bgColor=#f8f8f8 width="50" align="center">点击数<span id="sorthits"></span></td>
+<td onclick="resetSort('sortCode')" style="cursor:pointer;" bgColor=#f8f8f8 width="50" align="center">排序号<span id="sortsortCode"></span></td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td align="left"><a href="?action=edit&id=${obj.id?default('')}"  target="_self">${obj.tname?default('')}</a></td>
+<td align="center">${obj.createId?default('')}</td>
+<#if auditState>
+<td align="center">${obj.auditer?default('')}</td>
+<td align="center"><#if obj.auditState=false&&audit><a href="#" onclick="auditinfo('${obj.id}')"></#if>${obj.auditState?string('已审核','未审核')}&nbsp;<#if obj.auditState=false&&audit></a></#if></td>
+</#if>
+<td align="center">${obj.valid?string('已发布','草稿')}</td>
+<td align="center"><#if obj.valid><#if obj.publishTime??>${obj.publishTime?string("yyyy-MM-dd HH:mm:ss")}</#if></#if></td>
+<td align="center"><#if obj.auditState><a href="jiuyedetail.jsp?content=${columns.id?default('')}&id=${obj.id?default('')}"  target="_blank">
+预览</a><#else><a href="?action=edit&id=${obj.id?default('')}"  target="_self">编辑</a></#if></td>
+<td align="center">${obj.hits?c}</td>
+<td align="center">${obj.sortCode?c}</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr></tfoot>
+</table>
+<@common.bottom/>
+<script type="text/javascript">
+var curaction="?action=list"; 
+initSort();
+//*****************设置元素id的value值********************
+function setelementvalue(elementid,value){
+	setValue(elementid,value);
+	document.all.commonform.submit();
+}
+function auditinfo(obj){
+	location.href="?action=auditinfo&id="+obj;
+}
+</script>
+

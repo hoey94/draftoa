@@ -1,0 +1,120 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <script type="text/javascript">
+
+        	/* window.onload=function (){
+        		var $ul = $("#mytian").children("ul").css('display','block');
+        	} */
+        </script>
+        
+        <section class="main-content-wrapper">
+            <section id="main-content">
+             <div class="row col-md-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                            <li><a href="index.do">主页</a>
+                            </li>
+                            <li>我的提案</li>
+                            <li class="active">起草提案</li>
+                        </ul>
+                        <!--breadcrumbs end -->
+					<form class="form-horizontal" id="formId" action="motion.do?action=save" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="lah" value="${lah!''}">
+					<input type="hidden" name="zlh" value="${zlh!''}">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">起草提案</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-wrapper tab-primary">
+                                    <div class="tab-pane active" id="profile1">
+                                         <div class="panel-body chuli">
+                                            
+                                                <div class="form-group">
+                                                    <label for="inputPassword3" class="col-sm-3 col-lg-2 control-label">可选操作：</label>
+                                                    <div class="col-sm-9 col-lg-10">
+                                                       <input type="submit" style="width: 80px;" class="btn btn-info btn-sm " value="保存"/>
+                                                       <label  class=" control-label" style="margin-left:20px;">附议人：</label>
+                                                        <span class="form-control1" style="width:200px;display:inline-block">
+                                                        <!-- <input class="form-control"  style="min-height:30px;" name="fyr" required="true" placeholder="请填写附议人"> -->
+                                                        <select name="fyr" class="form-control form-control2">
+                                                        	<#if fyrs??>
+                                                        	<#list fyrs as obj>
+                                                        	<option value="${obj.id}">${obj.id!''}</option>
+                                                        	</#list>
+                                                        	</#if>
+                                                        </select>
+                                                       <!--  <img src="theme/oa/images/iconfont-fangdajing.png" alt="" style="width:20px;height:20px;right:10px;" class="input-img" onclick="findFyr();">   -->
+                                                         </span>
+                                                       
+                                                    </div>
+                                                </div>
+                                        </div>
+                                            <p class="liushui"> <#if zlh??><span>流水号：${zlh!''} </span></#if>  
+                                            <#if lah??><span >立案号：${lah!''}</span></#if><span name="time" id="dateID"></span></p>
+                                            <p>提案题目：<input name="tname" type="text" class="mouchu" style="width:80%;" placeholder="请输入提案题目" required="true" ></p>
+                                             <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>参与人</th>
+                                                            <th>职称（务）</th>
+                                                            <th>单位</th>
+                                                            <th>联系电话</th>
+                                                            <th>提案人</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>参与人</td>
+                                                            <td><input type="text" class="mouchu" name="createId" style="width:80%;" value="${SESSONUSER.id!''}" readonly="readonly"></td>
+                                                            <td><input type="text" class="mouchu" style="width:80%;" value="${SESSONUSER.duty!''}" readonly="readonly"></td>
+                                                          
+                                                            <td><input type="text" class="mouchu" style="width:80%;" value="${SESSONUSER.mobilNumber!''}" readonly="readonly"></td>
+                                                            <td align="center"><input class="icheck" checked="" type="radio" name="rad1"></td>                    
+                                                        </tr>                                 
+                                                    </tbody>
+                                                </table>
+	                                            <p class="font16">提案内容：</p>
+												<textarea id="ueID" name="content" showName="议案内容"></textarea>
+                                            <div class="panel-body chuli">
+                                           
+                                                 <div class="form-group">
+                                                    <label for="exampleInputFile" class="col-sm-2 control-label">提案附件：</label>
+                                                    <div class="col-sm-10">
+                                                    	<input type="file" id="exampleInputFile"  style="margin-top:5px;" name="file">
+                                                    <span>提案附件最大10M,只允许上传txt,doc,docx文档文件</span>
+                                                    </div>
+                                                </div>
+                                        </div>  
+                                                         
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+               	</form>
+                </div>
+            </section>
+        </section>
+         <script type="text/javascript">
+        	var date = new Date();
+        	var div = document.getElementById("dateID");
+        	div.innerHTML = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+        </script>
+        
+        <script type="text/javascript">
+        	function findFyr(){
+        		var url="user.do?action=findFyr";
+        		var data = "";
+        		$.post(url,data,function(backData){
+        			alert(backData);
+        		});
+        	}
+        </script>
+        
+        <script type="text/javascript">
+        	var ue = UE.getEditor('ueID');
+        </script>
+        
+<@common.bottom/>

@@ -1,0 +1,40 @@
+<#import "../../macro/macrocommon.htm" as common> <@common.header/>
+<@common.addheader name="系统配置"/>
+<form id="formId" method="post" action="?action=save">
+<table cellSpacing=1 cellPadding=2 width="96%" align=center
+	bgColor=#cccccc border=0 class="tab">
+	<thead>
+		<tr>
+			<td colspan=2 bgColor=#f8f8f8 height=30 align="center">新建系统配置</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="titleTd">配置标识</td>
+			<td class="contentTd"><input type="text" class="btinput" required=true check="isString(4,80)"
+				style="width: 60%" name="id" maxlength="32" size="32" /><span class="spantip" id="id_span"/></td>
+		</tr>
+		<tr>
+			<td class="titleTd">配置项值</td>
+			<td class="contentTd"><textarea id="tname" required=true name="tname" rows="2"
+				cols="50" style="width: 80%;"></textarea>&nbsp;&nbsp;<a href="#"
+				onclick="openfileuplodpage('all','tname')"><font color="red">上传文件</font><span class="spantip" id="tname_span"/></a>
+			</td>
+		</tr>
+		<tr>
+			<td class="titleTd">配置项描述</td>
+			<td class="contentTd"><textarea id="description"
+				name="description" rows="2" cols="50" style="width: 80%;"></textarea><span class="spantip" id="description_span"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 bgColor=#f8f8f8 height=30 align="center"><input
+				type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input
+				type="button" class="buttons" value="关闭"
+				onclick="javascript:history.go(-1);" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<@common.bottom/>
+

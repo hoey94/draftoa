@@ -1,0 +1,52 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="属性信息"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建属性</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname"/></td>
+<td class="titleTd">应用Id</td>
+<td class="contentTd"><input type="text" class="txtinput" name="app"/></td>
+</tr>
+<tr>
+<td class="titleTd">类型</td>
+<td class="contentTd"><input type="text" class="txtinput" name="attributeType"/></td>
+<td class="titleTd">显示类型</td>
+<td class="contentTd"><input type="text" class="txtinput" name="displayType"/></td>
+</tr>
+<tr>
+<td class="titleTd">增加页面显示</td>
+<td class="contentTd"><select  name="addDisplay" /><@common.valid /></select></td>
+<td class="titleTd">编辑页面显示</td>
+<td class="contentTd"><select  name="editDisplay" /><@common.valid /></select></td>
+</tr>
+<tr>
+<td class="titleTd">是否列表显示</td>
+<td class="contentTd"><select  name="listDisplay" /><@common.valid /></select></td>
+<td class="titleTd">允许空值</td>
+<td class="contentTd"><select  name="nullValue" /><@common.valid /></select></td>
+</tr>
+<tr>
+<td class="titleTd">最大长度</td>
+<td class="contentTd"><input type="text" class="txtinput" name="maxLength"/></td>
+<td class="titleTd">where 条件</td>
+<td class="contentTd"><textarea  name="whereParameter"/></textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

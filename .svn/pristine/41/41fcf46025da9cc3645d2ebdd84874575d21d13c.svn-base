@@ -1,0 +1,37 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="系统配置"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=page value="${page?c}"  />
+<input type="hidden" name=id value="${obj.id?default('')}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">编辑系统配置</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd">${obj.id?default('')}</td>
+</tr>
+<tr>
+<td class="titleTd">配置项值</td>
+<td class="contentTd"><textarea id="tname" name="tname" required=true  rows="2" cols="50" style="width: 80%;">${obj.tname?default('')}</textarea>&nbsp;&nbsp;<a href="#" onclick="openfileuplodpage('all','tname')"><font color="red">上传文件</font></a><span class="spantip" id="tname_span"/>
+</td>
+</tr>
+<tr>
+<td class="titleTd">配置项描述</td>
+<td class="contentTd"><textarea id="description" name="description"  rows="2" cols="50" style="width: 80%;">${obj.description?default('')}</textarea><span class="spantip" id="description_span"/>
+</td>
+</tr>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>人员选择器</title>
+<link href="theme/defaultstyle/css/public.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="javascript/dhtmlTree/dhtmlxtree.css"  />
+<script  src="javascript/dhtmlTree/dhtmlxcommon.js"></script>
+<script  src="javascript/dhtmlTree/dhtmlxtree.js"></script>
+</head>
+<body style="margin-top: 0px;margin-left: 0px;margin-right: 0px;">
+<table width="600" border="0" cellSpacing=1 cellPadding=1 align=center bgColor=#cccccc>
+  <tr>
+    <td height="25px;" align=center bgColor=#f8f8f8>组织部门</td>
+    <td bgColor=#f8f8f8 align=center>人员</td>
+    <td bgColor=#f8f8f8 align=center>已选择</td>
+  </tr>
+  <tr>
+    <td height="300" width="180px" bgColor=#f8f8f8>
+    <div id="treeDiv" style="width:180px;height:300px;padding-top:0px;padding-left:0px;padding-right:0px;"></div>
+    </td>
+    <td bgColor=#f8f8f8  width="220px;">
+    <iframe id="rightContent" name="rightContent" width="220px;" height="300" src="${rightContent?default('')}" frameborder="0"></iframe>
+    </td>
+    <td bgColor=#f8f8f8  width="200px;" height="300px;" valign="top">
+		<div id="selectNames" style="width: 190px;height:300px;float: left;overflow-y:scroll;">
+		</div>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="3" height="25px;" bgColor=#f8f8f8 align="center">
+    &nbsp;<input type="button" value="确定" onclick="savedata()" />
+    &nbsp;<input type="button" value="关闭" onclick="window.close();" />
+    </td>
+  </tr>
+</table>
+<input id="userIds" type="hidden" value=""/>
+<input id="roleId" type="hidden" value="${roleId?default('')}"/>
+<input id="userNames" type="hidden" value=""/>
+</body>
+</html>
+<script>
+//---------------------------------定义拖动树-------------------------------------//
+var currentId="";
+var tree=new dhtmlXTreeObject(document.getElementById('treeDiv'),"180","300px",'11111111111111111111111111111111');
+tree.setImagePath("javascript/dhtmlTree/imgs/csh_vista/");
+tree.enableCheckBoxes(false);
+tree.enableDragAndDrop(false);
+//--------------------------------添加树节点-------------------------------------//
+<#list list as obj>
+	tree.insertNewChild('${obj.parentId?default('')}','${obj.id}','${obj.tname}');
+	<#list obj.subset as subobj>
+		tree.insertNewChild('${subobj.parentId?default('')}','${subobj.id}','${subobj.tname?default('无')}');
+		<#list subobj.subset as subobj1>
+			tree.insertNewChild('${subobj1.parentId?default('')}','${subobj1.id}','${subobj1.tname?default('无')}');
+			<#list subobj1.subset as subobj2>
+				tree.insertNewChild('${subobj2.parentId?default('')}','${subobj2.id}','${subobj2.tname?default('无')}');
+				<#list subobj2.subset as subobj3>
+					tree.insertNewChild('${subobj3.parentId?default('')}','${subobj3.id}','${subobj3.tname?default('无')}');
+					<#list subobj3.subset as subobj4>
+						tree.insertNewChild('${subobj4.parentId?default('')}','${subobj4.id}','${subobj4.tname?default('无')}');
+					</#list>
+				</#list>
+			</#list>
+		</#list>
+	</#list>
+</#list>
+
+//--------------------------------添加事件处理-------------------------------------//
+tree.attachEvent("onClick",treeClick);//点击事件
+function treeClick(currentNodeId){
+	currentId = currentNodeId;
+	var rightContent=document.getElementById("rightContent");
+	if(rightContent){
+		rightContent.src="${urlLink?default('')}"+currentNodeId;
+		}
+}
+/*删除所有空格*/ 
+function allTrim(ui){ 
+	var notValid=/\s/; 
+	while(notValid.test(ui)){ 
+		ui=ui.replace(notValid,"");
+		} 
+	return ui;
+} 
+var userIds="";
+var userNames="";
+var uname="";
+var pdiv=document.getElementById("selectNames");
+<#list selectUsers as obj>
+	uname=allTrim("${obj.tname?default('')}");
+	userIds=userIds+"${obj.usersId?default('')}"+";";
+	userNames=userNames+uname+";";
+	var newdiv = document.createElement("div");
+	newdiv.id="${obj.usersId?default('')}";
+	newdiv.style.width="150px";
+	newdiv.style.height=20;
+	newdiv.innerHTML="<a href='#' ondblclick=delUser('${obj.usersId}','"+uname+"') >"+uname+"</a>";
+	pdiv.appendChild(newdiv);
+</#list>
+document.getElementById("userIds").value=userIds;
+document.getElementById("userNames").value=userNames;
+function delUser(objid,objname){
+	var pdiv=document.getElementById("selectNames");
+	var obj= document.getElementById(objid);
+	if(obj&&pdiv){
+		pdiv.removeChild(obj);
+	}
+	var userIdValue=document.getElementById("userIds").value;
+	var userNamesValue=document.getElementById("userNames").value;
+	if(userIdValue.indexOf(objid)>-1){
+			if(userIdValue.indexOf(objid+";")>-1){
+				userIdValue=userIdValue.replace(objid+";","");
+			}else{
+				userIdValue=userIdValue.replace(objid,"");
+			}
+			if(userNamesValue.indexOf(objname+";")>-1){
+				userNamesValue=userNamesValue.replace(objname+";","");
+			}else{
+				userNamesValue=userNamesValue.replace(objname,"");
+			}
+			document.getElementById("userIds").value=userIdValue;
+			document.getElementById("userNames").value=userNamesValue;
+	}
+	//删除当前页面的选择记录 
+	var rightContent= document.getElementById("rightContent").contentDocument || document.frames["rightContent"].document; 
+	if(rightContent){
+		var objeme=rightContent.getElementById(objid);
+		if(objeme){
+			objeme.checked = false;
+		}
+	}
+}
+function savedata(){
+	var userIdValue=document.getElementById("userIds").value;
+	var roleId=document.getElementById("roleId").value;
+	if(userIdValue!=""&&roleId!=""){
+		$.ajax({
+			type : "post",
+			url : "?action=pathupdate",
+			data:{roleId:roleId,userIds:userIdValue},
+			timeout : 30000,
+			success : function(msg) {
+				if(msg.resultCode==0){
+					alert(msg.resultDesc);
+					window.close();
+				}else{
+					window.returnValue="succe";
+					window.close();
+				}
+			}
+		});
+	}else{
+		window.close();
+		}
+} 
+</script>

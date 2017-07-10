@@ -1,0 +1,265 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <!--sidebar left end-->
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <section id="main-content">
+                <!--tiles start-->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="dashboard-tile detail tile-red">
+                            <div class="content">
+                                <h1 class="text-left timer" data-from="0" data-to="180" data-speed="2500"></h1>
+                                <p><a href="motion.do">我的提案</a></p>
+                            </div>
+                            <div class="icon"><i class="fa  fa-pencil"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="dashboard-tile detail tile-turquoise">
+                            <div class="content">
+                                <h1 class="text-left timer" data-from="0" data-to="56" data-speed="2500"></h1>
+                                <p><a href="chengbanRecord.do">待办提案</a></p>
+                            </div>
+                            <div class="icon"><i class="fa fa-desktop"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="dashboard-tile detail tile-blue">
+                            <div class="content">
+                                <h1 class="text-left timer" data-from="0" data-to="32" data-speed="2500"></h1>
+                                <p><a href="motion.do">我的反馈</a></p>
+                            </div>
+                            <div class="icon"><i class="fa fa-edit"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="dashboard-tile detail tile-purple">
+                            <div class="content">
+                                <h1 class="text-left timer" data-to="105" data-speed="2500"></h1>
+                                <p><a href="tianQuery.do?action=queryAll">全部提案</a></p>
+                            </div>
+                            <div class="icon"><i class="fa fa-bar-chart-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--折线图-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">20161提案数量</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div id="sales-chart" style="height: 250px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- 我的提案 -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">我的提案</h3>
+                                        <div class="actions pull-right">
+                                            <i class="fa fa-chevron-down"></i>
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+
+                                        <span class="sublabel">附议中</span>
+                                        <div class="progress progress-striped">
+                                            <div id="fyCountID" class="progress-bar progress-bar-info">${fyCount!''}</div>
+                                        </div>
+
+                                        <span class="sublabel">承办中</span>
+                                        <div class="progress progress-striped">
+                                            <div id="cbCountID" class="progress-bar progress-bar-primary" >${cbCount!''}</div>
+                                        </div>
+
+                                        <span class="sublabel">立案中</span>
+                                        <div class="progress progress-striped">
+                                            <div id="laCountID" class="progress-bar progress-bar-default">${laCount!''}</div>
+                                        </div>
+
+                                        <span class="sublabel">已通过</span>
+                                        <div class="progress progress-striped">
+                                            <div id="tgCountID" class="progress-bar progress-bar-warning">${tgCount!''}</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- 我的提案 -->
+                    </div>
+
+                   <!--  <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">待办事项</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                        <div class="form-group">
+                                            <input id="new-todo" type="text" class="form-control" placeholder="接下来我们需要做什么?">
+                                            <section id='main'>
+                                                <ul id='todo-list'></ul>
+                                            </section>
+                                        </div>
+                                        <div class="form-group">
+                                            <button id="todo-enter" class="btn btn-primary pull-right">提交</button>
+                                            <div id='todo-count'></div>
+                                        </div>
+                            </div>        
+                        </div>
+                        </div>
+                        </div>
+ -->
+
+                <!--ToDo end-->
+            </section>
+        </section>
+        <!--main content end-->
+        <!--sidebar right start-->
+        <aside class="sidebarRight">
+            <div id="rightside-navigation ">
+                <div class="sidebar-heading"><i class="fa fa-user"></i> 联系人</div>
+                <div class="sidebar-title">在线</div>
+                <div class="list-contacts">
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>James Bagian</h4>
+                            <p>Los Angeles, CA</p>
+                        </div>
+                        <div class="item-status item-status-online"></div>
+                    </a>
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar1.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>Jeffrey Ashby</h4>
+                            <p>New York, NY</p>
+                        </div>
+                        <div class="item-status item-status-online"></div>
+                    </a>
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar2.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>John Douey</h4>
+                            <p>Dallas, TX</p>
+                        </div>
+                        <div class="item-status item-status-online"></div>
+                    </a>
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar3.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>Ellen Baker</h4>
+                            <p>London</p>
+                        </div>
+                        <div class="item-status item-status-away"></div>
+                    </a>
+                </div>
+
+                <div class="sidebar-title">离线</div>
+                <div class="list-contacts">
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar4.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>Ivan Bella</h4>
+                            <p>Tokyo, Japan</p>
+                        </div>
+                        <div class="item-status"></div>
+                    </a>
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar5.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>Gerald Carr</h4>
+                            <p>Seattle, WA</p>
+                        </div>
+                        <div class="item-status"></div>
+                    </a>
+                    <a href="javascript:void(0)" class="list-item">
+                        <div class="list-item-image">
+                            <img src="images/avatar6.gif" class="img-circle">
+                        </div>
+                        <div class="list-item-content">
+                            <h4>Viktor Gorbatko</h4>
+                            <p>Palo Alto, CA</p>
+                        </div>
+                        <div class="item-status"></div>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <!--sidebar right end-->
+    </section>
+    <!--Load these page level functions-->
+    <script>
+    $(document).ready(function() {
+        app.timer();
+        app.map();
+        app.weather();
+        app.morrisPie();
+    });
+	function lgn(){
+		window.location.href="index.do?action=login";
+    }
+    </script>
+    <!-- 进度条 -->
+    <script type="text/javascript">
+    	function getNum(val){
+    		if(val <100){
+        		val = val +"%";
+        		
+        	}else{
+        		val = 100 + "%";
+        	}
+    		return val;
+    	}
+    </script>
+    <script type="text/javascript">
+    	
+    	var fyCount_div = document.getElementById("fyCountID");
+    	var fy = getNum(fyCount_div.innerHTML);
+    	fyCount_div.style.width = fy;
+    	
+    	var cbCount_div = document.getElementById("cbCountID");
+    	var cb = getNum(cbCount_div.innerHTML);
+    	cbCount_div.style.width = cb;
+    	
+    	var tgCount_div = document.getElementById("tgCountID");
+    	var tg = getNum(tgCount_div.innerHTML);
+    	tgCount_div.style.width = tg;
+    	
+    	var laCount_div = document.getElementById("laCountID");
+    	var la = getNum(laCount_div.innerHTML);
+    	laCount_div.style.width = la;
+    </script>
+    
+   
+    
+    
+<@common.bottom/>

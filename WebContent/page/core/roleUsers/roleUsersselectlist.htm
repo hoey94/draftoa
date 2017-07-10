@@ -1,0 +1,119 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<form id="commonform" action="?action=selectlist" method="post">
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<input type='hidden' id='rows' name='rows' value='${page.pageSize?c}' />
+<input type='hidden' id='organId' name="organId" value='${organ.id?default('')}' />
+<input type='hidden' id='sortfield' name="sortfield" value="${sortfield?default('')}" />
+<input type='hidden' id='sortvalue' name="sortvalue" value="${sortvalue?default('')}" />
+</form>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0>
+<thead>
+<tr>
+<td width=20 bgColor=#f8f8f8 height="22px" align="center"><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAllUser(this.checked)" /></td>
+<td  bgColor=#f8f8f8 width="50px;" align="center">名称 </td>
+<td  bgColor=#f8f8f8 width="30px;" align="center">性别</td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=20 >
+<input type="checkbox" name="box" value="${obj.id?default('')}" id="${obj.id?default('')}" onclick="selectUser(this.checked,'${obj.id}')"/>
+<input type="hidden" id="${obj.id?default('')}n" value="${obj.tname?default('')}">
+</td>
+<td align="left" title="${obj.tname}">
+  <#if obj.tname?default('')?length lt 8>${obj.tname}<#else>${obj.tname[0..7]}</#if>
+</td>
+<td width="30px" align="center">${obj.sex?default('')}</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.simple page=page/>&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript">
+<!--
+/*删除所有空格*/ 
+function allTrim(ui){ 
+	var notValid=/\s/; 
+	while(notValid.test(ui)){ 
+		ui=ui.replace(notValid,"");
+		} 
+	return ui;
+} 
+function selectUser(objstate,objid){
+	var pdiv=window.parent.document.getElementById("selectNames");
+	if(objstate){
+		var obj= window.parent.document.getElementById(objid);
+		if(obj){
+		}else if(pdiv){
+			var newdiv = document.createElement("div");
+			newdiv.id=objid;
+			newdiv.style.width="150px";
+			newdiv.style.height=20;
+			var lid=document.getElementById(objid+"n");
+			if(lid){
+				var usersname=allTrim(lid.value);
+				newdiv.innerHTML="<a href='#' ondblclick=delUser('"+objid+"','"+usersname+"') >"+lid.value+"</a>";
+				pdiv.appendChild(newdiv);
+				var userIdValue=window.parent.document.getElementById("userIds").value;
+				var userNamesValue=window.parent.document.getElementById("userNames").value;
+				if(userIdValue.indexOf(objid)==-1){
+					userIdValue=userIdValue+objid+";";
+					userNamesValue=userNamesValue+lid.value+";";
+					window.parent.document.getElementById("userIds").value=userIdValue;
+					window.parent.document.getElementById("userNames").value=userNamesValue;
+				}	
+				}
+			}
+	}else{
+		var obj= window.parent.document.getElementById(objid);
+		if(obj&&pdiv){
+			pdiv.removeChild(obj);
+			var userIdValue=window.parent.document.getElementById("userIds").value;
+			var userNamesValue=window.parent.document.getElementById("userNames").value;
+			if(userIdValue.indexOf(objid)>-1){
+				userIdValue=userIdValue.replace(objid+";","");
+				var objname=document.getElementById(objid+"n").value;
+				userNamesValue=userNamesValue.replace(objname+";","");
+				window.parent.document.getElementById("userIds").value=userIdValue;
+				window.parent.document.getElementById("userNames").value=userNamesValue;
+			}
+		}
+	}
+}
+//******************全选和全不选****************************
+function selectAllUser(obj) {
+	var objs = document.getElementsByName("box");
+	var objslength = objs.length;
+	if (obj) {
+		for ( var i = 0; i < objslength; i++) {
+			objs[i].checked = true;
+			selectUser(objs[i].checked,objs[i].value);
+		}
+	} else {
+		for ( var i = 0; i < objslength; i++) {
+			objs[i].checked = false;
+			selectUser(objs[i].checked,objs[i].value);
+		}
+	}
+}
+function initpage(){
+	var userIdValue=window.parent.document.getElementById("userIds").value;
+	var userIds = userIdValue.split(";");
+   	for(i = 0; i < userIds.length; i++) {
+   	   var obj=document.getElementById(""+userIds[i]);
+	   if(obj){
+		   obj.checked = true;
+		   selectUser(true,userIds[i]);
+		}
+    }
+}
+initpage();
+//-->
+</script>
+<@common.bottom/>
+

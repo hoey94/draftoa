@@ -1,0 +1,90 @@
+<#import "../../macro/mycommon.htm" as common>
+<@common.header/>
+<@common.left/>
+        <section class="main-content-wrapper">
+            <section id="main-content">
+             <div class="row">
+                    <div class="col-md-12">
+                        <!--breadcrumbs start -->
+                        <ul class="breadcrumb">
+                           <li><a href="#">主页</a>
+                            </li>
+                            <li>我的提案</li>
+                            <li class="active">立案提案列表</li>
+                        </ul>
+                        <!--breadcrumbs end -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">立案提案列表</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>提案标题</th>
+                                            <th>提案人</th>
+                                            <th>职称</th>
+                                            <th>附议人</th>
+                                            <th>提交时间</th>
+                                            <th>建议处理单位</th>   
+                                           
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <#if lists??>
+                                    <#list lists as obj>
+                                        <tr>
+                                            <td class="col-sm-2">${obj.lah!''}</td>
+                                            <td class="col-sm-3">${obj.tname!''}</td>
+                                            <td class="col-sm-1">${obj.createId!''}</td>
+                                            <td class="col-sm-1">${obj.duty!''}</td>
+                                            <td class="col-sm-1">${obj.fyrNum!''}</td>
+                                            <td class="col-sm-1">${obj.time!''}</td>
+                                            <td class="col-sm-3">
+                                             <form class="form-horizontal" role="form">
+                                                <div class="form-group form-group1">
+                                                    <label class="col-sm-3 control-label control-label1">主办：</label>
+                                                    <div class="col-sm-9  form-control1">
+                                                        <input class="form-control"  style="min-height:24px">
+                                                        <img src="theme/oa/images/iconfont-fangdajing.png" alt="" width="16" height="16" class="input-img">  
+                                                    </div>
+                                                    </div>
+                                                    <div class="form-group form-group1">
+                                                    <label class="col-sm-3 control-label  control-label1">协办：</label>
+                                                    <div class="col-sm-9  form-control1">
+                                                        <input class="form-control"   style="min-height:24px">
+                                                        <img src="theme/oa/images/iconfont-fangdajing.png" alt="" width="16" height="16" class="input-img">  
+                                                    </div>
+                                                </div>
+                                                </form>
+
+                                            </td>
+                                            
+                                        </tr>
+									</#list>
+									</#if>
+                                    </tbody>
+                                </table>
+                            <p align="center"><button type="button" class="btn btn-info">上报领导  王华校长</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    $(document).ready(function() {
+        $('#example').dataTable();
+    });
+    </script>
+<@common.bottom/>

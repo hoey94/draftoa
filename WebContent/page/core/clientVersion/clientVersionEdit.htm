@@ -1,0 +1,45 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="客户端管理"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="90%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>
+编辑客户端</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">客户端名称</td>
+<td class="contentTd"><input type="text" style="width: 60%" name="tname" class="btinputwidth" required=true  value="${obj.tname?default('')}" /><span class="spantip" id="tname_span"/></td>
+<td  class="contentTd">
+<select id="clientType" name="clientType">
+<option value="android">android</option>
+<option value="ios">ios</option>
+</select>
+</td>
+</tr>
+<tr>
+<td class="titleTd">客户端代号</td>
+<td class="contentTd"><input type="text" style="width: 60%" name="clientCode" class="btinput" required=true  value="${obj.clientCode?default('')}" /><span class="spantip" id="clientCode_span"/></td>
+<td class="titleTd">当前版本号</td>
+<td bgColor=#ffffff><input type="text" name="currVersion" class="btinput" required=true  value="${obj.currVersion?default('')}" /><span class="spantip" id="currVersion_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">下载路径</td>
+<td bgColor=#ffffff  colspan="3"><input type="text" id="downPath" name="downPath" class="btinputwidth" required=true  value="${obj.downPath?default('')}" />
+&nbsp;&nbsp;<a href="#"
+				onclick="openfileuplodpage('all','downPath')"><font color="red">上传文件</font></a>
+<span class="spantip" id="downPath_span"/></td>
+</tr>
+<tr>
+<td colspan=4 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

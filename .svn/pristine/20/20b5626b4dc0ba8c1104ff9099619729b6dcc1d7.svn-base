@@ -1,0 +1,48 @@
+* { margin: 0; padding: 0; }
+html { font-size:12px; margin:0px; padding:0px; }
+body {margin:0 auto; padding:0; list-style:none;font-size:12px;text-align:center; font-family:"微软雅黑",Verdana,sans-serif;background:#ffffff;color:#333333;line-height:150%}
+body>table,body>div { margin-left:auto; margin-right:auto; clear:both;}
+/* header_wrap */
+/*--------------------------------------------------------*/
+#header{height:80px;background:url("images/regist_top_bg.png") repeat-x  top;}
+.header{width:968px;position:relative;}
+
+#logo{width:529px;height:73px;position:absolute;top:0;left:0;}
+#header_link{color:#8fc31f;height:30px;position:absolute;top:10px;right:0;}
+#header_link span{color:#eeeeee;}
+/* css site */
+/*--------------------------------------------------------*/
+table,form,div,img,td,ul,li,dl,dt,dd {margin:0 auto; padding:0; border:0;}
+div,td,li,dt,dd,h2,h3,h4,p,a { list-style-type:none; word-break:break-all; Width:fixed;}
+select, input { vertical-align:middle; }
+img {border:0; }
+em{font-style:normal;}
+ /* menu */
+#menu{height:30px;width:300px;position:absolute;top:30px;right:0;font-family:"微软雅黑";}
+#menu ul{height:30px;margin:0 auto;}
+#menu li{float:right; width:80px;}
+#menu li a,#menu li a:hover{text-decoration: none;line-height:30px;width:80px;height:30px;display:block;background:#0d55af;color:#fff;}
+#menu li a:hover{background:#00a0e9;}
+
+.sub_title{height:48px;background:url("images/sub_title_bg.png");border-bottom:1px solid #cac9c9;line-height:48px;font-size:18px;padding:0 20px;position:relative;font-family:"微软雅黑";}
+.sub_title span{display:block;position:absolute;right:20px;top:0;font-size:12px;font-weight:normal;}
+.sub_title span a{color:#638c0b;}
+
+#content{padding:20px 0 ; margin:0;}
+#content.sub{background:#f5f5f5;}
+#content-box{width:968px;background:#fff;margin:0 auto;}
+#content-box.sub{min-height:495px;text-align:left;border:1px solid #d0d0d0;}
+.regist,.login{margin:20px auto;text-align:left;width:800px;position:relative;}
+.login h4{border-bottom:1px solid #dfdfdf;height:50px;line-height:50px;font-size:20px;color:#666666;font-weight:120%;padding:0 0 0 100px;}
+.login h4 span{font-size:14px;}
+
+.login_table{width:100%;}
+.regist .classify{border-bottom:2px solid #eeeeee;height:40px;line-height:40px;font-size:14px;color:#0068b7;}
+.regist_table{width:100%;}
+.regist_table td,th,.login_table td,th{padding:2px 5px;line-height:26px;}
+.regist_table td .input,.login_table td .input{border:1px solid #d6d6d6;height:28px;line-height:28px;}
+.regist_table td select{height:28px;line-height:28px;border:1px solid #d6d6d6;}
+.regist_table th i{color:red;}
+.regist_table th,.login_table th{width:150px;text-align:right;font-weight:bold;font-size:14px;}
+.btn-regist{width:170px;height:50px;background:url("images/btn_regist.png");border:none;cursor:hand!important;cursor:pointer;}
+.btn-login{width:170px;height:50px;background:url("images/btn_login2.png");border:none;cursor:hand!important;cursor:pointer;}

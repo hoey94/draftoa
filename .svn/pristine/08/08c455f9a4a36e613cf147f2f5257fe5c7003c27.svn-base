@@ -1,0 +1,78 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="招生学生"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑招生学生</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname" value="${obj.tname?default('')}" /></td>
+<td class="titleTd">省市</td>
+<td class="contentTd"><input type="text" class="txtinput" name="city" value="${obj.city?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">类别</td>
+<td class="contentTd"><input type="text" class="txtinput" name="cate" value="${obj.cate?default('')}" /></td>
+<td class="titleTd">考号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="studentNumber" value="${obj.studentNumber?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">性别</td>
+<td class="contentTd"><input type="text" class="txtinput" name="sex" value="${obj.sex?default('')}" /></td>
+<td class="titleTd">出生日期</td>
+<td class="contentTd"><input type="text" class="txtinput" name="birthday" value="${obj.birthday?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">身份证号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="idcard" value="${obj.idcard?default('')}" /></td>
+<td class="titleTd">院系</td>
+<td class="contentTd"><input type="text" class="txtinput" name="college" value="${obj.college?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">专业</td>
+<td class="contentTd"><input type="text" class="txtinput" name="major" value="${obj.major?default('')}" /></td>
+<td class="titleTd">分数</td>
+<td class="contentTd"><input type="text" class="txtinput" name="scores" value="${obj.scores?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">排名</td>
+<td class="contentTd"><input type="text" class="txtinput" name="ranking" value="${obj.ranking?default('')}" /></td>
+<td class="titleTd">状态</td>
+<td class="contentTd"><input type="text" class="txtinput" name="state" value="${obj.state?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">通讯地址</td>
+<td class="contentTd"><input type="text" class="txtinput" name="address" value="${obj.address?default('')}" /></td>
+<td class="titleTd">联系电话</td>
+<td class="contentTd"><input type="text" class="txtinput" name="phone" value="${obj.phone?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">其他1</td>
+<td class="contentTd"><input type="text" class="txtinput" name="other1" value="${obj.other1?default('')}" /></td>
+<td class="titleTd">其他2</td>
+<td class="contentTd"><input type="text" class="txtinput" name="other2" value="${obj.other2?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">序号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="sortCode" value="${obj.sortCode?c}" /></td>
+<td class="titleTd">备注描述</td>
+<td class="contentTd"><textarea name="description" />${obj.description?default('')}</textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

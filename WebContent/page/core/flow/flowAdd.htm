@@ -1,0 +1,52 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="流程"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建流程</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname"/></td>
+<td class="titleTd">主键</td>
+<td class="contentTd"><input type="text" class="txtinput" name="id"/></td>
+</tr>
+<tr>
+<td class="titleTd">创建人ID</td>
+<td class="contentTd"><input type="text" class="txtinput" name="createId"/></td>
+<td class="titleTd">创建人姓名</td>
+<td class="contentTd"><input type="text" class="txtinput" name="creater"/></td>
+</tr>
+<tr>
+<td class="titleTd">创建时间</td>
+<td class="contentTd"><input type="text" class="txtinput" class="calendars" name="createTime"/></td>
+<td class="titleTd">应用名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="appes"/></td>
+</tr>
+<tr>
+<td class="titleTd">路由参数</td>
+<td class="contentTd"><input type="text" class="txtinput" name="routeParameter"/></td>
+<td class="titleTd">参数类型</td>
+<td class="contentTd"><input type="text" class="txtinput" name="parameterType"/></td>
+</tr>
+<tr>
+<td class="titleTd">版本</td>
+<td class="contentTd"><input type="text" class="txtinput" name="version"/></td>
+<td class="titleTd">备注描述</td>
+<td class="contentTd"><textarea  name="description"/></textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

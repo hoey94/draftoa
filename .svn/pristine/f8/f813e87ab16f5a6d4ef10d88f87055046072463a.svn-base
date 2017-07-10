@@ -1,0 +1,58 @@
+<#macro pagination page=page params=''>
+	<#assign ipage=page.pageIndex?int>
+	<#assign totalpage=page.pageCount?int>
+	<#assign pagesize=page.pageSize?int>
+	<#assign totalCount=page.totalCount?int>
+	<#-- url附加参数的判断 -->
+	<#assign requestParams = "">
+	<#if (params?? && params != '')>
+		<#assign requestParams = '&' + params>
+	</#if>
+	<#-- 首页 -->
+	<#if ipage gt 1>
+		<a href="javascript:turntopage(1);">首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
+		<a href="javascript:turntopage(${ipage?c}-1);">上一页&nbsp;&nbsp;</a>
+	<#else>
+		<span class="disabled">首&nbsp;&nbsp;页&nbsp;&nbsp;</span>
+		<span class="disabled">上一页&nbsp;&nbsp;</span>
+	</#if>	
+	<#-- 尾页 -->
+	<#if ipage lt totalpage>
+		<a href="javascript:turntopage(${ipage?c}+1);">下一页&nbsp;&nbsp;</a>
+		<a href="javascript:turntopage(${totalpage?c});">尾页&nbsp;&nbsp;</a>
+	<#else>
+		<span class="disabled">下一页&nbsp;&nbsp;</span>
+		<span class="disabled">尾页&nbsp;&nbsp;</span>
+	</#if>	
+	页&nbsp;&nbsp;次 : ${ipage?c}&nbsp;/&nbsp;${totalpage?c}&nbsp;页 ${pagesize?c}&nbsp;条&nbsp;/&nbsp;页 &nbsp;总&nbsp;${totalCount?c}&nbsp;条&nbsp;&nbsp;转&nbsp;&nbsp;到
+	<select id="selectpage" style="width: 60px;" onchange="turntopage(this.value)">
+			<#list 1..totalpage as num>  
+            <#if ipage != num>  
+               <option value=${num?c}>${num?c}</option>  
+            <#else>
+            	<option value=${num?c} selected>${num?c}</option>  
+           </#if>  
+        </#list>  
+		</option>
+	</select>页	
+</#macro>
+<#macro simple page=page>
+	<#assign ipage=page.pageIndex?int>
+	<#assign totalpage=page.pageCount?int>
+	<#assign pagesize=page.pageSize?int>
+	<#assign totalCount=page.totalCount?int>
+	总${totalCount}条共${totalpage}页&nbsp;
+	<#-- 首页 -->
+	<#if ipage gt 1>
+		<a href="javascript:turntopage(${ipage?c}-1);">上页&nbsp;</a>
+	<#else>
+		<span class="disabled">上页&nbsp;</span>
+	</#if>	
+	当前${ipage?c}页&nbsp;
+	<#-- 尾页 -->
+	<#if ipage lt totalpage>
+		<a href="javascript:turntopage(${ipage?c}+1);">下页&nbsp;</a>
+	<#else>
+		<span class="disabled">下页&nbsp;</span>
+	</#if>		
+</#macro>

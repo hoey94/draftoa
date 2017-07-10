@@ -1,0 +1,58 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="对象属性"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑${obj.tname?default('')}</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname" readOnly=true value="${obj.tname?default('')}" /></td>
+<td class="titleTd">备注</td>
+<td class="contentTd"><input type="text" class="txtinput" name="description" value="${obj.description?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">类型</td>
+<td class="contentTd"><input type="text" class="txtinput" name="attributeType" value="${obj.attributeType?default('')}" /></td>
+<td class="titleTd">显示类型</td>
+<td class="contentTd"><input type="text" class="txtinput" name="displayType" value="${obj.displayType?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">增加页面显示</td>
+<td class="contentTd"><select  name="addDisplay"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+<td class="titleTd">编辑页面显示</td>
+<td class="contentTd"><select  name="editDisplay"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+</tr>
+<tr>
+<td class="titleTd">是否列表显示</td>
+<td class="contentTd"><select  name="listDisplay"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+<td class="titleTd">允许空值</td>
+<td class="contentTd"><select  name="nullValue"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+</tr>
+<tr>
+<td class="titleTd">最大长度</td>
+<td class="contentTd"><input type="text" class="txtinput" name="maxLength" value="${obj.maxLength?c}" /></td>
+<td class="titleTd">排序号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="sortCode" value="${obj.sortCode?c}" /></td>
+</tr>
+<tr>
+<td class="titleTd">where 条件</td>
+<td bgColor=#ffffff colspan="3"><textarea  name="whereParameter"/>${obj.whereParameter?default('')}</textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

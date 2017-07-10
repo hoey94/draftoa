@@ -1,0 +1,30 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="快捷连接收藏"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+编辑快捷连接收藏</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="btinput" name="tname" style="width: 40%;" value="${obj.tname?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">连接地址</td>
+<td class="contentTd"><input type="text" class="btinput" style="width: 60%;" name="link" value="${obj.link?default('')}" /></td>
+</tr>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

@@ -1,0 +1,10 @@
+.tree{overflow-x:hidden;background:#eaeaea;}
+.tree_style{background-image:url("tree.png");width:100%;height:35px;line-height:35px;position:relative;}
+.tree_1{background-position:0 0;background-repeat:repeat-x;color:#ffffff;font-weight:bold;padding:0 10px;}
+.tree_2{background-position:0 -35px;background-repeat:repeat-x;height:35px;font-weight:bold;padding:0 30px;}
+.tree_3{background-position:0 -70px;background-repeat:repeat-x;height:35px;font-weight:bold;padding:0 50px;}
+.tree_4{background-position:0 -200px;background-color:#eaeaea;height:35px;padding:0 70px;}
+.tree_icon {background-repeat:no-repeat;height:35px;width:20px;float:left;}
+.tree_icon1{background-position:0 -105px;}
+.tree_icon2{background-position:0 -140px;}
+.tree_icon3{background-position:0 -175px;}

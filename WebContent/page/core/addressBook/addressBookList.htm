@@ -1,0 +1,75 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<div class="current">
+ <span class="place">首页> ><#if addressBookTypeName??><a href="addressBookType.do?action=edit&id=${addressBookTypeId?default('')}" style="color: red">${addressBookTypeName?default('')}</a><#else>我的通讯录</#if>用户列表 </span>
+	<ul>
+		<li><input type="button" class="buttons" value="批量导入" onclick="importaddbook()" /></li>	
+		<#if addressBookTypeName??>
+		<li><input type="button" class="buttons" value="编辑通讯录" onclick="gotourl('addressBookType.do?action=edit&id=${addressBookTypeId}')" /></li>	
+		</#if>
+		<li><input type="button" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" class="buttons" value="禁用" onclick="jsdeletes()" /></li>	
+		<li><input type="button" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="addressBookTypeId" name="addressBookTypeId" value="${addressBookTypeId?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>姓名：<input id="tname" class="txtinput" name="tname" value="${tname?default('')}"></td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;" >姓名<span id="sorttname"></span></td>
+<td onclick="resetSort('mobilNumber')" style="cursor:pointer;" >手机号码<span id="sortmobilNumber"></span></td>
+<td onclick="resetSort('qqNumber')" style="cursor:pointer;" >QQ号码<span id="sortqqNumber"></span></td>
+<td onclick="resetSort('email')" style="cursor:pointer;" >电子邮箱<span id="sortemail"></span></td>
+<td onclick="resetSort('homeAddress')" style="cursor:pointer;" >家庭地址<span id="sorthomeAddress"></span></td>
+<td onclick="resetSort('workAddress')" style="cursor:pointer;" >工作地址<span id="sortworkAddress"></span></td>
+<td onclick="resetSort('valid')" style="cursor:pointer;" >有效标识<span id="sortvalid"></span></td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td><a href="#" onclick="readInfor('${obj.id?default('')}')">${obj.tname?default('')}</a></td>
+<td>${obj.mobilNumber?default('')}</td>
+<td>${obj.qqNumber?default('')}</td>
+<td>${obj.email?default('')}</td>
+<td>${obj.homeAddress?default('')}</td>
+<td>${obj.workAddress?default('')}</td>
+<td align="center"><a href='javascript:void(0)' id="${obj.id?default('')}" onClick="updateBaseObject(this,${obj.valid?string('false','true')})" name=valid  value= ${obj.valid?string('false','true')}> ${obj.valid?string('启用','禁用')}</a></td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr></tfoot>
+</table>
+<script type="text/javascript">
+<!--
+initSort();
+function importaddbook(){
+	var addressBookTypeId=document.getElementById("addressBookTypeId").value;
+	if(addressBookTypeId==""){
+		alert("请先选择分组！");
+		return ;
+		}
+	window.showModalDialog("?action=importdatas&parameters='addressBookTypeId@${addressBookTypeId?default('')}",window,"status:false;dialogWidth:500px;dialogHeight:160px;edge:Raised; enter: Yes; help: No; resizable: No; status: No"); 
+	window.location.reload();
+}
+//-->
+</script>
+<@common.bottom/>
+

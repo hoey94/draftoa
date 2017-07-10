@@ -1,0 +1,37 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="委托授权"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name="delegateTo" id="delegateTo"  value="${obj.delegateTo?default('')}" />
+<input type="hidden" name="delegateFrom" id="delegateFrom"  value="${obj.delegateFrom?default('')}" />
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="90%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2>编辑委托授权</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">登记人姓名</td>
+<td class="contentTd"><input type="text" style="width: 60%" name="tname" class="btinput" required=true  value="${obj.tname?default('')}" /><span class="spantip" id="tname_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">委托人名称</td>
+<td class="contentTd"><input type="text" style="width: 60%" name="delegateFromName" class="btinput" required=true  value="${obj.delegateFromName?default('')}" /><span class="spantip" id="delegateFromName_span"/></td>
+</tr>
+<tr>
+<td class="titleTd">被委托人名称</td>
+<td class="contentTd"><input type="text" style="width: 60%" name="delegateToName" class="btinput" required=true  value="${obj.delegateToName?default('')}" /><span class="spantip" id="delegateToName_span"/></td>
+</tr>
+<tr>
+<td colspan=4 height=30 align="center">
+<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

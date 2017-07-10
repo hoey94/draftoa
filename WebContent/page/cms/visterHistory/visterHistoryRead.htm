@@ -1,0 +1,40 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.readheader name="访问历史"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="90%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>
+查看访问历史</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd">${obj.tname?default('')}"</td>
+<td class="titleTd">请求IP</td>
+<td class="contentTd">${obj.ip?default('')}"</td>
+</tr>
+<tr>
+<td class="titleTd">浏览器类型</td>
+<td class="contentTd">${obj.browserType?default('')}"</td>
+<td class="titleTd">session标识</td>
+<td class="contentTd">${obj.sessionId?default('')}"</td>
+</tr>
+<tr>
+<td class="titleTd">用户标识</td>
+<td class="contentTd">${obj.usersId?default('')}"</td>
+<td class="titleTd">访问路径</td>
+<td class="contentTd">${obj.visterpath?default('')}"</td>
+</tr>
+<tr>
+<td colspan=4 height=30 align="center">
+<input type="button" class="buttons" value="编辑" onclick="turnToEdit('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

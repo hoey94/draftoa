@@ -1,0 +1,32 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="提醒"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+编辑提醒</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">标题</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname" value="${obj.tname?default('')}" /></td>
+<td class="titleTd">提醒时间</td>
+<td class="contentTd"><input type="text" class="txtinput" name="remindTime" class="calendars" value="${obj.remindTime}" /></td>
+</tr>
+<tr>
+<td class="titleTd">提醒内容</td>
+<td bgColor=#ffffff colspan="3"><textarea name="description" style="width: 96%" />${obj.description?default('')} </textarea></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

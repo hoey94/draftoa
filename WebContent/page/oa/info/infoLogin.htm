@@ -1,0 +1,113 @@
+<#import "../../macro/mycommon.htm" as common>
+    <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+<title>教代会网上提案系统</title>
+<link rel="stylesheet" href="theme/oa/css/bootstrap.min.css">
+<link rel="stylesheet" href="theme/oa/css/font-awesome.min.css">
+<link rel="stylesheet" href="theme/oa/css/animate.css">
+<!-- 用户自定义的css文件 -->
+<link rel="stylesheet" href="theme/oa/css/main.css">
+<!--  -->
+<link rel="stylesheet" href="theme/oa/css/style.css">
+<link rel="stylesheet" href="theme/oa/css/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="theme/oa/css/todos.css">
+<link rel="stylesheet" href="theme/oa/css/morris.css">
+</head>
+<body >
+    <section id="login-container">
+
+        <div class="row">
+            <div class="col-md-3" id="login-wrapper">
+                <div class="panel panel-primary animated flipInY">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            登录
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>请登录您的账户</p>
+                        <form class="form-horizontal" role="form" id="formId" method="post" action="index.do?action=login">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input style="padding-left: 32px;" type="email" class="form-control" id="id" name="id" placeholder="请输入您的用户名">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入您的密码">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                            </div>
+                            <div class="form-group" style="width: 330px;">
+                                <div class="col-md-12" style="position:relative ;margin-bottom: 40px;">
+                                   	<input style="position:absolute ;padding-left: 32px;padding-right: 11px;" type="email" class="form-control" id="verifycode" name="txtyzm" placeholder="请输入验证码">
+                                   	<img onclick="refreshImage();" style="position: absolute;top :8px;left: 280px; cursor: pointer;text-decoration: underline;color: blue;" id="validateImage" src="validateCode.do">
+                                    <i class="fa fa-cog"></i>
+                                   <!--  <a href="javascript:void(0)" class="help-block">忘记密码?</a> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <a href="javascript:void(0);" onclick="lgn();" class="btn btn-primary btn-block">登录</a>
+                                    <hr />
+                                    <a href="infoRegistry.htm" class="btn btn-default btn-block">立即注册</a>
+                                </div>
+                            </div>
+                        </form>
+                        <#if logId?? && logId != ''>
+			            	<div style="margin-bottom: 1px;color: red;">${msg!}</div>
+			            </#if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+    // 刷新验证码
+    function refreshImage(){
+    	$("#validateImage").attr("src","validateCode.do?time="+new Date());
+    }
+    var a = "${msg!}";
+    if(a.length != 0){
+    	alert(a);
+    }
+    // 登录
+   	function lgn(){
+    	var $form = $("#formId");
+		// 校验不为空
+		var $id = $("#id");
+		if($.trim($id.val()).length == 0){
+			$id.focus();
+			return;
+		}
+		
+		var $pass = $("#password");
+		if($.trim($pass.val()).length == 0){
+			$pass.focus();
+			return;
+		}
+		var $verifycode = $("#verifycode");
+		if($.trim($verifycode.val()).length == 0){
+			$verifycode.focus();
+			return;
+		}
+		
+		$form.submit();
+		/* $.post("index.do?action=login",$form.serialize(),function(){
+			alert("0");
+		}); */
+    }
+    </script>
+<@common.bottom/>

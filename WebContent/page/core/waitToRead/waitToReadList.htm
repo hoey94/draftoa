@@ -1,0 +1,70 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<#if 'true'==valid>
+<div class="current">
+ <span class="place">首页> >已阅事项 </span>
+</div>
+<#else>
+<div class="current">
+ <span class="place">首页> >待阅事项列表 </span>
+	<ul>
+		<li><input type="button" id="buttondelete" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" id="buttonforbidden" class="buttons" value="禁用" onclick="jsdeletes()" /></li>	
+		<li><input type="button" id="buttonadd" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+</#if>
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id="page" name="page" value="${page.pageIndex?c}" />
+<input type='hidden' id="valid" name="valid" value="${valid?default('true')}" />
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>待阅标题：<input class="txtinput" id="tname" name="tname" value="${tname?default('')}"></td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</form>
+</table>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20><input type="checkbox" name="allbox" value="checkbox" onClick="selectAll(this.checked)" /></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;" >待阅标题<span id="sorttname"></span></td>
+<td onclick="resetSort('toReadType')" width=100 style="cursor:pointer;" >待阅类型<span id="sorttoReadType"></span></td>
+<#if 'true'==valid>
+<td onclick="resetSort('transactTime')" width=80 style="cursor:pointer;" >阅读时间<span id="sorttransactTime"></span></td>
+</#if>
+</tr>
+</thead>
+<tbody>
+<#list list as obj>
+<tr>
+<td width=20 align="center"><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td bgColor=#fffff>${obj.tname?default('')}</td>
+<td bgColor=#fffff>${obj.toDoType?default('')}</td>
+<td bgColor=#fffff>
+<#if 'true'==valid>
+<#if obj.transactTime??>${obj.transactTime?string("yyyy-MM-dd")}</#if>
+</#if>
+</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+<tfoot>
+<tr>
+<td><@pagination.pagination page=page />&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+<script type="text/javascript">
+<!--
+initSort();
+//-->
+</script>
+<@common.bottom/>
+

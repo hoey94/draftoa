@@ -1,0 +1,38 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="帮助向导"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">编辑帮助向导</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">帮助标题</td>
+<td bgColor=#ffffff colspan="3"><input type="text" class="btinput" required=true name="tname" size="60" value="${obj.tname?default('')}" /><span class="spantip" id="tname_span"/></td>
+</tr>
+<tr>
+<td bgColor=#ffffff colspan="4" align="center">
+<textarea id="content" name="content"  rows="25" cols="80" style="width:800px;">${obj.content?default('')}</textarea>
+</td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="submit" class="buttons" value="更新" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="javascript/xheditor-1.2.1/xheditor_plugins/ubb.js"></script>
+<script type="text/javascript">
+$('#content').xheditor({upLinkUrl:"fileUplod.do?action=jsfileUplod",upLinkExt:"doc,zip,rar,txt,xls,ppt",upImgUrl:"fileUplod.do?action=jsfileUplod",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"fileUplod.do?action=jsfileUplod",upFlashExt:"swf",upMediaUrl:"fileUplod.do?action=jsfileUplod",upMediaExt:"wmv,avi,wma,mp3,mid"});
+</script>
+

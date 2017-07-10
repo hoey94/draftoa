@@ -1,0 +1,6 @@
+<#if displayTitle>
+<option value="">---请选择---</option>
+</#if>
+<#list list as obj>
+<option value="${obj.id?default('')}" <#if obj.id==defaultValue>selected</#if>>${obj.tname?default('')}</option>
+</#list>

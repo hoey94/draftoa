@@ -1,0 +1,45 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="访问量类"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+新建访问量类</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd"><input type="text" class="txtinput" name="tname"/></td>
+<td class="titleTd">总访问量</td>
+<td class="contentTd"><input type="text" class="txtinput" name="totolNumber"/></td>
+</tr>
+<tr>
+<td class="titleTd">今年访问量</td>
+<td class="contentTd"><input type="text" class="txtinput" name="yearNumber"/></td>
+<td class="titleTd">昨天访问量</td>
+<td class="contentTd"><input type="text" class="txtinput" name="yesterdayNumber"/></td>
+</tr>
+<tr>
+<td class="titleTd">今天访问量</td>
+<td class="contentTd"><input type="text" class="txtinput" name="todayNumber"/></td>
+<td class="titleTd">状态</td>
+<td class="contentTd"><input type="text" class="txtinput" name="status"/></td>
+</tr>
+<tr>
+<td class="titleTd">创建时间</td>
+<td class="contentTd"><input type="text" class="txtinput" name="createTime"/></td>
+<td class="titleTd">null</td>
+<td class="contentTd"><input type="text" class="txtinput" name="attributeStatus"/></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>

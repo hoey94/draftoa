@@ -1,0 +1,49 @@
+<#import "../../macro/macrocommon.htm" as common>
+<#import "../../macro/paginationCommon.htm" as pagination>
+<@common.header/>
+<form id="commonform" action="?action=list" method="post">
+<input type="hidden" id="sortfield" name="sortfield" value="${sortfield?default('')}" />
+<input type="hidden" id="sortvalue" name="sortvalue" value="${sortvalue?default('')}" />
+<input type='hidden' id='page' name='page' value='${page.pageIndex?c}' />
+<table  cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<tr>
+<td bgColor=#f8f8f8 height=22 width=60>筛选条件</td>
+<td bgColor=#f8f8f8>名称：<input id="tname" class="txtinput" name="tname" value="${tname?default('')}"></td>
+<td bgColor=#f8f8f8 width=60><input type="image" id="ImageButton1" src="theme/defaultstyle/images/search.gif" onclick="searchSubmit()"	border="0" /></td>
+</tr>
+</table>
+</form>
+<table cellSpacing=1 cellPadding=2 width="100%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td width=20 ><input type="checkbox" name="allbox" value="checkbox"	onClick="selectAll(this.checked)" /></td>
+<td onclick="resetSort('tname')" style="cursor:pointer;" >日期<span id="sorttname"></span></td>
+<td onclick="resetSort('totolNumber')" style="cursor:pointer;" >总访问量<span id="sorttotolNumber"></span></td>
+<td onclick="resetSort('yearNumber')" style="cursor:pointer;" >今年访问量<span id="sortyearNumber"></span></td>
+<td onclick="resetSort('yesterdayNumber')" style="cursor:pointer;" >昨天访问量<span id="sortyesterdayNumber"></span></td>
+<td onclick="resetSort('todayNumber')" style="cursor:pointer;" >今天访问量<span id="sorttodayNumber"></span></td>
+</tr>
+</thead><tbody><#list list as obj>
+<tr>
+<td width=20 ><input type="checkbox" name="box" value="${obj.id?default('')}"/></td>
+<td>${obj.tname?default('')}</td>
+<td>${obj.totolNumber?default('')}</td>
+<td>${obj.yearNumber?default('')}</td>
+<td>${obj.yesterdayNumber?default('')}</td>
+<td>${obj.todayNumber?default('')}</td>
+</tr>
+</#list>
+</tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab"><tfoot>
+<tr>
+<td height="22" align="right" bgcolor="#ebeaf4"><@pagination.pagination page=page />&nbsp;</td>
+</tr></tfoot>
+</table>
+<script type="text/javascript">
+<!--
+var curaction="?action=list"; 
+initSort();
+//-->
+</script>
+<@common.bottom/>

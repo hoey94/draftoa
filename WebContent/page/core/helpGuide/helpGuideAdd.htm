@@ -1,0 +1,61 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="帮助向导"/>
+<form id="formId" method="post" action="?action=save" >
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">新建帮助向导</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">帮助标题</td>
+<td bgColor=#ffffff colspan="3"><input type="text" class="txtinput" name="tname" value="${tname?default('')}" size="60"/></td>
+</tr>
+<tr>
+<td class="titleTd">所属帮助</td>
+<td bgColor=#ffffff colspan="3">
+<select name="id"/><@common.treeoptions list=parentlist /></select>
+</td>
+</tr>
+<tr>
+<td bgColor=#ffffff colspan="4" align="center">
+<textarea id="content" name="content"  rows="20" cols="80" style="width:800px;"></textarea>
+</td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="submit" class="buttons" value="保存"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr></tbody>
+</table>
+</form>
+<@common.bottom/>
+<script type="text/javascript">
+UE.getEditor('content');
+function checkfiletype(){
+var namevalue=document.getElementById("tname").value;
+if(namevalue==""){
+	alert("名称不能为空！");
+	return false;
+}
+return true;
+}
+function changecontentType(obj){
+	var value=obj.value;
+	var btxinwen=document.getElementById("btxinwen");
+	var ptxinwen=document.getElementById("ptxinwen");
+	if("普通新闻"==value){// 如果是普通新闻
+		btxinwen.style.display="none";
+		ptxinwen.style.display="block";
+	}else if("标题新闻"==value){// 如果是标题新闻	
+		btxinwen.style.display="block";
+		ptxinwen.style.display="none";
+		}
+}
+function savestate(obj){
+	document.getElementById("status").value=obj;
+  }
+</script>
+

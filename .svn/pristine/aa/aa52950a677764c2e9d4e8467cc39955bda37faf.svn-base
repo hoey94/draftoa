@@ -1,0 +1,27 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.addheader name="留言信息"/>
+<form id="formId" method="post" action="?action=save" >
+<input type="hidden" name="parentIds" value="${parentId?default('')}">
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+新建留言信息</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td width=160 bgColor=#f8f8f8 style="padding-left:10px">信息内容</td>
+<td class="contentTd"><textarea name="content" cols="100" rows="16" ></textarea></td>
+</tr>
+<tr>
+<td colspan=2 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

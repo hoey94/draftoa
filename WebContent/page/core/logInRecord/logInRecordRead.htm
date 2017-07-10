@@ -1,0 +1,28 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.readheader name="登录日志记录"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" /><input type="hidden" name=page value="${page?c}"  /><table cellSpacing=1 cellPadding=2 width="90%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4>
+查看登录日志记录</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">名称</td>
+<td class="contentTd">${obj.tname?default('')}"</td>
+<td class="titleTd">请求IP</td>
+<td class="contentTd">${obj.ip?default('')}"</td>
+</tr>
+<tr>
+<td colspan=4 height=30 align="center">
+<input type="button" class="buttons" value="编辑" onclick="editInfor('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<@common.bottom/>
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<title>中国项目管理平台</title>
+<link href="theme/defaultstyle/css/public.css" rel="stylesheet" type="text/css">
+<link href="theme/defaultstyle/css/css.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+function AutoScroll(obj){
+$(obj).find("ul:first").animate({
+marginTop:"-25px"
+},500,function(){
+$(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+});
+}
+$(document).ready(function(){
+//setInterval('AutoScroll("#scrollDiv")',2000)
+});
+</script>
+<style>html,body{ height:100%;}</style>
+</head>
+<body style="background:url(images/main_r7_c5.jpg) repeat-x top #f8f8f8;">
+<div class="main1_t" ><div class="main1_tt" style=" background:none;"></div></div>
+<div class="mr">
+	<div class="xsnazzy">
+    <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+    <div class="xboxcontent">
+    		<table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><span  class="yj_01">滚动公告</span></td>
+    <td><div id="scrollDiv">
+                                <ul>
+                                <li><a href="applicationData.do?action=myinfo">・请点击左边个人信息核对自己的信息!</a></li>
+                                </ul>
+                            </div></td>
+    <td align="right"><a href="#">更多...</a></td>
+  </tr>
+</table>
+    </div>
+    <b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+    </div>
+  <div class="xsnazzy">
+    <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+    <div class="xboxcontent">
+            <div class="yj_1_main2">
+                 	<div class="yj_1_main2_t"><h4>各角色工作人员工作流程如下：</h4></div>
+                    <div class="yj_1_main2_b1">
+                    	<div class="yj_1_main2_b1_left">
+                        	<ul>
+                        		<#list list as obj>
+                        	        <#if obj.id=='a4630d11d80d432a8022ec1e6c661eb2'>
+                        				<li>专业主设人操作流程：<a href="projectPlan.do?action=selectProject">1.工作任务分配</a>>><a href="workingCalendar.do?action=shenpilist">2.录入确认工作日历</a>>><a href="reportManage.do?action=previewProject">3.查询主设人报表</a></li>
+                        			</#if>
+                        			<#if obj.id=='4fc80d53403647afaf0a05f1056d52c8'>
+                        				<li>生产管理部人员操作流程：<a href="project.do?action=add">1.录入项目</a>>><a href="projectOrgan.do?action=myproject">2.录入项目主设人</a>>><a href="reportManage.do?action=previewReport&id=cc7cf036e1f94185b8ddd6983ffa6b50">3.查看系统各部门上报报表</a></li>
+                        			</#if>
+                        			<#if obj.id=='cec12dccb7bc421dacf5c3143ee3d1c7'>
+                        				<li>部门领导操作流程：<a href="projectOrgan.do?action=add">1.录入项目</a>>><a href="projectOrgan.do?action=myproject">2.录入项目主设人</a>>><a href="workSchedule.do">3.确认上报报表</a></li>
+                        			</#if>
+                        			<#if obj.id=='f3a836caa7e6432f847d44782fb4ae66'>
+                        				<li>普通用户操作流程：<a href="project.do?action=add">1.录入工作日历</a>>><a href="reportManage.do?action=previewReport&id=59bd0a7db163428cbf987a241e7236d8">1.查询个人报表信息</a>>></li>
+                        			</#if>
+                        		</#list>
+                            	
+                            </ul>
+                        </div>
+                    	<div class="c"></div>
+                    </div>
+                    <div class="yj_1_main2_t"><h4>友情提示</h4></div>
+                    <div class="yj_1_main2_b1">
+                    	<div class="yj_1_main2_b1_left">
+                        	<ul>
+                        		<li>请点击左边个人信息核对自己的信息。</li>
+                        		<li>修改密码可以通过右上角的我的资料进行更改。</li>
+                            	<li>操作完成退出时，请点击右上角的安全"退出"。</li>
+                            	<li>如需其他帮助请联系赵士星 手机18538119506。</li>
+                            </ul>
+                        </div>
+                    	<div class="c"></div>
+                    </div>
+                 </div>
+    </div>
+    <b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<#import "../../macro/macrocommon.htm" as common>
+<@common.header/>
+<@common.editheader name="栏目信息"/>
+<form id="formId" method="post" action="?action=update" >
+<input type="hidden" name=id value="${obj.id?default('')}" />
+<input type="hidden" name=page value="${page?c}"  />
+<table cellSpacing=1 cellPadding=2 width="96%" align=center bgColor=#cccccc border=0 class="tab">
+<thead>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">编辑栏目信息</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="titleTd">栏目名称</td>
+<td class="contentTd" colspan="3"><input type="text" class="txtinputwidth" name="tname" value="${obj.tname?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">图片地址</td>
+<td class="contentTd"><input type="text" class="txtinput" id="imgurl" name="imgurl" value="${obj.imgurl?default('')}" />&nbsp;&nbsp;<a href="#" onclick="openfileuplodpage('image','imgurl')"><font color="red">上传文件</font></a></td>
+<td class="titleTd">上级栏目</td>
+<td class="contentTd"><select  name="parentId"/><@common.treeoptions list=parentlist defaultValue="${obj.parentId}"/></select></td>
+</tr>
+<tr>
+<td class="titleTd">是否启用审核</td>
+<td class="contentTd"><select  name="auditState"/><@common.valid defaultValue="${obj.auditState?string('true','false')}" /></select></td>
+<td class="titleTd">审核角色</td>
+<td class="contentTd"><select id="auditRole" name="auditRole" param="id=auditRole&displayTitle=false&defaultValue=${obj.auditRole?default('')}" /></td>
+</tr>
+<tr>
+<td class="titleTd">序号</td>
+<td class="contentTd"><input type="text" class="txtinput" name="sortCode" value="${obj.sortCode?c}" /></td>
+<td class="titleTd">状态</td>
+<td class="contentTd"><select  name="valid"/><@common.valid defaultValue="${obj.valid?string('true','false')}" /></select></td>
+</tr>
+<tr>
+<td class="titleTd">栏目地址</td>
+<td bgColor=#ffffff colspan="3"><input type="text" class="txtinputwidth" name="columnUrl" size="40" value="${obj.columnUrl?default('')}" /></td>
+</tr>
+<tr>
+<td colspan=4 bgColor=#f8f8f8 height=30 align="center">
+<input type="button" class="buttons" value="更新" onclick="saveform()" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="buttons" value="删除" onclick="formdelete('${obj.id}')" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="buttons" value="关闭" onclick="javascript:history.go(-1);" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<script type="text/javascript">
+<!--
+function saveform(){
+	var form=document.getElementById("formId");
+	if(Validate.CheckForm(form)){
+		$.ajax({
+			type:"post",
+			dataType:"json",
+			url:form.action,
+			data:$('#formId').serialize(),
+			success:function(msg){
+				if(msg.resultCode==0){
+					alert(msg.resultDesc);
+				}else{
+					//判断是不是子框架
+					var parentwindow=window.parent;
+					parentwindow.location.reload(true);
+				}
+			},
+			error:function(data){
+				
+			}
+		});
+	}
+}
+//-->
+</script>
+<@common.bottom/>
+
+

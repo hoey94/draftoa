@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>公用数据查询页面</title>
+<base target="_self">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="theme/defaultstyle/images/defaultstyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+<link type="text/css" rel="stylesheet" href="javascript/dhtmlTree/dhtmlxtree.css"  />
+<script  src="javascript/dhtmlTree/dhtmlxcommon.js"></script>
+<script  src="javascript/dhtmlTree/dhtmlxtree.js"></script>
+</head>
+<body>
+<input type="hidden" id="objectId" name="objectId" value="${objectId?default('')}" />
+<input type='hidden' id='objectName' name='objectName' value="${objectName?default('')}" />
+<table width="400" border="0" cellSpacing=1 cellPadding=1 align=center bgColor=#cccccc>
+  <tr>
+    <td height="25px;" align=center bgColor=#f8f8f8>组织部门树</td>
+  </tr>
+  <tr>
+    <td height="300" width="180px" bgColor=#f8f8f8>
+    <div id="treeDiv" style="width:380px;height:300px;padding-top:0px;padding-left:0px;padding-right:0px;overflow-y:scroll;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td height="25px;" bgColor=#f8f8f8 align="center">
+    &nbsp;<input type="button" value="确定" onclick="savedata()" />
+    &nbsp;<input type="button" value="关闭" onclick="window.close();" />
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+<script>
+//---------------------------------定义拖动树-------------------------------------//
+var currentId="";
+var tree=new dhtmlXTreeObject(document.getElementById('treeDiv'),"180","300",'11111111111111111111111111111111');
+tree.setImagePath("javascript/dhtmlTree/imgs/csh_vista/");
+<#if selectType>
+tree.enableCheckBoxes(true);
+<#else>
+tree.enableCheckBoxes(false);
+</#if>
+tree.enableDragAndDrop(false);
+//--------------------------------添加树节点-------------------------------------//
+<#list list as obj>
+tree.insertNewChild('${obj.parentId?default('')}','${obj.id}','${obj.tname}');
+<#list obj.subset as subobj>
+	tree.insertNewChild('${subobj.parentId?default('')}','${subobj.id}','${subobj.tname?default('无')}');
+	<#list subobj.subset as subobj1>
+		tree.insertNewChild('${subobj1.parentId?default('')}','${subobj1.id}','${subobj1.tname?default('无')}');
+		<#list subobj1.subset as subobj2>
+			tree.insertNewChild('${subobj2.parentId?default('')}','${subobj2.id}','${subobj2.tname?default('无')}');
+			<#list subobj2.subset as subobj3>
+				tree.insertNewChild('${subobj3.parentId?default('')}','${subobj3.id}','${subobj3.tname?default('无')}');
+			</#list>
+		</#list>
+	</#list>
+</#list>
+</#list>
+//--------------------------------添加事件处理-------------------------------------//
+tree.attachEvent("onClick",treeClick);//点击事件
+<#if selectType>
+tree.attachEvent("OnCheck",treecheck);//点击事件
+</#if>
+function treecheck(currentNodeId){
+	currentId = currentNodeId;
+	var state=tree.isItemChecked(currentNodeId);
+	tree.setSubChecked(currentNodeId,state)//
+}
+function treeClick(currentNodeId){
+	currentId = currentNodeId;
+	<#if selectType>
+	var state=tree.isItemChecked(currentNodeId);
+	state=state==1?0:1;
+	tree.setCheck(currentNodeId,state)//
+	tree.setSubChecked(currentNodeId,state)//
+	</#if>
+}
+var selectIds="${selectIds?default('')}";
+function initpage(){
+	var ids=selectIds.split(',');
+	for ( var i = 0; i < ids.length; i++){ 
+		if(ids[i]!=null&&ids[i]!=""){
+			var id=ids[i];
+			tree.setCheck(id,1)//
+		}
+	}
+}
+initpage();
+function savedata(){
+	var organIdValue="";
+	var organNamesValue="";
+	<#if selectType>
+		organIdValue=tree.getAllChecked(); 
+		if(organIdValue.length>0){
+			var ids=organIdValue.split(',');
+			for ( var i = 0; i < ids.length; i++){  
+				var id=ids[i];
+				organNamesValue+=tree.getItemText(id)+";";
+			}
+		}
+	<#else>
+		organIdValue=currentId; 
+		organNamesValue=tree.getItemText(currentId);
+	</#if>
+	window.returnValue="objectId="+organIdValue+"&objectName="+organNamesValue;
+	window.close();
+} 
+</script>

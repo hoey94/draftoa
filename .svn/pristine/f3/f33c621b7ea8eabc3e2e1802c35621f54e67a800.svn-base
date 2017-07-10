@@ -1,0 +1,208 @@
+<#macro header>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>登录</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="theme/defaultstyle/images/defaultstyleMobile.css" rel="stylesheet" type="text/css" />
+ <!--  <link rel="stylesheet" title="Default" href="theme/defaultstyle/mobileui/ui/themes/default/themes.css"  type="text/css"/> -->
+  <link rel="stylesheet" href="theme/defaultstyle/mobileui/ui/ui.css" type="text/css" />
+  <script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+<link href="javascript/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="javascript/jquery-ui-1.11.2/jquery-ui.js"></script>
+<script type="text/javascript" src="javascript/starsoftlist.js"></script>
+  
+ <!--  <script type="text/javascript" src="javascript/jquery-2.0.0.min.js"></script> -->
+  <script type="text/javascript" src="javascript/ajaxfileupload.js"></script>
+  <script type="text/javascript" src="javascript/starsoftlist.js"></script>
+  <script type="text/javascript" src="javascript/validate.js"></script>
+</head>
+<body  onload="initSelects()">
+</#macro>
+<!---add页面头部--->
+<#macro listheader name="数据">
+<div class="current">
+	<ul>
+		<li><input type="button" id="buttondelete" class="buttons" value="删除" onclick="deletes()" /></li>	
+		<li><input type="button" id="buttonadd" class="buttons" value="增加" onclick="addInfor()" /></li>
+	</ul>
+</div>
+</#macro>
+<!---页面底部--->
+<#macro bottom>
+</body>
+</html>
+</#macro>
+<!-- 公共option选项 值为整型 -->
+<#macro options list=list defaultValue="" strlength=15 display="true">
+	<#if display == "true">
+		<option value="">---请选择---</option>
+	</#if>
+ 	<#list list as obj>
+ 		<option value="${obj.id?default('')}"  <#if obj.id==defaultValue>selected</#if>><#if obj.name?default('')?length lt strlength>${obj.name?default('')}<#else>${obj.name[0..(strlength-3)]}... </#if> </option>
+ 	</#list>
+</#macro>
+<!-- 公共option选项 值为整型 -->
+<#macro treeoptions list=list defaultValue="" strlength=18 display="false">
+	<#if display == "true">
+		<option value="">---请选择---</option>
+	</#if>
+	<#list list as obj>
+ 		<option value="${obj.id?default('')}"  <#if obj.id==defaultValue>selected</#if>><#if obj.name?default('')?length lt strlength>${obj.name?default('')}<#else>${obj.name[0..(strlength-3)]}... </#if> </option>
+	 	<#list obj.subset as objtwo>
+ 			<option value="${objtwo.id?default('')}"  <#if objtwo.id==defaultValue>selected</#if>>|-<#if objtwo.name?default('')?length lt strlength>${objtwo.name?default('')}<#else>${objtwo.name[0..(strlength-3)]}... </#if> </option>
+	 		<#list objtwo.subset as objthree>
+ 				<option value="${objthree.id?default('')}"  <#if objthree.id==defaultValue>selected</#if>>|-|-<#if objthree.name?default('')?length lt strlength>${objthree.name?default('')}<#else>${objthree.name[0..(strlength-3)]}... </#if> </option>
+	 			<#list objthree.subset as objfour>
+ 					<option value="${objfour.id?default('')}"  <#if objfour.id==defaultValue>selected</#if>>|-|-|-<#if objfour.name?default('')?length lt strlength>${objfour.name?default('')}<#else>${objfour.name[0..(strlength-3)]}... </#if> </option>
+	 				<#list objfour.subset as objfive>
+ 						<option value="${objfive.id?default('')}"  <#if objfive.id==defaultValue>selected</#if>>|-|-|-|-<#if objfive.name?default('')?length lt strlength>${objfive.name?default('')}<#else>${objfive.name[0..(strlength-3)]}... </#if> </option>
+	 				</#list>
+	 			</#list>
+	 		</#list>
+	 	</#list>
+ 	</#list>
+</#macro>
+<!-- 公共字典值选项 值为整型 -->
+<#macro dictionary list=list defaultValue="">
+ 	<#list list as obj>
+ 		<option value="${obj.name?default('')}"  <#if obj.name==defaultValue>selected</#if>><#if obj.description?default('')?length lt 20 >${obj.description}<#else>${obj.description[0..18]}... </#if> </option>
+ 	</#list>
+</#macro>
+<!-- 启用和禁用 -->
+<#macro valid  defaultValue="true">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>启用</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>禁用</option>
+</#macro>
+<!-- 静态字典/动态字典 -->
+<#macro dictionaryvalid  defaultValue="true">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>静态字典</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>动态字典</option>
+</#macro>
+<#macro sex defaultValue="男">
+ 	<option value="男" <#if defaultValue=="男">selected</#if>>男</option>
+ 	<option value="女" <#if defaultValue=="女">selected</#if>>女</option>
+</#macro>
+<#macro yesOrno defaultValue="true">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>是</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>否</option>
+</#macro>
+<#macro yesNo defaultValue="true" display="审核">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>已${display?default('审核')}</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>未${display?default('审核')}</option>
+</#macro>
+<#macro selectType defaultValue="true" display="多选">
+ 	<option value="true" <#if defaultValue == "true">selected</#if>>多选</option>
+ 	<option value="false" <#if defaultValue != "true">selected</#if>>单选</option>
+</#macro>
+<#macro commonselect app="app" objectId="objectId" selectType=1>
+<input type="hidden" id="${objectId}" name="${objectId}"/><input type="text" class="txtinput" style="width: 96%" id="${objectId}objectName" name="${objectId}objectName"/><a style="padding-left: 6px;" href="#" onclick="commonselect('${app}','${objectId}','${objectId}objectName','${selectType}')">>></a>
+</#macro>
+
+<#macro workFlowInfo>
+<input type="hidden" id="workFlowId" name="workFlowId" value="${workFlowId?default('')}"/>
+<input type="hidden" id="workFlowInstanceId" name="workFlowInstanceId" value="${workFlowInstanceId?default('')}"/>
+<input type="hidden" id="currentNodeId" name="currentNodeId" value="${currentNodeId?default('')}"/>
+<input type="hidden" id="currentState" name="currentState" value="${currentState?default('')}"/>
+<input type="hidden" id="appes" name="appes" value="${appes?default('')}"/>
+<input type="hidden" id="baseObjectId" name="baseObjectId" value="${baseObjectId?default('')}"/>
+<input type='hidden' id='gotourl' name='gotourl' value="${gotourl?default('')}" />
+</#macro>
+<#macro workFlow>
+<input type="hidden" id="workFlowId" name="workFlowId" value="${workFlowId?default('')}"/>
+<input type="hidden" id="workFlowInstanceId" name="workFlowInstanceId" value="${workFlowInstanceId?default('')}"/>
+<input type="hidden" id="currentNodeId" name="currentNodeId" value="${currentNodeId?default('')}"/>
+<input type="hidden" id="currentState" name="currentState" value="${currentState?default('')}"/>
+<input type="hidden" id="appes" name="appes" value="${appes?default('')}"/>
+<input type="hidden" id="baseObjectId" name="baseObjectId" value="${baseObjectId?default('')}"/>
+<input type='hidden' id='gotourl' name='gotourl' value="${gotourl?default('')}" />
+<input id="longitude" value="" name="longitude" type="hidden" />
+<input id="latitude" value="" name="latitude" type="hidden" />
+<input id="location" value="" name="location" type="hidden" />
+<#if 'edit'==workFlowInstanceAuthorization&&'start'!=currentNodeId>
+<tr>
+	<td colspan="2" align="center">当前办理情况信息</td>
+</tr>
+<tr>
+	<td width="200px" class="titleTd">审核意见</td>
+	<td><select  name="workFlowOperateHistoryAudit" />
+	<option value="同意">同意</option>	
+	<option value="不同意">不同意</option>
+	</select>
+	</td>
+</tr>
+<tr>	
+	<td width="200px" class="titleTd">当前节点</td>
+	<td>${currentState?default('')}</td>
+</tr>
+<tr>
+	<td class="titleTd">备注</td>
+	<td><textarea cols="10" style="width: 150px" name="operateContent"/></textarea></td>
+</tr>
+<#else>
+<tr>
+	<td colspan="2" align="center">当前所在节点信息</td>
+</tr>
+<tr>
+	<td width="200px" class="titleTd">当前节点</td>
+	<td>${currentState?default('')}</td>
+</tr>
+</#if>
+<#if nextFlowRouters??&&nextFlowRouters?size gt 1>
+<tr>
+	<td class="titleTd">选择下一步</td>
+	<td>
+	<select id="nextFlowRouterId" name="nextFlowRouterId" onchange="resetnexFlowRouterId()"/>
+	<#list nextFlowRouters as router>
+	<option value="${router.workFlowRouterId?default('')}">${router.workFlowRouterName?default('')}</option>		
+	</#list>
+	</select>&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">选择"提交"启作用</font>
+	</td>
+</tr>
+</#if>
+<#if nextUsersList??>
+<tr>
+	<td class="titleTd">选择下一办理人</td>
+	<td>
+	<select id="nextUsersId" name="nextUsersId" />
+	<#list nextUsersList as users>
+	<option value="${users.id?default('')}">${users.name?default('')}</option>		
+	</#list>
+	</select>&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">选择"提交"启作用</font>
+	</td>
+</tr>
+</#if>
+<tr>
+<td colspan=2  height=30 align="center">
+<div class="submitB">
+<#if 'edit'==workFlowInstanceAuthorization && 'end'!=currentNodeId>
+<input type="button" class="redButton" value="保存" onclick="save()" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="redButton" value="提交" onclick="workFlowFormAction('next')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<#if 'start'!=currentNodeId>
+<input type="button" class="redButton" value="退回" onclick="workFlowFormAction('last')" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="redButton" value="返回发起人" onclick="workFlowFormAction('first')" />&nbsp;&nbsp;&nbsp;&nbsp;
+</#if>
+</#if>
+</div>
+</td>
+</tr>
+<#if 'start'!=currentNodeId>
+<tr>
+	<td colspan="2" align="center">已办理情况</td>
+</tr>
+<tr>
+<td class="titleTd">节点名称</td>
+<td>审核意见--办理人--办理时间</td>
+</tr>
+<#list historyList as obj>
+<tr>
+<td class="titleTd">${obj.nodestate?default('')}</td>
+<td>${obj.audit?default('')}-${obj.operateContent?default('')}<br>(${obj.operaterName?default('')} ${obj.operateTime?string('yyyy-MM-dd HH:mm:ss')})</td>
+</tr>
+</#list>
+</#if>
+</#macro>
+
+
+
